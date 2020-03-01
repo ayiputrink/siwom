@@ -175,13 +175,13 @@
                     </li>
                     <li class="dropdown nav-profile">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                            <?php if($user->foto == null) : ?>
+                            <?php if($this->session->userdata('user')->foto == null) : ?>
                             <img src="<?= base_url() ?>assets/images/user-white.png" alt="" class="0 size-30x30"> </a>
                             <?php endif; ?>
                         <ul class="dropdown-menu pull-right" role="menu">
                             <li>
                                 <div class="user-info">
-                                    <div class="user-name"><?= $user->nama ?></div>
+                                    <div class="user-name"><?= $this->session->userdata('user')->nama ?></div>
                                     <div class="user-position online">Available</div>
                                 </div>
                             </li>
@@ -200,10 +200,6 @@
                                     <i class="fa fa-cog"></i>Settings</a>
                             </li>
                             <li class="divider"></li>
-                            <li>
-                                <a href="locked.html" role="button" tabindex="0">
-                                    <i class="fa fa-lock"></i>Lock</a>
-                            </li>
                             <li>
                                 <a href="<?= base_url() ?>login/aksi_logout" role="button" tabindex="0">
                                     <i class="fa fa-sign-out"></i>Logout</a>

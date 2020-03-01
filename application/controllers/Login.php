@@ -29,6 +29,10 @@ class Login extends CI_Controller {
 		
 	}
 
+	public function lupa_password(){
+		$this->load->view('user/lupa_password');
+	}
+
 	public function aksi_login(){
 		$this->load->model('user_m');
 		$email = $this->input->post('email');
@@ -40,20 +44,21 @@ class Login extends CI_Controller {
 		$result = $this->user_m->read_where($data);
 		if($result->num_rows() > 0) {
 			$user = $result->row();
-			$sesi = array('id_user' => $user->id_user);
+			$user->password = null;
+			$sesi = array('user' => $user);
 			if($user->status == 'unverified') {
 				$this->session->set_userdata($sesi);
-				redirect(base_url(),'refresh');
+				redirect(base_url('home'),'refresh');
 			} else if ($user->status == 'active') {	
 				$this->session->set_userdata($sesi);
 				$this->ouput->cache(10080);
 				$this->load->view('home');
 			} else {
-				$this->session->set_flashdata('status_login', 'Maaf Akun anda telah diblokir');
+				$this->session->set_flashdata('status_login_gagal', 'Maaf Akun anda telah diblokir');
 				$this->load->view('login');	
 			}
 		} else {
-			$this->session->set_flashdata('status_login', 'Maaf Email atau Password anda salah');
+			$this->session->set_flashdata('status_login_gagal', 'Maaf Email atau Password anda salah');
 			redirect('login','refresh');
 		}
 	}

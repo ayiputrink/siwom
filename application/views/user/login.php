@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <link rel="shortcut icon" href="<?= base_url() ?>assets/favicon.ico" type="image/x-icon">
   <link rel="icon" href="<?= base_url() ?>assets/favicon.ico" type="image/x-icon">
-  <title>SIWOM</title>
+  <title>SIWOM | Login</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="<?= base_url() ?>assets/js/vendor/bootstrap/bootstrap.min.css">
@@ -26,10 +26,17 @@
                 </div>
                 <h3 class="mt-0">SIWOM</h3>
                 <p class="help-block">Sistem Informasi Workload Monitoring</p>
-                <?php if ($this->session->flashdata('status_login') != null) : ?>
-                <h5 class="text text-danger"><?= 
-                    $this->session->flashdata('status_login');
-                 ?></h5>
+                <?php if ($this->session->flashdata('status_login_gagal') != null) : ?>
+                  <div class="alert alert-danger alert-dismissable">
+                                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                                    <?= $this->session->flashdata('status_login_gagal'); ?>
+                   </div>
+                <?php endif; ?>
+                <?php if ($this->session->flashdata('status_login_sukses') != null) : ?>
+                  <div class="alert alert-success alert-dismissable">
+                                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                                    <?= $this->session->flashdata('status_login_sukses'); ?> 
+                                    </div>
                 <?php endif; ?>
                 <div class="content">
                   <div class="form-group">
@@ -46,7 +53,7 @@
                 <div class="footer text-center">
                   <button type="submit" class="btn btn-info btn-raised">Login</button>
                 </div>
-                <a href="<?= base_url() ?>forget" class="btn btn-wd">Lupa Password?</a>
+                <a href="<?= base_url() ?>login/lupa_password" class="btn btn-wd">Lupa Password?</a>
               </form>
             </div>
           </div>

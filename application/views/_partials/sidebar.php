@@ -1,5 +1,5 @@
 <aside id="leftmenu">
-<?php if($user->status == 'active') : ?>
+<?php if($this->session->userdata('user')->status == 'active') : ?>
                 <div id="leftmenu-wrap">
                     <div class="panel-group slim-scroll" role="tablist">
                         <div class="panel panel-default">

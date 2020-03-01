@@ -7,12 +7,12 @@
 <body id="falcon" class="main_Wrapper">
     <div id="wrap" class="animsition">
         <!-- HEADER Content -->
-        <?php $this->load->view('_partials/navbar',array('user' => $user)); ?>
+        <?php $this->load->view('_partials/navbar'); ?>
         <!--/ HEADER Content  -->
         <!-- CONTROLS Content  -->
         <div id="controls">
             <!--SIDEBAR Content -->
-            <?php $this->load->view('_partials/sidebar',array('user' => $user)); ?>
+            <?php $this->load->view('_partials/sidebar'); ?>
             <!--/ SIDEBAR Content -->
 
             <!--RIGHTBAR Content -->

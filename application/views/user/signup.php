@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <link rel="shortcut icon" href="<?= base_url() ?>assets/favicon.ico" type="image/x-icon">
   <link rel="icon" href="<?= base_url() ?>assets/favicon.ico" type="image/x-icon">
-  <title>SIWOM</title>
+  <title>SIWOM | Daftar</title>
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
   <link rel="stylesheet" href="<?= base_url() ?>assets/js/vendor/bootstrap/bootstrap.min.css">
   <!--  Fonts and icons -->
@@ -28,6 +28,18 @@
                 </div>
                 <h3 class="mt-0">SIWOM</h3>
                 <p class="help-block">Sistem Informasi Workload Monitoring</p>
+                <?php if ($this->session->flashdata('status_login_gagal') != null) : ?>
+                  <div class="alert alert-danger alert-dismissable">
+                                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                                    <?= $this->session->flashdata('status_login_gagal'); ?>
+                   </div>
+                <?php endif; ?>
+                <?php if ($this->session->flashdata('status_login_sukses') != null) : ?>
+                  <div class="alert alert-success alert-dismissable">
+                                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                                    <?= $this->session->flashdata('status_login_sukses'); ?> 
+                                    </div>
+                <?php endif; ?>
                 <div class="content">
                   <div class="form-group">
                     <input type="text" name="nama" class="form-control" placeholder="Masukan Nama">

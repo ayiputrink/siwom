@@ -20,14 +20,12 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
-        $sesi = $this->session->userdata('id_user');
+        $sesi = $this->session->userdata('user');
         if($sesi == null) {
             $this->load->view('user/login');
         } else {
             $this->load->model('user_m');
-            $data = array('id_user' => $sesi);
-            $result = $this->user_m->read_where($data);
-            $user = $result->row();
+            $user = $this->session->userdata('user');
             if($user->status == 'active') {
                 $this->load->view('user/home');
             } else if ($user->status == 'unverified') {
@@ -36,7 +34,6 @@ class Home extends CI_Controller {
                 $divisi = $this->divisi_m->read()->result_array();
                 $data = array(
                     'konten' => 'user/verify',
-                    'user' => $user,
                     'divisi' => $divisi
                 );
                 $this->load->view('_partials/template',$data);

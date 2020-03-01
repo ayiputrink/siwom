@@ -1,7 +1,7 @@
 <meta charset="utf-8">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>:: Falcon - Admin Dashboard ::</title>
+    <title>SIWOM</title>
     <link rel="icon" type="image/ico" href="<?= base_url() ?>assets/images/favicon.ico" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">

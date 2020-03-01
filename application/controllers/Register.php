@@ -39,6 +39,10 @@ class Register extends CI_Controller {
 			'password' => $password,
 			'status' => 'unverified'
 		); 
+		if($this->user_m->read_where(array('email' => $email))->num_rows() > 0){
+			$this->session->set_flashdata('status_login_gagal','Maaf Email anda telah terdaftar, <a class="alert-link" href="'.base_url().'login">Silahkan Login</a>');
+			redirect('register');
+		}
 		if($this->user_m->create($data)) {
 			$result = $this->user_m->read_where(array('email' => $email));
 			$user = $result->row();
