@@ -18,11 +18,12 @@ class Login extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
 	public function index()
 	{
-		$sesi = $this->session->userdata('id_user');
+		$sesi = $this->session->userdata('user');
 		if($sesi != null) {
-			redirect(base_url().'home','refresh');
+			redirect(base_url('home'));
 		} else {
 			$this->load->view('user/login');
 		}
@@ -41,17 +42,18 @@ class Login extends CI_Controller {
 			'email' => $email,
 			'password' => $password
 		);
-		$result = $this->user_m->read_where($data);
+		$result = $this->user_m->read_full_where($data);
 		if($result->num_rows() > 0) {
 			$user = $result->row();
 			$user->password = null;
+			$user->hak_akses = $user->nama_jabatan;
 			$sesi = array('user' => $user);
+		
 			if($user->status == 'unverified') {
 				$this->session->set_userdata($sesi);
-				redirect(base_url('home'),'refresh');
+				redirect(base_url('verifikasi'),'refresh');
 			} else if ($user->status == 'active') {	
 				$this->session->set_userdata($sesi);
-				$this->ouput->cache(10080);
 				$this->load->view('home');
 			} else {
 				$this->session->set_flashdata('status_login_gagal', 'Maaf Akun anda telah diblokir');
@@ -63,9 +65,31 @@ class Login extends CI_Controller {
 		}
 	}
 
+	public function aksi_login_admin(){
+		$this->load->model('admin_m');
+		$username = $this->input->post('username');
+		$password = $this->input->post('password');
+		$data = array(
+			'username' => $username,
+			'password' => $password
+		);
+		$result = $this->admin_m->read_where($data);
+		if($result->num_rows() > 0) {
+			$admin = $result->row();
+			$admin->password = null;
+			$admin->hak_akses = 'admin';
+			$sesi = array('user' => $admin);
+			$this->session->set_userdata($sesi);
+			redirect('home');
+		} else {
+			$this->session->set_flashdata('status_login_gagal', 'Maaf Username atau Password anda salah');
+			redirect('admin','refresh');
+		}
+	}
+
 	public function aksi_logout(){
 		$this->session->sess_destroy();
-		$this->output->delete_cache('cachecontroller'); 
+		//$this->output->delete_cache('cachecontroller'); 
 		redirect('login','refresh');
 	}
 }

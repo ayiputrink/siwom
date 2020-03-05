@@ -20,23 +20,24 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
-        $sesi = $this->session->userdata('user');
+		$sesi = $this->session->userdata('user');
+		// var_dump($sesi);
+		// die();
         if($sesi == null) {
+			$this->session->set_flashdata('status_login_gagal', 'Maaf Anda harus login terlebih dahulu');
             $this->load->view('user/login');
-        } else {
+        } else if($sesi->hak_akses == 'admin') {
+			redirect('admin');
+		} else {
             $this->load->model('user_m');
             $user = $this->session->userdata('user');
             if($user->status == 'active') {
-                $this->load->view('user/home');
-            } else if ($user->status == 'unverified') {
-                $this->session->set_flashdata('status_login', 'Anda harus verifikasi data terlebih dahulu');
-                $this->load->model('divisi_m');
-                $divisi = $this->divisi_m->read()->result_array();
                 $data = array(
-                    'konten' => 'user/verify',
-                    'divisi' => $divisi
-                );
-                $this->load->view('_partials/template',$data);
+					'konten' => 'user/home'
+				);
+				$this->load->view('_partials/template',$data);
+            } else if ($user->status == 'unverified') {
+                redirect('verifikasi');
             } else {
                 $this->session->sess_destroy();
                 $this->load->view('user/login');
@@ -44,31 +45,10 @@ class Home extends CI_Controller {
             
         }
 		
-    }
+	}
+	
+	public function coba(){
+		var_dump($this->session->userdata('user'));
+	}
     
-    public function aksi_verifikasi(){
-        $this->load->model('user_m');
-        $nik = $this->input->post('nik');
-        $alamat = $this->input->post('alamat');
-        $jabatan = $this->input->post('jabatan');
-        $divisi = $this->input->post('divisi');
-        $bagian = $this->input->post('bagian');
-        $nametag = $this->input->post('nametag');
-        $foto = $this->input->post('foto');
-        $data = array(
-            'nik' => $nik,
-            'alamat' => $alamat,
-            'jabatan' => $jabatan,
-            'divisi' => $divisi,
-            'bagian' => $bagian,
-            'nametag' => $nametag,
-            'foto' => $foto
-        );
-        $where = array(
-            'id_user' => $this->session->userdata('id_user')
-        );
-        var_dump($data);
-        var_dump($where);
-        //$this->user_m->update($data,$where);
-    }
 }

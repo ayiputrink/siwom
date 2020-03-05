@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Administrator_m extends Base_m {
+class Admin_m extends Base_m {
 
 	/**
 	 * Index Page for this controller.

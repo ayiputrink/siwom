@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="<?= base_url() ?>assets/js/vendor/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/vendor/animsition.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/js/vendor/sweetalert/sweetalert2.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/js/vendor/colorpicker/css/bootstrap-colorpicker.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/js/vendor/touchspin/jquery.bootstrap-touchspin.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/js/vendor/chosen/chosen.css">    

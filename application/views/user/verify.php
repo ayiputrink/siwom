@@ -22,8 +22,13 @@
                                     <strong>Form</strong> Verifikasi</h3>
 
                             </div>
+                            <?php if($user->nametag != null) { ?>
                             <div class="boxs-body">
-                                <form enctype="multipart/form-data" method="POST" action="<?= base_url() ?>home/aksi_verifikasi/" class="form-horizontal" role="form">
+                                <h3>Terimakasih Sudah Melakukan Verifikasi Silahkan Tunggu Konfirmasi Oleh Admin</h3>
+                            </div>
+                            <?php } else { ?>
+                            <div class="boxs-body">
+                                <form enctype="multipart/form-data" method="POST" action="<?= base_url() ?>verifikasi/aksi_verifikasi/" class="form-horizontal" role="form">
                                     
                                     <hr class="line-dashed full-witdh-line" />
                                     <div class="form-group">
@@ -45,10 +50,11 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Jabatan</label>
                                         <div class="col-sm-10">
-                                            <select tabindex="3" name="jabatan" class="chosen-select" style="width: 400px;">
+                                            <select tabindex="3" name="id_jabatan" class="chosen-select" style="width: 400px;">
                                                 <option value="" disabled selected>Pilih Jabatan</option>
-                                                <option value="karyawan">Karyawan</option>
-                                                <option value="manajer">Manajer</option>
+                                                <?php foreach ($jabatan as $value) { ?>
+                                                    <option value="<?= $value['id_jabatan'] ?>"><?= $value['nama_jabatan'] ?></option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                     </div>
@@ -56,7 +62,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Divisi</label>
                                         <div class="col-sm-10">
-                                            <select tabindex="3" id="verifikasi_select_divisi" name="divisi" class="chosen-select" style="width: 400px;">
+                                            <select tabindex="3" id="verifikasi_select_divisi" name="id_divisi" class="chosen-select" style="width: 400px;">
                                             <option value="" disabled selected>Pilih Divisi</option>
                                                 <?php 
                                                 foreach ($divisi as $value) {
@@ -72,7 +78,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Bagian</label>
                                         <div class="col-sm-10">
-                                            <select tabindex="3" id="verifikasi_select_bagian" name="bagian" class="chosen-select" style="width: 400px;">
+                                            <select tabindex="3" id="verifikasi_select_bagian" name="id_bagian" class="chosen-select" style="width: 400px;">
                                                 <option value="" disabled selected>Pilih Bagian Divisi</option>
 
                                             </select>
@@ -85,12 +91,6 @@
                                             <input type="file" name="nametag" class="filestyle" data-buttonText="Upload Nametag" data-iconName="fa fa-inbox">
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Foto Profil Karyawan</label>
-                                        <div class="col-sm-10">
-                                            <input type="file" name="foto" class="filestyle" data-buttonText="Upload Foto Profile" data-iconName="fa fa-inbox">
-                                        </div>
-                                    </div>
                                     <hr class="line-dashed full-witdh-line" />
                                     <div class="form-group">
                                         <div class="col-sm-4 col-sm-offset-2">
@@ -99,6 +99,7 @@
                                     </div>
                                 </form>
                             </div>
+                            <?php } ?>
                         </section>
                     </div>
                 </div>

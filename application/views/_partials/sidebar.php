@@ -1,5 +1,4 @@
 <aside id="leftmenu">
-<?php if($this->session->userdata('user')->status == 'active') : ?>
                 <div id="leftmenu-wrap">
                     <div class="panel-group slim-scroll" role="tablist">
                         <div class="panel panel-default">
@@ -7,38 +6,67 @@
                                 <div class="panel-body">
                                     <!--  NAVIGATION Content -->
                                     <ul id="navigation">
-                                        <li>
-                                            <a href="index.html">
+                                        <li class="<?php echo ( $this->uri->segment('1') == 'home') ? 'active' : '' ?>">
+                                            <a href="<?= base_url('home') ?>">
                                                 <i class="fa fa-dashboard"></i>
                                                 <span>Dashboard</span>
                                             </a>
                                         </li>
 
                                         <li>
-                                            <a href="material.html">
+                                            <a href="<?= base_url('notifikasi') ?>">
                                                 <i class="fa fa-arrow-right"></i>
                                                 <span>Pemberitahuan</span>
                                             </a>
                                         </li>
-                                        <li class="active open">
+
+                                        <?php if(($this->session->userdata('user')->hak_akses == 'Manajer') || ($this->session->userdata('user')->hak_akses == 'Karyawan')) : ?>
+                                        <li class="dropdown">
                                             <a role="button" tabindex="0">
                                                 <i class="fa fa-list"></i>
                                                 <span>Jobdesk</span>
                                             </a>
                                             <ul>
-                                                <li class="active">
-                                                    <a href="form-wizard.html">
+                                                <?php if($this->session->userdata('user')->hak_akses == 'Karyawan') { ?>
+                                                <li>
+                                                    <a href="<?= base_url('jobdesk/masuk') ?>">
                                                         <i class="fa fa-angle-right"></i> Jobdesk Masuk
                                                         <span class="badge br-10 badge-success">13</span>
                                                     </a>
                                                 </li>
+                                                <?php } else if($this->session->userdata('user')->hak_akses == 'Manajer') { ?>
                                                 <li>
-                                                    <a href="form-wizard.html">
+                                                
+                                                    <a href="<?= base_url('jobdesk/karyawan') ?>">
+                                                        <i class="fa fa-angle-right"></i> Jobdesk Karyawan
+                                                    </a>
+                                                </li>
+                                                <?php } ?>
+                                                <li>
+                                                    <a href="<?= base_url('jobdesk/selesai') ?>">
                                                         <i class="fa fa-angle-right"></i> Jobdesk Selesai
                                                     </a>
                                                 </li>
                                             </ul>
                                         </li>
+                                        <?php endif; ?>
+
+                                        <?php if($this->session->userdata('user')->hak_akses == 'admin' ) : ?>
+                                        <li class="<?= ($this->uri->segment('2') == 'kelola_user') ? 'active open' : 'dropdown' ?>">
+                                            <a role="button" tabindex="0">
+                                                <i class="fa fa-list"></i>
+                                                <span>Menu Admin</span>
+                                            </a>
+                                            <ul>
+                                                <li class="<?= ($this->uri->segment('1') == 'admin' && $this->uri->segment('2') == 'kelola_user') ? 'active' : '' ?>">
+                                                    <a href="<?= base_url('admin/kelola_user') ?>">
+                                                        <i class="fa fa-angle-right"></i> Kelola User
+                                                        <!-- <span class="badge br-10 badge-success">13</span> -->
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <?php endif; ?>
                                         
                                         
                                     </ul>
@@ -74,5 +102,4 @@
                         </div>
                     </div>
                 </div>
-                <?php endif; ?>
             </aside>

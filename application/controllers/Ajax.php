@@ -24,5 +24,32 @@ class Ajax extends CI_Controller {
         $where = array('id_divisi' => $id_divisi);
         $bagian = $this->bagian_m->read_where($where)->result_array();
         echo json_encode($bagian);
-    }
+	}
+	
+	public function get_jabatan(){
+        $this->load->model('jabatan_m');
+        $jabatan = $this->jabatan_m->read->result_array();
+        echo json_encode($jabatan);
+	}
+
+	public function get_detail_user(){
+		$this->load->model('user_m');
+		$id_user = $this->input->post('id_user');
+		$user = $this->user_m->read_full_where(array('user.id_user' => $id_user))->result_array();
+		echo json_encode($user);
+	}
+
+	public function aktifkan_user(){
+		$this->load->model('user_m');
+		$id_user = $this->input->post('id_user');
+		$user = $this->user_m->update(array('status' => 'active'),array('id_user' => $id_user));
+		echo json_encode($user);
+	}
+
+	public function blokir_user(){
+		$this->load->model('user_m');
+		$id_user = $this->input->post('id_user');
+		$user = $this->user_m->update(array('status' => 'suspend'),array('id_user' => $id_user));
+		echo json_encode($user);
+	}
 }
