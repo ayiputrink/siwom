@@ -45,10 +45,10 @@
 														</label>
 													</div>
 												</td>
-												<td><?= $value['nik'] ?></td>
-												<td><?= $value['nama'] ?></td>
-                                                <td><?= $value['email'] ?></td>
-                                                <td><?= $value['status'] ?></td>
+												<td class="nik-<?= $value['id_user'] ?>"><?= $value['nik'] ?></td>
+												<td class="nama-<?= $value['id_user'] ?>"><?= $value['nama'] ?></td>
+                                                <td class="email-<?= $value['id_user'] ?>"><?= $value['email'] ?></td>
+                                                <td class="status-<?= $value['id_user'] ?>"><?= $value['status'] ?></td>
                                                 <td>
                                                     <button data-idUser="<?= $value['id_user'] ?>" class="btn btn-primary detailUser" data-toggle="modal" data-target="#validasiUserModal">Lihat Detail</button></td>
 												

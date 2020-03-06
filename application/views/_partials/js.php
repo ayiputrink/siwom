@@ -65,7 +65,9 @@
 <script src="<?= base_url() ?>assets/bundles/libscripts.bundle.js"></script>
     <script src="<?= base_url() ?>assets/bundles/vendorscripts.bundle.js"></script>
     
-    <script src="<?= base_url() ?>assets/bundles/sweetalertscripts.bundle.js"></script>
+    <!-- <script src="<?= base_url() ?>assets/bundles/sweetalertscripts.bundle.js"></script> -->
+    <script src="<?= base_url() ?>assets/js/sweetalert.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> -->
     <script src="<?= base_url() ?>assets/js/vendor/sparkline/jquery.sparkline.min.js"></script>     
     <script src="<?= base_url() ?>assets/js/vendor/animsition/js/jquery.animsition.min.js"></script> 
     <script src="<?= base_url() ?>assets/js/vendor/screenfull/screenfull.min.js"></script> 
@@ -115,41 +117,61 @@
             });
 
             $('#aktifkan').click(function(){
-                swal({
-                    title: "Apakah kamu yakin?",
-                    text: "Akan mengaktifkan nik dengan nama?",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: '#DD6B55',
-                    confirmButtonText: 'Iya, Aktifkan!',
-                    cancelButtonText: "Tidak Batalkan!",
-                },
-                    function (isConfirm) {
-                        if (isConfirm) {
-                            swal("Deleted!", "Your imaginary file has been deleted!", "success");
-                        } else {
-                            swal("Cancelled", "Your imaginary file is safe :)", "error");
+                var id_user = $(this).attr('data-idUser');
+                var url = '<?= base_url() ?>Ajax/aktifkan_user/';
+                Swal.fire({
+                title: 'Apakah kamu yakin?',
+                text: "Akan mengaktifkan user ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Iya, Aktifkan!',
+                cancelButtonText: 'Batalkan',
+                }).then((result) => {
+                if (result.value) {
+                        $.post(url,{id_user: id_user},
+                        function(data,status) {
+                            Swal.fire(
+                            'Diaktifkan!',
+                            'User sudah aktif.',
+                            'success'
+                            );
+                            $('.status-'+id_user).html('active');
                         }
-                    }).catch(swal.noop);
+                    );  
+                    
+                }
+                });
             });
 
             $('#blokir').click(function(){
-                swal({
-                    title: "Apakah kamu yakin?",
-                    text: "Akan memblokir nik dengan nama?",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: '#DD6B55',
-                    confirmButtonText: 'Iya, Blokir!',
-                    cancelButtonText: "Tidak Batalkan!",
-                },
-                    function (isConfirm) {
-                        if (isConfirm) {
-                            swal("Deleted!", "Your imaginary file has been deleted!", "success");
-                        } else {
-                            swal("Cancelled", "Your imaginary file is safe :)", "error");
+                var id_user = $(this).attr('data-idUser');
+                var url = '<?= base_url() ?>Ajax/blokir_user/';
+                Swal.fire({
+                title: 'Apakah kamu yakin?',
+                text: "Akan memblokir user ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Iya, Blokir!',
+                cancelButtonText: 'Batalkan',
+                }).then((result) => {
+                if (result.value) {
+                    $.post(url,{id_user: id_user},
+                        function(data,status) {
+                            Swal.fire(
+                            'Diblokir!',
+                            'User sudah terblokir.',
+                            'success'
+                            );
+                            $('.status-'+id_user).html('suspend');
                         }
-                    }).catch(swal.noop);
+                    );
+                    
+                }
+                });
             });
 
             $('.detailUser').click(function(){
