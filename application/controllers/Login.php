@@ -54,10 +54,10 @@ class Login extends CI_Controller {
 				redirect(base_url('verifikasi'),'refresh');
 			} else if ($user->status == 'active') {	
 				$this->session->set_userdata($sesi);
-				$this->load->view('home');
+				redirect('home');
 			} else {
 				$this->session->set_flashdata('status_login_gagal', 'Maaf Akun anda telah diblokir');
-				$this->load->view('login');	
+				redirect('login');	
 			}
 		} else {
 			$this->session->set_flashdata('status_login_gagal', 'Maaf Email atau Password anda salah');
