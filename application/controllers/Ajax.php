@@ -28,8 +28,14 @@ class Ajax extends CI_Controller {
 	
 	public function get_jabatan(){
         $this->load->model('jabatan_m');
-        $jabatan = $this->jabatan_m->read->result_array();
+        $jabatan = $this->jabatan_m->read()->result_array();
         echo json_encode($jabatan);
+	}
+
+	public function get_all_divisi(){
+		$this->load->model('divisi_m');
+		$divisi = $this->divisi_m->read()->result_array();
+		echo json_encode($divisi);	
 	}
 
 	public function get_detail_user(){

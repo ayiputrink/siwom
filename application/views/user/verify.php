@@ -62,7 +62,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Divisi</label>
                                         <div class="col-sm-10">
-                                            <select tabindex="3" id="verifikasi_select_divisi" name="id_divisi" class="chosen-select" style="width: 400px;">
+                                            <select tabindex="3" id="verifikasi_select_divisi" name="id_divisi" class="verifikasi_select_divisi chosen-select" style="width: 400px;">
                                             <option value="" disabled selected>Pilih Divisi</option>
                                                 <?php 
                                                 foreach ($divisi as $value) {
@@ -78,7 +78,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Bagian</label>
                                         <div class="col-sm-10">
-                                            <select tabindex="3" id="verifikasi_select_bagian" name="id_bagian" class="chosen-select" style="width: 400px;">
+                                            <select tabindex="3" id="verifikasi_select_bagian" name="id_bagian" class="verifikasi_select_bagian chosen-select" style="width: 400px;">
                                                 <option value="" disabled selected>Pilih Bagian Divisi</option>
 
                                             </select>
