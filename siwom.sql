@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 26 Feb 2020 pada 17.08
+-- Waktu pembuatan: 08 Mar 2020 pada 17.03
 -- Versi server: 10.4.8-MariaDB
 -- Versi PHP: 7.3.11
 
@@ -30,10 +30,19 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `administrator` (
   `id_admin` int(11) NOT NULL,
+  `nama` varchar(20) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
+  `foto` varchar(100) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `administrator`
+--
+
+INSERT INTO `administrator` (`id_admin`, `nama`, `username`, `password`, `foto`, `created_at`) VALUES
+(1, 'Ayi', 'ayiputrink', '123456', NULL, '2020-03-04 05:45:07');
 
 -- --------------------------------------------------------
 
@@ -45,7 +54,7 @@ CREATE TABLE `assign_jobdesk` (
   `id_assign` int(11) NOT NULL,
   `id_jobdesk` int(11) NOT NULL,
   `deskripsi` text NOT NULL,
-  `lampiran` varchar(100) NOT NULL,
+  `lampiran` varchar(100) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -163,6 +172,14 @@ CREATE TABLE `jabatan` (
   `nama_jabatan` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `jabatan`
+--
+
+INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`) VALUES
+(1, 'Karyawan'),
+(2, 'Manajer');
+
 -- --------------------------------------------------------
 
 --
@@ -174,7 +191,7 @@ CREATE TABLE `jobdesk` (
   `dari` int(11) NOT NULL,
   `kepada` int(11) NOT NULL,
   `deskripsi` text NOT NULL,
-  `lampiran` varchar(100) NOT NULL,
+  `lampiran` varchar(100) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -222,6 +239,7 @@ CREATE TABLE `user` (
   `id_divisi` int(11) DEFAULT NULL,
   `id_bagian` int(11) DEFAULT NULL,
   `foto` varchar(100) DEFAULT NULL,
+  `nametag` varchar(100) DEFAULT NULL,
   `status` enum('unverified','active','suspend') NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -230,8 +248,9 @@ CREATE TABLE `user` (
 -- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`id_user`, `nik`, `nama`, `alamat`, `email`, `password`, `id_jabatan`, `id_divisi`, `id_bagian`, `foto`, `status`, `created_at`) VALUES
-(1, NULL, 'Ayi Putri', '', 'ayiputrink@gmail.com', '123456', NULL, NULL, NULL, NULL, 'unverified', '2020-02-25 02:14:41');
+INSERT INTO `user` (`id_user`, `nik`, `nama`, `alamat`, `email`, `password`, `id_jabatan`, `id_divisi`, `id_bagian`, `foto`, `nametag`, `status`, `created_at`) VALUES
+(1, 10104006, 'Ayi Putri', 'Subang', 'ayiputrink@gmail.com', '123456', 2, 7, 34, NULL, '698c1f9716fa66d5d5989a32a6cb4d07.png', 'active', '2020-03-06 04:02:43'),
+(2, NULL, 'Nuca', NULL, 'nuca@gmail.com', '123456', NULL, NULL, NULL, NULL, NULL, 'suspend', '2020-03-06 08:08:41');
 
 --
 -- Indexes for dumped tables
@@ -299,7 +318,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `administrator`
 --
 ALTER TABLE `administrator`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `assign_jobdesk`
@@ -317,7 +336,7 @@ ALTER TABLE `bagian`
 -- AUTO_INCREMENT untuk tabel `divisi`
 --
 ALTER TABLE `divisi`
-  MODIFY `id_divisi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_divisi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `item_jobdesk`
@@ -329,7 +348,7 @@ ALTER TABLE `item_jobdesk`
 -- AUTO_INCREMENT untuk tabel `jabatan`
 --
 ALTER TABLE `jabatan`
-  MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `jobdesk`
@@ -347,7 +366,7 @@ ALTER TABLE `komentar_jobdesk`
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
