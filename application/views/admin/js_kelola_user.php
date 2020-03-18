@@ -210,6 +210,13 @@
                                             <span class="help-block mb-0">Email karyawan.</span>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="input04" class="col-sm-2 control-label">Password</label>
+                                        <div class="col-sm-10">
+                                            <input id="tambah_password" type="password" name="password" class="form-control" id="input04">
+                                            <span class="help-block mb-0">Password karyawan.</span>
+                                        </div>
+                                    </div>
                                     <hr class="line-dashed full-witdh-line" />
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Jabatan</label>
@@ -279,6 +286,7 @@
             var url_edit = '<?= base_url().'ajax/update_user/' ?>';
             var url_tambah = '<?= base_url().'ajax/insert_user/' ?>';
             var url_all_user = '<?= base_url().'ajax/get_all_user/' ?>';
+            var url_delete_user = '<?= base_url().'ajax/delete_user/' ?>';
             var dataDetail;
 
             //function start
@@ -371,6 +379,7 @@
 
             //calling function start
             get_user();
+            
             //calling function end
 
 
@@ -587,7 +596,32 @@
         });
 
         $(document).on('click', ".hapusUser",function(){
-            
+            var id_user = $(this).attr('data-idUser');
+            Swal.fire({
+                title: 'Apakah kamu yakin?',
+                text: "Akan menghapus user ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Iya, Hapus!',
+                cancelButtonText: 'Batalkan',
+                }).then((result) => {
+                if (result.value) {
+                        $.post(url_delete_user,{id_user: id_user},
+                        function(data,status) {
+                            Swal.fire(
+                            'Dihapus!',
+                            'User sudah terhapus.',
+                            'success'
+                            );
+                            $('#validasiUserModal').modal('toggle');
+                            get_user();
+                        }
+                    );  
+                    
+                }
+            });
         });
 
 

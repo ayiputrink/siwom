@@ -11,42 +11,34 @@
                     </div>
                 </div>
                 <div class="row clearfix">
-                    <div class="col-lg-3 col-sm-6 col-md-6 col-xs-12">
+                    <div class="col-lg-4 col-sm-6 col-md-6 col-xs-12">
                         <div class="boxs top_report_chart l-blue">
                             <div class="boxs-body">
-                                <h3 class="mt-0"><?= $total_user ?> User</h3>
-                                <p>Total User</p>
+                                <h3 class="mt-0"><?= $tugas ?> Tugas</h3>
+                                <p>Total Tugas</p>
                             </div>
                             
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6 col-md-6 col-xs-12">
+                    <div class="col-lg-4 col-sm-6 col-md-6 col-xs-12">
                         <div class="boxs top_report_chart l-parpl">
                             <div class="boxs-body">
-                                <h3 class="mt-0"><?= $tugas ?> Tugas</h3>
+                                <h3 class="mt-0"><?= $tugas_selesai ?> Tugas</h3>
+                                <p>Tugas Selesai</p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 col-md-6 col-xs-12">
+                        <div class="boxs top_report_chart l-seagreen">
+                            <div class="boxs-body">
+                                <h3 class="mt-0"><?= $tugas_belum ?> Tugas</h3>
                                 <p>Tugas Belum Selesai</p>
                             </div>
                             
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6 col-md-6 col-xs-12">
-                        <div class="boxs top_report_chart l-seagreen">
-                            <div class="boxs-body">
-                                <h3 class="mt-0"><?= $unverified ?> User</h3>
-                                <p>User Belum Terverifikasi</p>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 col-md-6 col-xs-12">
-                        <div class="boxs top_report_chart l-amber">
-                            <div class="boxs-body">
-                                <h3 class="mt-0"><?= $blocked ?> User</h3>
-                                <p>User Diblokir</p>
-                            </div>
-                            
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
 </section>

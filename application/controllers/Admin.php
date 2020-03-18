@@ -30,8 +30,18 @@ class Admin extends CI_Controller {
 	}
 
 	public function dashboard(){
+		$this->load->model('user_m');
+		$this->load->model('jobdesk_m');
+		$total_user = $this->user_m->read()->num_rows();
+		$unverified = $this->user_m->read_where(array('status' => 'unverified'))->num_rows();
+		$blocked = $this->user_m->read_where(array('status' => 'suspend'))->num_rows();
+		$tugas = $this->jobdesk_m->read()->num_rows();
 		$data = array(
-			'konten' => 'admin/home'
+			'konten' => 'admin/home',
+			'total_user' => $total_user,
+			'unverified' => $unverified,
+			'blocked' => $blocked,
+			'tugas' => $tugas
 		);
 		$this->load->view('_partials/template',$data);
 	}

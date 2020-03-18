@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="<?= base_url() ?>assets/js/vendor/touchspin/jquery.bootstrap-touchspin.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/js/vendor/chosen/chosen.css">    
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/main.css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/css/vendor/datatables.min.css">
     <style>
         .swal2-popup {
            font-size: 1.6rem !important;

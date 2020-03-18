@@ -6,7 +6,7 @@
                                 <div class="panel-body">
                                     <!--  NAVIGATION Content -->
                                     <ul id="navigation">
-                                        <li class="<?php echo ( $this->uri->segment('1') == 'home') ? 'active' : '' ?>">
+                                        <li class="<?php echo ( $this->uri->segment('1') == 'home' || $this->uri->segment('2') == 'dashboard') ? 'active' : '' ?>">
                                             <a href="<?= base_url('home') ?>">
                                                 <i class="fa fa-dashboard"></i>
                                                 <span>Dashboard</span>

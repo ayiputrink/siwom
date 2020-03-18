@@ -104,10 +104,20 @@ class Ajax extends CI_Controller {
 		echo json_encode($user);
 	}
 
-	public function hapus_user(){
+	public function datatables_user(){
+		$this->load->model('user_m');
+		$data = array();
+		foreach ($this->user_m->read()->result_array() as $key => $value) {
+			array_push($data,array_values($value));
+		}
+		$user = array('data' => $data);
+		echo json_encode($user);
+	}
+
+	public function delete_user(){
 		$this->load->model('user_m');
 		$where = array('id_user' => $this->input->post('id_user'));
-		$user = $this->user_m->delete();
+		$user = $this->user_m->delete($where);
 		echo json_encode($user);
 	}
 

@@ -37,6 +37,6 @@ class Base_m extends CI_Model {
     }
 
     public function delete($where){
-        return $this->db->delete($table,$where);
+        return $this->db->delete($this->table,$where);
     }
 }

@@ -16,7 +16,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="row">
+								<!-- <div class="row">
 									
 									<div class="col-sm-12 col-xs-12">
 										<div class="input-group">
@@ -27,7 +27,7 @@
 										</div>
 									</div>
 								</div>
-							</div>
+							</div> -->
 							<div class="boxs-body p-0">
 								<div class="table-responsive">
 									<table class="table mb-0" id="usersList">
@@ -53,7 +53,7 @@
 							<!-- /boxs body -->
 
 							<!-- boxs footer -->
-							<div class="boxs-footer dvd dvd-top">
+							<!-- <div class="boxs-footer dvd dvd-top">
 								<div class="row">
 									<div class="col-sm-2 hidden-xs">
 										<select class="form-control inline">
@@ -66,7 +66,7 @@
 										<button class="btn btn-default btn-raised">Terapkan</button>
 									</div>
 									<div class="col-sm-3 text-left">
-										<!-- <small class="text-muted">showing 20-30 of 50 items</small> -->
+									
 									</div>
 									<div class="col-sm-5 text-right">
 										<ul class="pagination m-0">
@@ -92,7 +92,7 @@
 										</ul>
 									</div>
 								</div>
-							</div>
+							</div> -->
 							<!-- /boxs footer -->
 
 						</section>
