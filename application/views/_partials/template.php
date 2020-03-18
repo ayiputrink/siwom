@@ -27,6 +27,9 @@
     <?php $this->load->view('_partials/js'); ?>    
     <!--/ vendor javascripts -->
 
+    <?php if($js != null) {  
+        $this->load->view($js);   
+    }?>
     
 
 

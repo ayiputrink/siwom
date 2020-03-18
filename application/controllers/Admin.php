@@ -22,18 +22,18 @@ class Admin extends CI_Controller {
 	 public function index()
 	{
 		$sesi = $this->session->userdata('user');
-		if($sesi != null) {
-			if($sesi->hak_akses == 'admin') {
-				$data = array(
-					'konten' => 'admin/home'
-				);
-				$this->load->view('_partials/template',$data);
-			} else {
-				redirect('login/aksi_logout');
-			}
-		} else {
+		if($sesi == null) {
 			$this->load->view('admin/login');
+		} else {
+			redirect('admin/dashboard');
 		}
+	}
+
+	public function dashboard(){
+		$data = array(
+			'konten' => 'admin/home'
+		);
+		$this->load->view('_partials/template',$data);
 	}
 
 	public function lupa_password()
@@ -42,12 +42,21 @@ class Admin extends CI_Controller {
 	}
 
 	public function kelola_user(){
+		$this->is_login();
 		$this->load->model('user_m');
 		$data_user = $this->user_m->read()->result_array();
 		$data = array(
 			'konten' => 'admin/kelola_user',
+			'js' => 'admin/js_kelola_user',
 			'data_user' => $data_user
 		);
 		$this->load->view('_partials/template',$data);
+	}
+
+	private function is_login() {
+		$sesi = $this->session->userdata('user');
+		if($sesi == null) {
+			redirect('admin');
+		}
 	}
 }

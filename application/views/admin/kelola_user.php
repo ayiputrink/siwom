@@ -8,6 +8,14 @@
 									<strong>Tabel</strong> User</h3>
 							</div>
 							<div class="boxs-widget">
+							<div class="row">
+									
+									<div class="col-sm-12 col-xs-12">
+										<div class="input-group">
+												<button id="tambahUser" class="btn btn-info" data-toggle="modal" data-target="#tambahUserModal">Tambah User</button>
+										</div>
+									</div>
+								</div>
 								<div class="row">
 									
 									<div class="col-sm-12 col-xs-12">
@@ -35,25 +43,8 @@
                                                 <th style="width:30px;"></th>
 											</tr>
 										</thead>
-										<tbody>
-                                            <?php foreach($data_user as $value) : ?>
-											<tr>
-												<td>
-													<div class="checkbox">
-														<label>
-															<input type="checkbox" name="optionsCheckboxes">
-														</label>
-													</div>
-												</td>
-												<td class="nik-<?= $value['id_user'] ?>"><?= $value['nik'] ?></td>
-												<td class="nama-<?= $value['id_user'] ?>"><?= $value['nama'] ?></td>
-                                                <td class="email-<?= $value['id_user'] ?>"><?= $value['email'] ?></td>
-                                                <td class="status-<?= $value['id_user'] ?>"><?= $value['status'] ?></td>
-                                                <td>
-                                                    <button data-idUser="<?= $value['id_user'] ?>" class="btn btn-primary detailUser" data-toggle="modal" data-target="#validasiUserModal">Lihat Detail</button></td>
-												
-                                            </tr>
-                                            <?php endforeach; ?>
+										<tbody id="isiTabelUser">
+                                            
 											
 										</tbody>
 									</table>
@@ -66,14 +57,13 @@
 								<div class="row">
 									<div class="col-sm-2 hidden-xs">
 										<select class="form-control inline">
-											<option value="0">Bulk action</option>
-											<option value="1">Delete selected</option>
-											<option value="2">Archive selected</option>
-											<option value="3">Copy selected</option>
+											<option value="0">Aksi</option>
+											<option value="1">Hapus</option>
+
 										</select>
 									</div>
 									<div class="col-sm-2">
-										<button class="btn btn-default btn-raised">Apply</button>
+										<button class="btn btn-default btn-raised">Terapkan</button>
 									</div>
 									<div class="col-sm-3 text-left">
 										<!-- <small class="text-muted">showing 20-30 of 50 items</small> -->

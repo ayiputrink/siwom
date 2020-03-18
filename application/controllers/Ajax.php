@@ -58,4 +58,75 @@ class Ajax extends CI_Controller {
 		$user = $this->user_m->update(array('status' => 'suspend'),array('id_user' => $id_user));
 		echo json_encode($user);
 	}
+
+	public function update_user(){
+		$this->load->model('user_m');
+		//echo var_dump($this->input->post());
+		//die();
+		$id_user = $this->input->post('id_user');
+		$data = array(
+			'nik' => $this->input->post('nik'),
+			'nama' => $this->input->post('nama'),
+			'alamat' => $this->input->post('alamat'),
+			'email' => $this->input->post('email'),
+			'id_jabatan' => $this->input->post('id_jabatan'),
+			'id_divisi' => $this->input->post('id_divisi'),
+			'id_bagian' => $this->input->post('id_bagian')
+		);
+		if($this->upload_foto('nametag_'.$id_user,'nametag','user/') != null) {
+			$data['nametag'] = $this->upload_foto('nametag_'.$id_user,'nametag','user/');
+		}
+		$user = $this->user_m->update($data,array('id_user' => $id_user));
+		echo json_encode($user);
+	}
+
+	public function insert_user(){
+		$this->load->model('user_m');
+		$data = array(
+			'nik' => $this->input->post('nik'),
+			'nama' => $this->input->post('nama'),
+			'alamat' => $this->input->post('alamat'),
+			'email' => $this->input->post('email'),
+			'id_jabatan' => $this->input->post('id_jabatan'),
+			'id_divisi' => $this->input->post('id_divisi'),
+			'id_bagian' => $this->input->post('id_bagian')
+		);
+		if($this->upload_foto('nametag_','nametag','user/') != null) {
+			$data['nametag'] = $this->upload_foto('nametag_','nametag','user/');
+		}
+		$user = $this->user_m->create($data);
+		echo json_encode($user);
+	}
+
+	public function get_all_user(){
+		$this->load->model('user_m');
+		$user = $this->user_m->read()->result_array();
+		echo json_encode($user);
+	}
+
+	public function hapus_user(){
+		$this->load->model('user_m');
+		$where = array('id_user' => $this->input->post('id_user'));
+		$user = $this->user_m->delete();
+		echo json_encode($user);
+	}
+
+	private function upload_foto($nama,$form,$direktori){
+        $config['upload_path']          = './upload/'.$direktori;
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['file_name']            = $nama;
+        $config['overwrite']			= true;
+        $config['max_size']             = 2048; // 1MB
+        $config['encrypt_name'] = TRUE;
+        // $config['max_width']            = 1024;
+        // $config['max_height']           = 768;
+
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload($form)) {
+            return $this->upload->data("file_name");
+        }
+        
+        return null;
+    }
 }
