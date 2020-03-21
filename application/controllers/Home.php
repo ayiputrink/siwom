@@ -34,11 +34,11 @@ class Home extends CI_Controller {
             $user = $this->session->userdata('user');
             if($user->status == 'active') {
 				if($user->id_jabatan == 1){
-					$tugas = $this->jobdesk_m->read()->num_rows();
-					$tugas_belum = $this->jobdesk_m->read()->num_rows();
-					$tugas_selesai = $this->jobdesk_m->read()->num_rows();
+					$tugas = $this->jobdesk_m->read_where(array('kepada' => $user->id_user))->num_rows();
+					$tugas_belum = $this->jobdesk_m->read_where(array('status_jobdesk' => 'belum selesai','kepada' => $user->id_user))->num_rows();
+					$tugas_selesai = $this->jobdesk_m->read_where(array('status_jobdesk' => 'selesai','kepada' => $user->id_user))->num_rows();
 					$data = array(
-						'konten' => 'user/home_karyawan',
+						'konten' => 'karyawan/home_karyawan',
 						'tugas' => $tugas,
 						'tugas_belum' => $tugas_belum,
 						'tugas_selesai' => $tugas_selesai
@@ -46,23 +46,18 @@ class Home extends CI_Controller {
 					$this->load->view('_partials/template',$data);
 				} else if ($user->id_jabatan == 2) {
 					$total_karyawan = $this->user_m->read_where(array('id_bagian' => $user->id_bagian))->num_rows();
-					$tugas = $this->jobdesk_m->read()->num_rows();
-					$tugas_belum = $this->jobdesk_m->read()->num_rows();
-					$tugas_selesai = $this->jobdesk_m->read()->num_rows();
+					$tugas = $this->jobdesk_m->read_where(array('dari' => $user->id_user))->num_rows();
+					$tugas_belum = $this->jobdesk_m->read_where(array('dari' => $user->id_user,'status_jobdesk' => 'belum selesai'))->num_rows();
+					$tugas_selesai = $this->jobdesk_m->read_where(array('dari' => $user->id_user,'status_jobdesk' => 'selesai'))->num_rows();
 					$data = array(
-						'konten' => 'user/home_manajer',
+						'konten' => 'manajer/home_manajer',
 						'total_karyawan' => $total_karyawan,
 						'tugas' => $tugas,
 						'tugas_belum' => $tugas_belum,
 						'tugas_selesai' => $tugas_selesai
 					);
 					$this->load->view('_partials/template',$data);
-				} else {
-					$data = array(
-						'konten' => 'user/home'
-					);
-					$this->load->view('_partials/template',$data);
-				}
+				} 
             } else if ($user->status == 'unverified') {
                 redirect('verifikasi');
             } else {

@@ -33,7 +33,7 @@
                         <div class="boxs top_report_chart l-seagreen">
                             <div class="boxs-body">
                                 <h3 class="mt-0"><?= $tugas_belum ?> Tugas</h3>
-                                <p>Tugas yang telah selesai</p>
+                                <p>Tugas yang belum selesai</p>
                             </div>
                             
                         </div>
@@ -42,7 +42,7 @@
                         <div class="boxs top_report_chart l-amber">
                             <div class="boxs-body">
                                 <h3 class="mt-0"><?= $tugas_selesai ?> Tugas</h3>
-                                <p>Tugas yang belum selesai</p>
+                                <p>Tugas yang telah selesai</p>
                             </div>
                             
                         </div>

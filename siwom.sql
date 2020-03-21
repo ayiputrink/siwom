@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 08 Mar 2020 pada 17.03
+-- Waktu pembuatan: 21 Mar 2020 pada 19.50
 -- Versi server: 10.4.8-MariaDB
 -- Versi PHP: 7.3.11
 
@@ -158,6 +158,7 @@ CREATE TABLE `item_jobdesk` (
   `id_item_jobdesk` int(11) NOT NULL,
   `id_jobdesk` int(11) NOT NULL,
   `isi_item` text NOT NULL,
+  `status_item` enum('belum selesai','selesai') NOT NULL DEFAULT 'belum selesai',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -190,10 +191,25 @@ CREATE TABLE `jobdesk` (
   `id_jobdesk` int(11) NOT NULL,
   `dari` int(11) NOT NULL,
   `kepada` int(11) NOT NULL,
+  `judul` varchar(50) NOT NULL,
   `deskripsi` text NOT NULL,
   `lampiran` varchar(100) DEFAULT NULL,
+  `status_jobdesk` enum('belum selesai','selesai') NOT NULL DEFAULT 'belum selesai',
+  `deadline` datetime DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `jobdesk`
+--
+
+INSERT INTO `jobdesk` (`id_jobdesk`, `dari`, `kepada`, `judul`, `deskripsi`, `lampiran`, `status_jobdesk`, `deadline`, `created_at`) VALUES
+(1, 1, 2, '', 'Buat', NULL, 'belum selesai', '2020-03-24 00:00:00', '2020-03-20 03:26:50'),
+(2, 1, 2, 'oke', 'des', NULL, 'belum selesai', NULL, '2020-03-20 03:20:01'),
+(3, 0, 3, 'bersih', 'korona', '5e55c8c3ac84dd2b229a8d71a778540d.zip', 'belum selesai', NULL, '2020-03-20 11:07:27'),
+(4, 0, 3, 'bersih', 'korona', '8e5e8d3b68add2caefbc62504d33a44c.zip', 'belum selesai', NULL, '2020-03-20 11:08:11'),
+(5, 0, 3, 'baru', 'boleh', NULL, 'belum selesai', NULL, '2020-03-20 14:13:54'),
+(6, 0, 3, 'masih percobaan', 'lagi', NULL, 'belum selesai', NULL, '2020-03-20 14:16:50');
 
 -- --------------------------------------------------------
 
@@ -204,6 +220,7 @@ CREATE TABLE `jobdesk` (
 CREATE TABLE `komentar_jobdesk` (
   `id_komentar` int(11) NOT NULL,
   `id_jobdesk` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `isi_komentar` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -216,9 +233,10 @@ CREATE TABLE `komentar_jobdesk` (
 
 CREATE TABLE `notifikasi` (
   `id_notifikasi` int(11) NOT NULL,
-  `id_jobdesk` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `isi_notifikasi` varchar(50) NOT NULL,
+  `link` varchar(150) DEFAULT NULL,
+  `status_notifikasi` enum('diterima','dibaca') NOT NULL DEFAULT 'diterima',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -249,8 +267,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `nik`, `nama`, `alamat`, `email`, `password`, `id_jabatan`, `id_divisi`, `id_bagian`, `foto`, `nametag`, `status`, `created_at`) VALUES
-(1, 10104006, 'Ayi Putri', 'Subang', 'ayiputrink@gmail.com', '123456', 2, 7, 34, NULL, '698c1f9716fa66d5d5989a32a6cb4d07.png', 'active', '2020-03-06 04:02:43'),
-(2, NULL, 'Nuca', NULL, 'nuca@gmail.com', '123456', NULL, NULL, NULL, NULL, NULL, 'suspend', '2020-03-06 08:08:41');
+(1, 10104006, 'Ayi Putri Nurkaidah', 'Subang', 'ayiputrink@gmail.com', '123456', 2, 7, 34, NULL, 'aa081589202d1f94a00962710ec204e9.jpg', 'active', '2020-03-17 09:25:14'),
+(2, 2020, 'Nuca', '', 'nuca@gmail.com', '123456', 2, NULL, NULL, NULL, '9c26f2d6903d551d36ff08cc22167cd9.jpg', 'suspend', '2020-03-20 14:23:45'),
+(3, 10104009, 'Lyodra', '', 'lyodra@gmail.com', '123456', 1, 7, 34, NULL, NULL, 'active', '2020-03-20 10:53:34');
 
 --
 -- Indexes for dumped tables
@@ -354,7 +373,7 @@ ALTER TABLE `jabatan`
 -- AUTO_INCREMENT untuk tabel `jobdesk`
 --
 ALTER TABLE `jobdesk`
-  MODIFY `id_jobdesk` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_jobdesk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `komentar_jobdesk`
@@ -366,7 +385,7 @@ ALTER TABLE `komentar_jobdesk`
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

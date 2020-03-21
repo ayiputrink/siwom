@@ -18,6 +18,23 @@ class Ajax extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
+	 public function test(){
+		 $this->load->model('user_m');
+		 $user = $this->user_m->read_beban()->result_array();
+		 echo json_encode($user);
+	 }
+
+	public function get_all_beban($id_bagian){
+		$this->load->model('user_m');
+		$where = array(
+			'id_jabatan' => 1,
+			'id_bagian' => $id_bagian
+		);
+		 $user = $this->user_m->read_beban_where($where)->result_array();
+		 echo json_encode($user);
+	}
+
 	public function get_bagian(){
         $this->load->model('bagian_m');
         $id_divisi = $this->input->post('id_divisi');
@@ -57,6 +74,53 @@ class Ajax extends CI_Controller {
 		$id_user = $this->input->post('id_user');
 		$user = $this->user_m->update(array('status' => 'suspend'),array('id_user' => $id_user));
 		echo json_encode($user);
+	}
+
+	public function update_jobdesk(){
+		$this->load->model('jobdesk_m');
+		$data = $this->input->post();
+		if($this->upload_foto('jobdesk','lampiran','lampiran/') != null) {
+			$data['lampiran'] = $this->upload_foto('jobdesk','lampiran','lampiran/');
+		}
+		$jobdesk = $this->jobdesk_m->update($data,$id_jobdesk);
+		echo json_encode($jobdesk);
+	}
+
+	public function insert_jobdesk(){
+		$this->load->model('jobdesk_m');
+		$id_jobdesk = array('id_jobdesk' => $this->input->post('id_jobdesk'));	
+		$data = $this->input->post();
+		unset($data['id_jobdesk']);
+		if($this->upload_file('jobdesk','lampiran','lampiran/') != null) {
+			$data['lampiran'] = $this->upload_file('jobdesk','lampiran','lampiran/');
+		}
+		$jobdesk = $this->jobdesk_m->create($data);
+		echo json_encode($jobdesk);
+	}
+
+	public function get_all_jobdesk($id_bagian){
+		$this->load->model('jobdesk_m');
+		$jobdesk = $this->jobdesk_m->read_full_where(array('id_bagian' => $id_bagian))->result_array();
+		echo json_encode($jobdesk);
+	}
+
+	public function get_jobdesk_belum($id_bagian){
+		$this->load->model('jobdesk_m');
+		$jobdesk = $this->jobdesk_m->read_full_where(array('id_bagian' => $id_bagian,'status_jobdesk' => 'belum selesai'))->result_array();
+		echo json_encode($jobdesk);
+	}
+
+	public function get_jobdesk_selesai($id_bagian){
+		$this->load->model('jobdesk_m');
+		$jobdesk = $this->jobdesk_m->read_full_where(array('id_bagian' => $id_bagian,'status_jobdesk' => 'selesai'))->result_array();
+		echo json_encode($jobdesk);
+	}
+
+	public function delete_jobdesk(){
+		$this->load->model('jobdesk_m');
+		$where = array('id_jobdesk' => $this->input->post('id_jobdesk'));
+		$jobdesk = $this->jobdesk_m->delete($where);
+		echo json_encode($jobdesk);
 	}
 
 	public function update_user(){
@@ -120,6 +184,25 @@ class Ajax extends CI_Controller {
 		$user = $this->user_m->delete($where);
 		echo json_encode($user);
 	}
+
+	private function upload_file($nama,$form,$direktori){
+        $config['upload_path']          = './upload/'.$direktori;
+        $config['allowed_types']        = 'zip|doc|xls';
+        $config['file_name']            = $nama;
+        $config['overwrite']			= true;
+        $config['max_size']             = 20000; // 1MB
+        $config['encrypt_name'] = TRUE;
+        // $config['max_width']            = 1024;
+        // $config['max_height']           = 768;
+
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload($form)) {
+            return $this->upload->data("file_name");
+        }
+        
+        return null;
+    }
 
 	private function upload_foto($nama,$form,$direktori){
         $config['upload_path']          = './upload/'.$direktori;

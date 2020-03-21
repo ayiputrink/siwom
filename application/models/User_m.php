@@ -38,5 +38,28 @@ class User_m extends Base_m {
 		$this->db->where($where);
 		return $this->db->get();
 	}
+
+	public function read_beban(){
+		$this->db->select('*');
+		$this->db->select("IF(COUNT(jobdesk.id_jobdesk) is NULL, 0, COUNT(jobdesk.id_jobdesk)) as jumlah_tugas");
+		$this->db->select("IF(COUNT(jobdesk.id_jobdesk) > 5, IF( COUNT(jobdesk.id_jobdesk) > 10, 'Berat' , 'Sedang') , 'Ringan' ) as beban_kerja",false);
+		$this->db->from($this->table);
+		$this->db->join('jobdesk','jobdesk.kepada = '.$this->table.'.id_user','left');
+		$this->db->group_by('user.id_user');
+		$this->db->order_by('COUNT(id_jobdesk)','asc');
+		return $this->db->get();
+	}
+
+	public function read_beban_where($where){
+		$this->db->select('*');
+		$this->db->select("IF(COUNT(jobdesk.id_jobdesk) is NULL, 0, COUNT(jobdesk.id_jobdesk)) as jumlah_tugas");
+		$this->db->select("IF(COUNT(jobdesk.id_jobdesk) > 5, IF( COUNT(jobdesk.id_jobdesk) > 10, 'Berat' , 'Sedang') , 'Ringan' ) as beban_kerja",false);
+		$this->db->from($this->table);
+		$this->db->join('jobdesk','jobdesk.kepada = '.$this->table.'.id_user','left');
+		$this->db->group_by('user.id_user');
+		$this->db->where($where);
+		$this->db->order_by('COUNT(id_jobdesk)','asc');
+		return $this->db->get();
+	}
     
 }

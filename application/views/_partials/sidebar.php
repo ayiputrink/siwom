@@ -21,7 +21,7 @@
                                         </li>
 
                                         <?php if(($this->session->userdata('user')->hak_akses == 'Manajer') || ($this->session->userdata('user')->hak_akses == 'Karyawan')) : ?>
-                                        <li class="dropdown">
+                                        <li class="dropdown <?= ($this->uri->segment('1') == 'jobdesk' && $this->uri->segment('2') == 'karyawan' ? 'active open':'') ?>">
                                             <a role="button" tabindex="0">
                                                 <i class="fa fa-list"></i>
                                                 <span>Jobdesk</span>
@@ -35,7 +35,7 @@
                                                     </a>
                                                 </li>
                                                 <?php } else if($this->session->userdata('user')->hak_akses == 'Manajer') { ?>
-                                                <li>
+                                                <li class="<?= ($this->uri->segment('1') == 'jobdesk' && $this->uri->segment('2') == 'karyawan' ? 'active':'') ?>">
                                                 
                                                     <a href="<?= base_url('jobdesk/karyawan') ?>">
                                                         <i class="fa fa-angle-right"></i> Jobdesk Karyawan

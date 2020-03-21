@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Jobdesk_m extends Base_m {
+class Jobdesk extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -18,22 +18,11 @@ class Jobdesk_m extends Base_m {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-	public $table = 'jobdesk';
-	
-	public function read_full(){
-		$this->db->select('*');
-		$this->db->from($this->table);
-		$this->db->join('user','user.id_user = '.$this->table.'.kepada');
-		$this->db->order_by('id_user','desc');
-		return $this->db->get();
-	}
-
-	public function read_full_where($where){
-		$this->db->select('*');
-		$this->db->from($this->table);
-		$this->db->join('user','user.id_user = '.$this->table.'.kepada');
-		$this->db->where($where);
-		$this->db->order_by('id_user','desc');
-		return $this->db->get();
-	}
+	public function karyawan(){
+        $data = array(
+            'konten' => 'manajer/jobdesk',
+            'js'=> 'manajer/js_jobdesk'
+        );
+        $this->load->view('_partials/template',$data);
+    }
 }
