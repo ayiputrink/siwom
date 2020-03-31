@@ -45,10 +45,10 @@
                   <div class="form-group">
                     <input name="password" type="password" placeholder="Password..." class="form-control underline-input">
                   </div>
-                  <div class="checkbox">
+                  <!-- <div class="checkbox">
                     <label>
                       <input type="checkbox" name="optionsCheckboxes"> Ingat Saya</label>
-                  </div>
+                  </div> -->
                 </div>
                 <div class="footer text-center">
                   <button type="submit" class="btn btn-info btn-raised">Login</button>

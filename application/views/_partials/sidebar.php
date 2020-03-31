@@ -74,7 +74,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel settings panel-default">
+                        <!-- <div class="panel settings panel-default">
                             <div class="panel-heading" role="tab">
                                 <h4 class="panel-title">
                                     <a data-toggle="collapse" href="#leftmenuControls">Jobdesk sedang dikerjakan
@@ -99,7 +99,7 @@
                                     <div class="progress-bar progress-bar-primary" style="width: 35%;"> </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </aside>
