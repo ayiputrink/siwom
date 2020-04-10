@@ -19,5 +19,13 @@ class Komentar_jobdesk_m extends Base_m {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
     public $table = 'komentar_jobdesk';
-    
+	
+	public function read_full_where($where){
+		$this->db->select('*');
+		$this->db->from($this->table);
+		$this->db->join('user','user.id_user = komentar_jobdesk.id_user');
+		$this->db->where($where);
+		$this->db->order_by('komentar_jobdesk.created_at','DESC');
+		return $this->db->get();
+	}
 }

@@ -88,8 +88,11 @@ class Ajax extends CI_Controller {
 
 	public function insert_jobdesk(){
 		$this->load->model('jobdesk_m');
-		$id_jobdesk = array('id_jobdesk' => $this->input->post('id_jobdesk'));	
 		$data = $this->input->post();
+		$tanggal = explode('/',$data['deadline']);
+		$tanggal = "$tanggal[2]-$tanggal[0]-$tanggal[1]";
+		$data['deadline'] = $tanggal;
+		$data['dari'] = $this->session->userdata('user')->id_user;
 		unset($data['id_jobdesk']);
 		if($this->upload_file('jobdesk','lampiran','lampiran/') != null) {
 			$data['lampiran'] = $this->upload_file('jobdesk','lampiran','lampiran/');
@@ -100,13 +103,20 @@ class Ajax extends CI_Controller {
 
 	public function get_all_jobdesk($id_bagian){
 		$this->load->model('jobdesk_m');
-		$jobdesk = $this->jobdesk_m->read_full_where(array('id_bagian' => $id_bagian))->result_array();
+		$jobdesk = $this->jobdesk_m->read_full_where(array('us1.id_bagian' => $id_bagian))->result_array();
+		echo json_encode($jobdesk);
+	}
+
+	public function get_jobdesk_masuk(){
+		$this->load->model('jobdesk_m');
+		$id_user = $this->session->userdata('user')->id_user;
+		$jobdesk = $this->jobdesk_m->read_full_where(array('us1.id_user' => $id_user))->result_array();
 		echo json_encode($jobdesk);
 	}
 
 	public function get_jobdesk_belum($id_bagian){
 		$this->load->model('jobdesk_m');
-		$jobdesk = $this->jobdesk_m->read_full_where(array('id_bagian' => $id_bagian,'status_jobdesk' => 'belum selesai'))->result_array();
+		$jobdesk = $this->jobdesk_m->read_full_where(array('us1.id_bagian' => $id_bagian,'status_jobdesk' => 'belum selesai'))->result_array();
 		echo json_encode($jobdesk);
 	}
 
@@ -185,9 +195,53 @@ class Ajax extends CI_Controller {
 		echo json_encode($user);
 	}
 
+	public function insert_assignment(){
+		$this->load->model('assign_jobdesk_m');
+		$data = $this->input->post();
+		if($this->upload_file('assign','lampiran','lampiran_assignment/') != null) {
+			$data['lampiran'] = $this->upload_file('assign','lampiran','lampiran_assignment/');
+		}
+		$assignment = $this->assign_jobdesk_m->create($data);
+		echo json_encode($assignment);
+	}
+
+	public function get_assign(){
+		$this->load->model('assign_jobdesk_m');
+		$assignment = $this->assign_jobdesk_m->read()->result_array();
+		echo json_encode($assignment);
+	}
+
+	public function insert_komentar(){
+		$this->load->model('komentar_jobdesk_m');
+		$data = $this->input->post();
+		$komentar = $this->komentar_jobdesk_m->create($data);
+		echo json_encode($komentar);
+	}
+
+	public function get_komentar(){
+		$this->load->model('komentar_jobdesk_m');
+		$id_jobdesk = $this->input->post('id_jobdesk');
+		$komentar = $this->komentar_jobdesk_m->read_full_where(array('id_jobdesk' => $id_jobdesk))->result_array();
+		echo json_encode($komentar);
+	}
+
+	public function insert_item_jobdesk(){
+		$this->load->model('item_jobdesk_m');
+		$data = $this->input->post();
+		$item = $this->item_jobdesk_m->create($data);
+		echo json_encode($item);
+	}
+
+	public function get_item_jobdesk(){
+		$this->load->model('item_jobdesk_m');
+		$id_jobdesk = $this->input->post('id_jobdesk');
+		$item = $this->item_jobdesk_m->read_where(array('id_jobdesk' => $id_jobdesk))->result_array();
+		echo json_encode($item);
+	}
+
 	private function upload_file($nama,$form,$direktori){
         $config['upload_path']          = './upload/'.$direktori;
-        $config['allowed_types']        = 'zip|doc|xls';
+        $config['allowed_types']        = 'zip|doc|xls|pdf|rar';
         $config['file_name']            = $nama;
         $config['overwrite']			= true;
         $config['max_size']             = 20000; // 1MB

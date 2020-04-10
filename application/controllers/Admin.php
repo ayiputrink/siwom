@@ -25,11 +25,19 @@ class Admin extends CI_Controller {
 		if($sesi == null) {
 			$this->load->view('admin/login');
 		} else {
-			redirect('admin/dashboard');
+			redirect(base_url('admin/dashboard'));
+		}
+	}
+
+	private function cek_login(){
+		$sesi = $this->session->userdata('user');
+		if($sesi == null) {
+			redirect(base_url('admin'));
 		}
 	}
 
 	public function dashboard(){
+		$this->cek_login();
 		$this->load->model('user_m');
 		$this->load->model('jobdesk_m');
 		$total_user = $this->user_m->read()->num_rows();
@@ -52,7 +60,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function kelola_user(){
-		$this->is_login();
+		$this->cek_login();
 		$this->load->model('user_m');
 		$data_user = $this->user_m->read()->result_array();
 		$data = array(
@@ -63,10 +71,4 @@ class Admin extends CI_Controller {
 		$this->load->view('_partials/template',$data);
 	}
 
-	private function is_login() {
-		$sesi = $this->session->userdata('user');
-		if($sesi == null) {
-			redirect('admin');
-		}
-	}
 }

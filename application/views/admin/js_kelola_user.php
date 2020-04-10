@@ -275,6 +275,9 @@
             </div>
         </div>
     </div>
+  
+	<script src="<?= base_url() ?>assets/js/vendor/footable/footable.all.min.js"></script>
+  
 
     <script>
         $(document).ready(function(){
@@ -380,6 +383,9 @@
             //calling function start
             get_user();
             
+            $(window).load(function () {
+			    $('#usersList').footable();
+		    });
             //calling function end
 
 

@@ -22,7 +22,7 @@ class Register extends CI_Controller {
 	{
 		$sesi = $this->session->userdata('id_user');
 		if($sesi != null) {
-			redirect(base_url().'home','refresh');
+			redirect(base_url().'home');
 		} else {
 			$this->load->view('user/signup');
 		}
@@ -46,10 +46,11 @@ class Register extends CI_Controller {
 		if($this->user_m->create($data)) {
 			$result = $this->user_m->read_where(array('email' => $email));
 			$user = $result->row();
-			$sesi = array('id_user' => $user->id_user);
+			unset($user->password);
+			$user->hak_akses = null;
+			$sesi = array('user' => $user);
 			$this->session->set_userdata($sesi);
-			//$this->output->cache('10080');
-			redirect(base_url());
+			redirect(base_url('verifikasi'));
 		} else {
 			$this->session->set_flashdata('status_register', 'Maaf Pendaftaran Gagal Silahkan Coba lagi.');
 			$this->load->view('user/register');

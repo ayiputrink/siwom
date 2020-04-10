@@ -19,5 +19,10 @@ class Item_jobdesk_m extends Base_m {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
     public $table = 'item_jobdesk';
-    
+ 
+	// public function read_full_where($where){
+	// 	$this->db->select("*");
+	// 	$this->db->from($this->table);
+	// 	$this->db->join("user","user.id_user = ")
+	// }
 }

@@ -25,7 +25,7 @@ class Home extends CI_Controller {
 		// die();
         if($sesi == null) {
 			$this->session->set_flashdata('status_login_gagal', 'Maaf Anda harus login terlebih dahulu');
-            $this->load->view('user/login');
+            redirect(base_url('login'));
         } else if($sesi->hak_akses == 'admin') {
 			redirect('admin');
 		} else {

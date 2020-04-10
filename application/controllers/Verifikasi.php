@@ -20,7 +20,10 @@ class Verifikasi extends CI_Controller {
 	 */
 	public function index()
 	{
-        $this->session->set_flashdata('status_login', 'Anda harus verifikasi data terlebih dahulu');
+        if($this->session->userdata('user') == null){
+            $this->session->set_flashdata('status_login', 'Anda harus verifikasi data terlebih dahulu');
+            redirect(base_url('login'));
+        }
         $id_user = $this->session->userdata('user')->id_user;
         $this->load->model('divisi_m');
         $this->load->model('jabatan_m');
@@ -32,7 +35,8 @@ class Verifikasi extends CI_Controller {
             'konten' => 'user/verify',
             'divisi' => $divisi,
             'jabatan' => $jabatan,
-            'user' => $user
+            'user' => $user,
+            'js' => 'admin/js_kelola_user'
         );
         $this->load->view('_partials/template',$data);
     }

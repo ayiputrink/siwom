@@ -27,7 +27,6 @@ class Login extends CI_Controller {
 		} else {
 			$this->load->view('user/login');
 		}
-		
 	}
 
 	public function lupa_password(){

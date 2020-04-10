@@ -11,8 +11,11 @@
     <link rel="stylesheet" href="<?= base_url() ?>assets/js/vendor/colorpicker/css/bootstrap-colorpicker.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/js/vendor/touchspin/jquery.bootstrap-touchspin.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/js/vendor/chosen/chosen.css">    
+    <link rel="stylesheet" href="<?= base_url() ?>assets/js/vendor/datetimepicker/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/main.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/vendor/datatables.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/css/jquery-ui.css">
+    
     <style>
         .swal2-popup {
            font-size: 1.6rem !important;

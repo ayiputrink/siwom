@@ -21,9 +21,9 @@
                    
                 </ul>
                 <!-- Left-side navigation end -->
-                <div class="search" id="main-search">
+                <!-- <div class="search" id="main-search">
                     <input type="text" class="form-control underline-input" placeholder="Explore Falcon...">
-                </div>
+                </div> -->
                 <!-- Search end -->
 
                 <!-- Right-side navigation -->
@@ -83,10 +83,9 @@
                     </li>
                     <li class="dropdown nav-profile">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                            <?php if($this->session->userdata('user')->foto == null) : ?>
+                            
                             <img src="<?= base_url() ?>assets/images/user-white.png" alt="" class="0 size-30x30"> </a>
-                            <?php endif; ?>
-                        <ul class="dropdown-menu pull-right" role="menu">
+                                                    <ul class="dropdown-menu pull-right" role="menu">
                             <li>
                                 <div class="user-info">
                                     <div class="user-name"><?= $this->session->userdata('user')->nama ?></div>

@@ -30,4 +30,5 @@ class Algoritma extends CI_Controller {
         echo $classifier->predict([3, 1, 1]);
 
 	}
+	
 }
