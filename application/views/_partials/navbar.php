@@ -40,42 +40,21 @@
                         </a>
                         <div class="dropdown-menu pull-right panel panel-default">
                             <ul class="list-group">
+                                
                                 <li class="list-group-item">
                                     <a role="button" tabindex="0" class="media">
                                         <span class="pull-left media-object media-icon">
-                                            <i class="fa fa-ban"></i>
+                                            <i class="fa fa-info-circle"></i>
                                         </span>
                                         <div class="media-body">
-                                            <span class="block">User Lucas cancelled account</span>
-                                            <small class="text-muted">12 minutes ago</small>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a role="button" tabindex="0" class="media">
-                                        <span class="pull-left media-object media-icon">
-                                            <i class="fa fa-spotify"></i>
-                                        </span>
-                                        <div class="media-body">
-                                            <span class="block">2 voice mails</span>
-                                            <small class="text-muted">Neque porro quisquam est</small>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a role="button" tabindex="0" class="media">
-                                        <span class="pull-left media-object media-icon">
-                                            <i class="fa fa-whatsapp"></i>
-                                        </span>
-                                        <div class="media-body">
-                                            <span class="block">8 voice messanger</span>
-                                            <small class="text-muted">8 texts</small>
+                                            <span class="block">Tidak ada Pemberitahuan</span>
+                                            <!-- <small class="text-muted">8 texts</small> -->
                                         </div>
                                     </a>
                                 </li>
                             </ul>
                             <div class="panel-footer">
-                                <a role="button" tabindex="0">Show all notifications
+                                <a href="<?= base_url('notifikasi') ?>" role="button" tabindex="0">Lihat Semua Pemberitahuan
                                     <i class="fa fa-angle-right pull-right"></i>
                                 </a>
                             </div>
@@ -109,11 +88,11 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="toggle-right-leftmenu">
+                    <!-- <li class="toggle-right-leftmenu">
                         <a role="button" tabindex="0">
                             <i class="fa fa-align-left"></i>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
                 <!-- Right-side navigation end -->
             </header>

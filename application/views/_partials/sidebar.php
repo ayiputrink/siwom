@@ -13,7 +13,7 @@
                                             </a>
                                         </li>
 
-                                        <li>
+                                        <li class="<?php echo  $this->uri->segment('1') == 'notifikasi' ? 'active' : '' ?>">
                                             <a href="<?= base_url('notifikasi') ?>">
                                                 <i class="fa fa-arrow-right"></i>
                                                 <span>Pemberitahuan</span>

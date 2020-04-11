@@ -74,14 +74,14 @@
 
 									<?php if($this->session->userdata('user')->hak_akses == 'Manajer') { ?>
 									<div class="form-group">
-										<input type="text" id="isiItem" value="" placeholder="Buat item jobdesk baru..." class="form-control" />
+										<input type="text" id="isiItem" value="" placeholder="Buat item jobdesk baru..." class="form-control" required/>
 										<button id="aksiItem" class="btn btn-raised btn-info btn-block">
 											<span class="float fa fa-plus"></span></button>
 									</div>
 									<?php } ?>
 
 									<ul class="todo-list" id="kontenItem">
-										
+									
 									</ul>
 
 								</div>

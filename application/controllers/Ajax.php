@@ -78,11 +78,20 @@ class Ajax extends CI_Controller {
 
 	public function update_jobdesk(){
 		$this->load->model('jobdesk_m');
+		$id_jobdesk = $this->input->post('id_jobdesk');
+		$where = array('id_jobdesk' => $id_jobdesk); 
+		$deadline = $this->input->post('deadline');
+		$deadline = explode('/',$deadline);
+		$deadline = "$deadline[2]-$deadline[0]-$deadline[1]";
 		$data = $this->input->post();
-		if($this->upload_foto('jobdesk','lampiran','lampiran/') != null) {
-			$data['lampiran'] = $this->upload_foto('jobdesk','lampiran','lampiran/');
+		$data['deadline'] = $deadline;
+		unset($data['id_jobdesk']);
+		if($this->upload_file('jobdesk','lampiran','lampiran/') != null) {
+			$data['lampiran'] = $this->upload_file('jobdesk','lampiran','lampiran/');
+		} else {
+			unset($data['lampiran']);
 		}
-		$jobdesk = $this->jobdesk_m->update($data,$id_jobdesk);
+		$jobdesk = $this->jobdesk_m->update($data,$where);
 		echo json_encode($jobdesk);
 	}
 
@@ -126,10 +135,46 @@ class Ajax extends CI_Controller {
 		echo json_encode($jobdesk);
 	}
 
+	public function get_jobdesk_detail(){
+		$this->load->model('jobdesk_m');
+		$id_jobdesk = $this->input->post('id_jobdesk');
+		$jobdesk = $this->jobdesk_m->read_full_where(array('id_jobdesk' => $id_jobdesk))->result_array();
+		echo json_encode($jobdesk);
+	}
+
 	public function delete_jobdesk(){
 		$this->load->model('jobdesk_m');
 		$where = array('id_jobdesk' => $this->input->post('id_jobdesk'));
 		$jobdesk = $this->jobdesk_m->delete($where);
+		echo json_encode($jobdesk);
+	}
+
+	public function delete_item_jobdesk(){
+		$this->load->model('item_jobdesk_m');
+		$where = array('id_item_jobdesk' => $this->input->post('id_item_jobdesk'));
+		$jobdesk = $this->item_jobdesk_m->delete($where);
+		echo json_encode($jobdesk);
+	}
+
+	public function delete_assign_jobdesk(){
+		$this->load->model('assign_jobdesk_m');
+		$where = array('id_assign' => $this->input->post('id_assign'));
+		$assignment = $this->assign_jobdesk_m->delete($where);
+		echo json_encode($assignment);
+	}
+
+	public function delete_komentar(){
+		$this->load->model('komentar_jobdesk_m');
+		$where = array('id_komentar' => $this->input->post('id_komentar'));
+		$komentar = $this->komentar_jobdesk_m->delete($where);
+		echo json_encode($komentar);
+	}
+
+	public function update_item_jobdesk(){
+		$this->load->model('item_jobdesk_m');
+		$where = array('id_item_jobdesk' => $this->input->post('id_item_jobdesk'));
+		$data = $this->input->post();
+		$jobdesk = $this->item_jobdesk_m->update($data,$where);
 		echo json_encode($jobdesk);
 	}
 

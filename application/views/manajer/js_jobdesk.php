@@ -309,7 +309,7 @@
                         `
                         <tr>
 												<td>
-															<input type="checkbox" name="optionsCheckboxes" style="width:20px;height:20px;">
+															
 													
 												</td>
             
