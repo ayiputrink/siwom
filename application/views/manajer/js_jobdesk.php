@@ -289,7 +289,7 @@
             //function start
         
             function get_jobdesk() {
-                $.post(url_jobdesk_belum,
+                $.post(url_all_jobdesk,
                 function(data,status){
                     let isi;
                     let jumlah = $.parseJSON(data).length;
