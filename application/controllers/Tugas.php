@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Jobdesk extends CI_Controller {
+class Tugas extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -20,24 +20,24 @@ class Jobdesk extends CI_Controller {
 	 */
 	public function karyawan(){
         $data = array(
-            'konten' => 'manajer/jobdesk',
-            'js'=> 'manajer/js_jobdesk'
+            'konten' => 'manajer/tugas',
+            'js'=> 'manajer/js_tugas'
         );
         $this->load->view('_partials/template',$data);
 	}
 	
-	public function detail($id_jobdesk){
-		$this->load->model('jobdesk_m');
+	public function detail($id_tugas){
+		$this->load->model('tugas_m');
 		$user = $this->session->userdata('user');
-		$detail = $this->jobdesk_m->read_where(array('id_jobdesk' => $id_jobdesk))->result_array();
+		$detail = $this->tugas_m->read_where(array('id_tugas' => $id_tugas))->result_array();
 		if($detail[0]['dari'] != $user->id_user && $detail[0]['kepada'] != $user->id_user){
-			redirect(base_url('jobdesk'));
+			redirect(base_url('tugas'));
 		} else {
-			$jobdesk = $this->jobdesk_m->read_full_where(array('id_jobdesk' => $id_jobdesk))->result_array();
+			$tugas = $this->tugas_m->read_full_where(array('id_tugas' => $id_tugas))->result_array();
 			$data = array(
-				'konten' => 'user/detail_jobdesk',
-				'parsing' => $jobdesk,
-				'js' => 'user/js_detail_jobdesk'
+				'konten' => 'user/detail_tugas',
+				'parsing' => $tugas,
+				'js' => 'user/js_detail_tugas'
 			);
 			$this->load->view('_partials/template',$data);
 		}
@@ -45,8 +45,8 @@ class Jobdesk extends CI_Controller {
 
 	public function masuk(){
 		$data = array(
-			'konten' => 'karyawan/jobdesk_masuk',
-			'js' => 'karyawan/js_jobdesk_masuk'
+			'konten' => 'karyawan/tugas_masuk',
+			'js' => 'karyawan/js_tugas_masuk'
 		);
 		$this->load->view('_partials/template',$data);
 	}

@@ -7,7 +7,7 @@
 
 <script>
     $(document).ready(function(){
-        var url_all_jobdesk = '<?= base_url().'ajax/get_all_jobdesk/'.$this->session->userdata('user')->id_bagian.'/' ?>';
+        var url_all_tugas = '<?= base_url().'ajax/get_all_tugas/'.$this->session->userdata('user')->id_bagian.'/' ?>';
 
         var DateDiff = {
                 inDays: function(d1, d2) {
@@ -39,8 +39,8 @@
             }
 
         //function start
-        function get_jobdesk() {
-                $.post(url_all_jobdesk,
+        function get_tugas() {
+                $.post(url_all_tugas,
                 function(data,status){
                     let isi;
                     let jumlah = $.parseJSON(data).length;
@@ -64,19 +64,19 @@
 													
 												</td>
             
-												<td class="jobdesk-`+item.id_jobdesk+`">`+jumlah+`</td>
-												<td class="kepada-`+item.id_jobdesk+`">`+item.kepada+`</td>
-                                                <td class="judul-`+item.id_jobdesk+`">`+item.judul+`</td>
-                                                <td class="status-`+item.id_jobdesk+`">`+item.status_jobdesk+`</td>
-                                                <td class="deadline-`+item.id_jobdesk+`">`+deadline+`</td>
+												<td class="tugas-`+item.id_tugas+`">`+jumlah+`</td>
+												<td class="kepada-`+item.id_tugas+`">`+item.kepada+`</td>
+                                                <td class="judul-`+item.id_tugas+`">`+item.judul+`</td>
+                                                <td class="status-`+item.id_tugas+`">`+item.status_tugas+`</td>
+                                                <td class="deadline-`+item.id_tugas+`">`+deadline+`</td>
                                                 <td>
-                                                    <a href="<?= base_url() ?>jobdesk/detail/`+item.id_jobdesk+`"><button data-idJobdesk="`+item.id_jobdesk+`" class="btn btn-primary detailJobdesk">Lihat Detail</button></a>
+                                                    <a href="<?= base_url() ?>tugas/detail/`+item.id_tugas+`"><button data-idtugas="`+item.id_tugas+`" class="btn btn-primary detailtugas">Lihat Detail</button></a>
                                                 </td>
 												
                                             </tr>
                         `;
                         //console.log(isi);
-                        $('#isiTabelJobdesk').html(isi);
+                        $('#isiTabeltugas').html(isi);
                         jumlah--;
                     });
                     if(isi == null){
@@ -89,7 +89,7 @@
 												</td>									
                                             </tr>
                         `;
-                        $('#isiTabelJobdesk').html(isi);
+                        $('#isiTabeltugas').html(isi);
                     }
                 });
             }
@@ -97,9 +97,9 @@
 
 
         //call start
-        get_jobdesk();
+        get_tugas();
         $(window).load(function () {
-			    $('#jobdeskList').footable();
+			    $('#tugasList').footable();
 		});
         //call end
     });

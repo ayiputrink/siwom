@@ -76,106 +76,106 @@ class Ajax extends CI_Controller {
 		echo json_encode($user);
 	}
 
-	public function update_jobdesk(){
-		$this->load->model('jobdesk_m');
-		$id_jobdesk = $this->input->post('id_jobdesk');
-		$where = array('id_jobdesk' => $id_jobdesk); 
+	public function update_tugas(){
+		$this->load->model('tugas_m');
+		$id_tugas = $this->input->post('id_tugas');
+		$where = array('id_tugas' => $id_tugas); 
 		$deadline = $this->input->post('deadline');
 		$deadline = explode('/',$deadline);
 		$deadline = "$deadline[2]-$deadline[0]-$deadline[1]";
 		$data = $this->input->post();
 		$data['deadline'] = $deadline;
-		unset($data['id_jobdesk']);
-		if($this->upload_file('jobdesk','lampiran','lampiran/') != null) {
-			$data['lampiran'] = $this->upload_file('jobdesk','lampiran','lampiran/');
+		unset($data['id_tugas']);
+		if($this->upload_file('tugas','lampiran','lampiran/') != null) {
+			$data['lampiran'] = $this->upload_file('tugas','lampiran','lampiran/');
 		} else {
 			unset($data['lampiran']);
 		}
-		$jobdesk = $this->jobdesk_m->update($data,$where);
-		echo json_encode($jobdesk);
+		$tugas = $this->tugas_m->update($data,$where);
+		echo json_encode($tugas);
 	}
 
-	public function insert_jobdesk(){
-		$this->load->model('jobdesk_m');
+	public function insert_tugas(){
+		$this->load->model('tugas_m');
 		$data = $this->input->post();
 		$tanggal = explode('/',$data['deadline']);
 		$tanggal = "$tanggal[2]-$tanggal[0]-$tanggal[1]";
 		$data['deadline'] = $tanggal;
 		$data['dari'] = $this->session->userdata('user')->id_user;
-		unset($data['id_jobdesk']);
-		if($this->upload_file('jobdesk','lampiran','lampiran/') != null) {
-			$data['lampiran'] = $this->upload_file('jobdesk','lampiran','lampiran/');
+		unset($data['id_tugas']);
+		if($this->upload_file('tugas','lampiran','lampiran/') != null) {
+			$data['lampiran'] = $this->upload_file('tugas','lampiran','lampiran/');
 		}
-		$jobdesk = $this->jobdesk_m->create($data);
-		echo json_encode($jobdesk);
+		$tugas = $this->tugas_m->create($data);
+		echo json_encode($tugas);
 	}
 
-	public function get_all_jobdesk($id_bagian){
-		$this->load->model('jobdesk_m');
-		$jobdesk = $this->jobdesk_m->read_full_where(array('us1.id_bagian' => $id_bagian))->result_array();
-		echo json_encode($jobdesk);
+	public function get_all_tugas($id_bagian){
+		$this->load->model('tugas_m');
+		$tugas = $this->tugas_m->read_full_where(array('us1.id_bagian' => $id_bagian))->result_array();
+		echo json_encode($tugas);
 	}
 
-	public function get_jobdesk_masuk(){
-		$this->load->model('jobdesk_m');
+	public function get_tugas_masuk(){
+		$this->load->model('tugas_m');
 		$id_user = $this->session->userdata('user')->id_user;
-		$jobdesk = $this->jobdesk_m->read_full_where(array('us1.id_user' => $id_user))->result_array();
-		echo json_encode($jobdesk);
+		$tugas = $this->tugas_m->read_full_where(array('us1.id_user' => $id_user))->result_array();
+		echo json_encode($tugas);
 	}
 
-	public function get_jobdesk_belum($id_bagian){
-		$this->load->model('jobdesk_m');
-		$jobdesk = $this->jobdesk_m->read_full_where(array('us1.id_bagian' => $id_bagian,'status_jobdesk' => 'belum selesai'))->result_array();
-		echo json_encode($jobdesk);
+	public function get_tugas_belum($id_bagian){
+		$this->load->model('tugas_m');
+		$tugas = $this->tugas_m->read_full_where(array('us1.id_bagian' => $id_bagian,'status_tugas' => 'belum selesai'))->result_array();
+		echo json_encode($tugas);
 	}
 
-	public function get_jobdesk_selesai($id_bagian){
-		$this->load->model('jobdesk_m');
-		$jobdesk = $this->jobdesk_m->read_full_where(array('id_bagian' => $id_bagian,'status_jobdesk' => 'selesai'))->result_array();
-		echo json_encode($jobdesk);
+	public function get_tugas_selesai($id_bagian){
+		$this->load->model('tugas_m');
+		$tugas = $this->tugas_m->read_full_where(array('id_bagian' => $id_bagian,'status_tugas' => 'selesai'))->result_array();
+		echo json_encode($tugas);
 	}
 
-	public function get_jobdesk_detail(){
-		$this->load->model('jobdesk_m');
-		$id_jobdesk = $this->input->post('id_jobdesk');
-		$jobdesk = $this->jobdesk_m->read_full_where(array('id_jobdesk' => $id_jobdesk))->result_array();
-		echo json_encode($jobdesk);
+	public function get_tugas_detail(){
+		$this->load->model('tugas_m');
+		$id_tugas = $this->input->post('id_tugas');
+		$tugas = $this->tugas_m->read_full_where(array('id_tugas' => $id_tugas))->result_array();
+		echo json_encode($tugas);
 	}
 
-	public function delete_jobdesk(){
-		$this->load->model('jobdesk_m');
-		$where = array('id_jobdesk' => $this->input->post('id_jobdesk'));
-		$jobdesk = $this->jobdesk_m->delete($where);
-		echo json_encode($jobdesk);
+	public function delete_tugas(){
+		$this->load->model('tugas_m');
+		$where = array('id_tugas' => $this->input->post('id_tugas'));
+		$tugas = $this->tugas_m->delete($where);
+		echo json_encode($tugas);
 	}
 
-	public function delete_item_jobdesk(){
-		$this->load->model('item_jobdesk_m');
-		$where = array('id_item_jobdesk' => $this->input->post('id_item_jobdesk'));
-		$jobdesk = $this->item_jobdesk_m->delete($where);
-		echo json_encode($jobdesk);
+	public function delete_item_tugas(){
+		$this->load->model('item_tugas_m');
+		$where = array('id_item_tugas' => $this->input->post('id_item_tugas'));
+		$tugas = $this->item_tugas_m->delete($where);
+		echo json_encode($tugas);
 	}
 
-	public function delete_assign_jobdesk(){
-		$this->load->model('assign_jobdesk_m');
+	public function delete_assign_tugas(){
+		$this->load->model('assign_tugas_m');
 		$where = array('id_assign' => $this->input->post('id_assign'));
-		$assignment = $this->assign_jobdesk_m->delete($where);
+		$assignment = $this->assign_tugas_m->delete($where);
 		echo json_encode($assignment);
 	}
 
 	public function delete_komentar(){
-		$this->load->model('komentar_jobdesk_m');
+		$this->load->model('komentar_tugas_m');
 		$where = array('id_komentar' => $this->input->post('id_komentar'));
-		$komentar = $this->komentar_jobdesk_m->delete($where);
+		$komentar = $this->komentar_tugas_m->delete($where);
 		echo json_encode($komentar);
 	}
 
-	public function update_item_jobdesk(){
-		$this->load->model('item_jobdesk_m');
-		$where = array('id_item_jobdesk' => $this->input->post('id_item_jobdesk'));
+	public function update_item_tugas(){
+		$this->load->model('item_tugas_m');
+		$where = array('id_item_tugas' => $this->input->post('id_item_tugas'));
 		$data = $this->input->post();
-		$jobdesk = $this->item_jobdesk_m->update($data,$where);
-		echo json_encode($jobdesk);
+		$tugas = $this->item_tugas_m->update($data,$where);
+		echo json_encode($tugas);
 	}
 
 	public function update_user(){
@@ -241,46 +241,46 @@ class Ajax extends CI_Controller {
 	}
 
 	public function insert_assignment(){
-		$this->load->model('assign_jobdesk_m');
+		$this->load->model('assign_tugas_m');
 		$data = $this->input->post();
 		if($this->upload_file('assign','lampiran','lampiran_assignment/') != null) {
 			$data['lampiran'] = $this->upload_file('assign','lampiran','lampiran_assignment/');
 		}
-		$assignment = $this->assign_jobdesk_m->create($data);
+		$assignment = $this->assign_tugas_m->create($data);
 		echo json_encode($assignment);
 	}
 
 	public function get_assign(){
-		$this->load->model('assign_jobdesk_m');
-		$assignment = $this->assign_jobdesk_m->read()->result_array();
+		$this->load->model('assign_tugas_m');
+		$assignment = $this->assign_tugas_m->read()->result_array();
 		echo json_encode($assignment);
 	}
 
 	public function insert_komentar(){
-		$this->load->model('komentar_jobdesk_m');
+		$this->load->model('komentar_tugas_m');
 		$data = $this->input->post();
-		$komentar = $this->komentar_jobdesk_m->create($data);
+		$komentar = $this->komentar_tugas_m->create($data);
 		echo json_encode($komentar);
 	}
 
 	public function get_komentar(){
-		$this->load->model('komentar_jobdesk_m');
-		$id_jobdesk = $this->input->post('id_jobdesk');
-		$komentar = $this->komentar_jobdesk_m->read_full_where(array('id_jobdesk' => $id_jobdesk))->result_array();
+		$this->load->model('komentar_tugas_m');
+		$id_tugas = $this->input->post('id_tugas');
+		$komentar = $this->komentar_tugas_m->read_full_where(array('id_tugas' => $id_tugas))->result_array();
 		echo json_encode($komentar);
 	}
 
-	public function insert_item_jobdesk(){
-		$this->load->model('item_jobdesk_m');
+	public function insert_item_tugas(){
+		$this->load->model('item_tugas_m');
 		$data = $this->input->post();
-		$item = $this->item_jobdesk_m->create($data);
+		$item = $this->item_tugas_m->create($data);
 		echo json_encode($item);
 	}
 
-	public function get_item_jobdesk(){
-		$this->load->model('item_jobdesk_m');
-		$id_jobdesk = $this->input->post('id_jobdesk');
-		$item = $this->item_jobdesk_m->read_where(array('id_jobdesk' => $id_jobdesk))->result_array();
+	public function get_item_tugas(){
+		$this->load->model('item_tugas_m');
+		$id_tugas = $this->input->post('id_tugas');
+		$item = $this->item_tugas_m->read_where(array('id_tugas' => $id_tugas))->result_array();
 		echo json_encode($item);
 	}
 

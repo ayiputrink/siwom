@@ -39,11 +39,11 @@ class Admin extends CI_Controller {
 	public function dashboard(){
 		$this->cek_login();
 		$this->load->model('user_m');
-		$this->load->model('jobdesk_m');
+		$this->load->model('tugas_m');
 		$total_user = $this->user_m->read()->num_rows();
 		$unverified = $this->user_m->read_where(array('status' => 'unverified'))->num_rows();
 		$blocked = $this->user_m->read_where(array('status' => 'suspend'))->num_rows();
-		$tugas = $this->jobdesk_m->read()->num_rows();
+		$tugas = $this->tugas_m->read()->num_rows();
 		$data = array(
 			'konten' => 'admin/home',
 			'total_user' => $total_user,

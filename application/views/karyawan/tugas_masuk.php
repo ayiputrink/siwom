@@ -16,7 +16,7 @@
 					<!-- boxs header -->
 					<div class="boxs-header">
 						<h3 class="custom-font hb-blue">
-							<strong>Tabel</strong> Jobdesk Masuk</h3>
+							<strong>Tabel</strong> Tugas Masuk</h3>
 					</div>
 					<div class="boxs-widget">
 						
@@ -27,7 +27,7 @@
 									<input id="filter" type="text"
 										class="form-control rounded w-md mb-10 inline-block" />
 								</div>
-								<table class="table mb-0 footable table table-custom" id="jobdeskList"
+								<table class="table mb-0 footable table table-custom" id="tugasList"
 									data-filter="#filter" data-page-size="5">
 									<thead>
 										<tr>
@@ -42,7 +42,7 @@
 											<th style="width:20px;"></th>
 										</tr>
 									</thead>
-									<tbody id="isiTabelJobdesk">
+									<tbody id="isiTabeltugas">
 
 
 									</tbody>

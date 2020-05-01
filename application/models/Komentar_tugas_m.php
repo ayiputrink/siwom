@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Item_jobdesk_m extends Base_m {
+class Komentar_tugas_m extends Base_m {
 
 	/**
 	 * Index Page for this controller.
@@ -18,11 +18,14 @@ class Item_jobdesk_m extends Base_m {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-    public $table = 'item_jobdesk';
- 
-	// public function read_full_where($where){
-	// 	$this->db->select("*");
-	// 	$this->db->from($this->table);
-	// 	$this->db->join("user","user.id_user = ")
-	// }
+    public $table = 'komentar_tugas';
+	
+	public function read_full_where($where){
+		$this->db->select('*');
+		$this->db->from($this->table);
+		$this->db->join('user','user.id_user = komentar_tugas.id_user');
+		$this->db->where($where);
+		$this->db->order_by('komentar_tugas.created_at','DESC');
+		return $this->db->get();
+	}
 }

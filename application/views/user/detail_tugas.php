@@ -16,7 +16,7 @@
 					<!-- boxs header -->
 					<div class="boxs-header">
 						<h3 class="custom-font hb-blue">
-							<strong>Tabel</strong> Item Jobdesk</h3>
+							<strong>Tabel</strong> Item Tugas</h3>
 					</div>
 					<div class="boxs-widget">
 
@@ -46,8 +46,8 @@
 										<td> : <?= $parsing[0]['deadline'] ?></td>
 									</tr>
 									<tr>
-										<td>Status Jobdesk</td>
-										<td> : <?= $parsing[0]['status_jobdesk'] ?></td>
+										<td>Status Tugas</td>
+										<td> : <?= $parsing[0]['status_tugas'] ?></td>
 									</tr>
 								</table>
 							</div>
@@ -59,9 +59,9 @@
 								<div class="input-group">
 									
 									<?php if($this->session->userdata('user')->hak_akses == 'Manajer') { ?>
-									<button id="editJobdesk" class="btn btn-warning" data-toggle="modal"
-										data-target="#editJobdeskModal">Edit Jobdesk</button>
-									<button id="hapusJobdesk" class="btn btn-danger">Hapus Jobdesk</button>
+									<button id="edittugas" class="btn btn-warning" data-toggle="modal"
+										data-target="#edittugasModal">Edit Tugas</button>
+									<button id="hapustugas" class="btn btn-danger">Hapus Tugas</button>
 									<?php } ?>
 								</div>
 							</div>
@@ -74,7 +74,7 @@
 
 									<?php if($this->session->userdata('user')->hak_akses == 'Manajer') { ?>
 									<div class="form-group">
-										<input type="text" id="isiItem" value="" placeholder="Buat item jobdesk baru..." class="form-control" required/>
+										<input type="text" id="isiItem" value="" placeholder="Buat item tugas baru..." class="form-control" required/>
 										<button id="aksiItem" class="btn btn-raised btn-info btn-block">
 											<span class="float fa fa-plus"></span></button>
 									</div>
@@ -94,7 +94,7 @@
 				<section class="boxs">
 					<div class="boxs-header">
 						<h3 class="custom-font hb-amber">
-							<strong>Kumpulkan Jobdesk </strong></h3>
+							<strong>Kumpulkan Tugas </strong></h3>
 
 					</div>
 					<div class="boxs-body">
@@ -106,7 +106,7 @@
 							<div class="form-group">
 								<input type="text" name="deskripsi" value="" placeholder="Deskripsi..." class="form-control" required/>
 
-								<button id="btnKumpulJobdesk" class="btn btn-raised btn-info btn-block">
+								<button id="btnKumpultugas" class="btn btn-raised btn-info btn-block">
 									<span class="float fa fa-plus"></span></button>
 							</div>
 						</form>

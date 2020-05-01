@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Assign_jobdesk_m extends Base_m {
+class Item_tugas_m extends Base_m {
 
 	/**
 	 * Index Page for this controller.
@@ -18,6 +18,11 @@ class Assign_jobdesk_m extends Base_m {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-    public $table = 'assign_jobdesk';
-    
+    public $table = 'item_tugas';
+ 
+	// public function read_full_where($where){
+	// 	$this->db->select("*");
+	// 	$this->db->from($this->table);
+	// 	$this->db->join("user","user.id_user = ")
+	// }
 }

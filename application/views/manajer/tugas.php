@@ -16,15 +16,15 @@
 					<!-- boxs header -->
 					<div class="boxs-header">
 						<h3 class="custom-font hb-blue">
-							<strong>Tabel</strong> Jobdesk</h3>
+							<strong>Tabel</strong> Tugas</h3>
 					</div>
 					<div class="boxs-widget">
 						<div class="row">
 
 							<div class="col-sm-12 col-xs-12">
 								<div class="input-group">
-									<button id="tambahJobdesk" class="btn btn-info" data-toggle="modal"
-										data-target="#tambahJobdeskModal">Tambah Jobdesk</button>
+									<button id="tambahtugas" class="btn btn-info" data-toggle="modal"
+										data-target="#tambahtugasModal">Tambah Tugas</button>
 								</div>
 							</div>
 						</div>
@@ -47,7 +47,7 @@
 									<input id="filter" type="text"
 										class="form-control rounded w-md mb-10 inline-block" />
 								</div>
-								<table class="table mb-0 footable table table-custom" id="jobdeskList"
+								<table class="table mb-0 footable table table-custom" id="tugasList"
 									data-filter="#filter" data-page-size="5">
 									<thead>
 										<tr>
@@ -62,7 +62,7 @@
 											<th style="width:20px;"></th>
 										</tr>
 									</thead>
-									<tbody id="isiTabelJobdesk">
+									<tbody id="isiTabeltugas">
 
 
 									</tbody>

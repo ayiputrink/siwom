@@ -30,13 +30,13 @@ class Home extends CI_Controller {
 			redirect('admin');
 		} else {
 			$this->load->model('user_m');
-			$this->load->model('jobdesk_m');
+			$this->load->model('tugas_m');
             $user = $this->session->userdata('user');
             if($user->status == 'active') {
 				if($user->id_jabatan == 1){
-					$tugas = $this->jobdesk_m->read_where(array('kepada' => $user->id_user))->num_rows();
-					$tugas_belum = $this->jobdesk_m->read_where(array('status_jobdesk' => 'belum selesai','kepada' => $user->id_user))->num_rows();
-					$tugas_selesai = $this->jobdesk_m->read_where(array('status_jobdesk' => 'selesai','kepada' => $user->id_user))->num_rows();
+					$tugas = $this->tugas_m->read_where(array('kepada' => $user->id_user))->num_rows();
+					$tugas_belum = $this->tugas_m->read_where(array('status_tugas' => 'belum selesai','kepada' => $user->id_user))->num_rows();
+					$tugas_selesai = $this->tugas_m->read_where(array('status_tugas' => 'selesai','kepada' => $user->id_user))->num_rows();
 					$data = array(
 						'konten' => 'karyawan/home_karyawan',
 						'tugas' => $tugas,
@@ -46,9 +46,9 @@ class Home extends CI_Controller {
 					$this->load->view('_partials/template',$data);
 				} else if ($user->id_jabatan == 2) {
 					$total_karyawan = $this->user_m->read_where(array('id_bagian' => $user->id_bagian))->num_rows();
-					$tugas = $this->jobdesk_m->read_where(array('dari' => $user->id_user))->num_rows();
-					$tugas_belum = $this->jobdesk_m->read_where(array('dari' => $user->id_user,'status_jobdesk' => 'belum selesai'))->num_rows();
-					$tugas_selesai = $this->jobdesk_m->read_where(array('dari' => $user->id_user,'status_jobdesk' => 'selesai'))->num_rows();
+					$tugas = $this->tugas_m->read_where(array('dari' => $user->id_user))->num_rows();
+					$tugas_belum = $this->tugas_m->read_where(array('dari' => $user->id_user,'status_tugas' => 'belum selesai'))->num_rows();
+					$tugas_selesai = $this->tugas_m->read_where(array('dari' => $user->id_user,'status_tugas' => 'selesai'))->num_rows();
 					$data = array(
 						'konten' => 'manajer/home_manajer',
 						'total_karyawan' => $total_karyawan,

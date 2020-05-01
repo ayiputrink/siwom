@@ -49,12 +49,13 @@
 											class="form-control rounded w-md mb-10 inline-block" />
 									</div>
 									<table class="table mb-0 footable table table-custom" id="usersList"
-										data-filter="#filter" data-page-size="5">
+										data-filter="#filter" data-page-size="10">
 										<thead>
 											<tr>
 												<th style="width:20px;">
 
 												</th>
+												<th>No</th>
 												<th>NIK</th>
 												<th>Nama</th>
 												<th>Email</th>

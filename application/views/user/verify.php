@@ -48,6 +48,36 @@
                                     </div>
                                     <hr class="line-dashed full-witdh-line" />
                                     <div class="form-group">
+                                        <label for="input03" class="col-sm-2 control-label">Tanggal Lahir</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="tanggal_lahir" class="form-control" id="input03">
+                                            <span class="help-block mb-0">Tanggal Lahir karyawan.</span>
+                                        </div>
+                                    </div>
+                                    <hr class="line-dashed full-witdh-line" />
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Jenis Kelamin</label>
+                                        <div class="col-sm-10">
+                                            <select tabindex="3" id="verifikasi_select_divisi" name="jenis_kelamin" class="verifikasi_select_divisi chosen-select" style="width: 400px;">
+                                            <option value="" disabled selected>Pilih Jenis Kelamin</option>
+                                                <option value="L">Laki-laki</option> 
+                                                <option value="P">Perempuan</option>    
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <hr class="line-dashed full-witdh-line" />
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Status Perkawinan</label>
+                                        <div class="col-sm-10">
+                                            <select tabindex="3" id="verifikasi_select_divisi" name="status_perkawinan" class="verifikasi_select_divisi chosen-select" style="width: 400px;">
+                                            <option value="" disabled selected>Pilih Status Perkawinan</option>
+                                                <option value="belum kawin">Belum Kawin</option> 
+                                                <option value="kawin">Kawin</option>    
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <hr class="line-dashed full-witdh-line" />
+                                    <div class="form-group">
                                         <label class="col-sm-2 control-label">Jabatan</label>
                                         <div class="col-sm-10">
                                             <select tabindex="3" name="id_jabatan" class="chosen-select" style="width: 400px;">

@@ -21,24 +21,24 @@
                                         </li>
 
                                         <?php if(($this->session->userdata('user')->hak_akses == 'Manajer') || ($this->session->userdata('user')->hak_akses == 'Karyawan')) : ?>
-                                        <li class="dropdown <?= ($this->uri->segment('1') == 'jobdesk' && ($this->uri->segment('2') == 'karyawan' || $this->uri->segment('2') == 'detail' || $this->uri->segment('2') == 'masuk') ? 'active open':'') ?>">
+                                        <li class="dropdown <?= ($this->uri->segment('1') == 'tugas' && ($this->uri->segment('2') == 'karyawan' || $this->uri->segment('2') == 'detail' || $this->uri->segment('2') == 'masuk') ? 'active open':'') ?>">
                                             <a role="button" tabindex="0">
                                                 <i class="fa fa-list"></i>
-                                                <span>Jobdesk</span>
+                                                <span>Tugas</span>
                                             </a>
                                             <ul>
                                                 <?php if($this->session->userdata('user')->hak_akses == 'Karyawan') { ?>
-                                                <li class="<?= ($this->uri->segment('1') == 'jobdesk' && ($this->uri->segment('2') == 'masuk' || $this->uri->segment('2') == 'detail') ? 'active':'') ?>">
-                                                    <a href="<?= base_url('jobdesk/masuk') ?>">
-                                                        <i class="fa fa-angle-right"></i> Jobdesk Masuk
+                                                <li class="<?= ($this->uri->segment('1') == 'tugas' && ($this->uri->segment('2') == 'masuk' || $this->uri->segment('2') == 'detail') ? 'active':'') ?>">
+                                                    <a href="<?= base_url('tugas/masuk') ?>">
+                                                        <i class="fa fa-angle-right"></i> Tugas Masuk
                                                         <!-- <span class="badge br-10 badge-success">13</span> -->
                                                     </a>
                                                 </li>
                                                 <?php } else if($this->session->userdata('user')->hak_akses == 'Manajer') { ?>
-                                                <li class="<?= ($this->uri->segment('1') == 'jobdesk' && ($this->uri->segment('2') == 'karyawan' || $this->uri->segment('2') == 'detail') ? 'active':'') ?>">
+                                                <li class="<?= ($this->uri->segment('1') == 'tugas' && ($this->uri->segment('2') == 'karyawan' || $this->uri->segment('2') == 'detail') ? 'active':'') ?>">
                                                 
-                                                    <a href="<?= base_url('jobdesk/karyawan') ?>">
-                                                        <i class="fa fa-angle-right"></i> Jobdesk Karyawan
+                                                    <a href="<?= base_url('tugas/karyawan') ?>">
+                                                        <i class="fa fa-angle-right"></i> Tugas Karyawan
                                                     </a>
                                                 </li>
                                                 <?php } ?>
@@ -73,7 +73,7 @@
                         <!-- <div class="panel settings panel-default">
                             <div class="panel-heading" role="tab">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" href="#leftmenuControls">Jobdesk sedang dikerjakan
+                                    <a data-toggle="collapse" href="#leftmenuControls">tugas sedang dikerjakan
                                         <i class="fa fa-angle-up"></i>
                                     </a>
                                 </h4>

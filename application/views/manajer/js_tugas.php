@@ -166,17 +166,17 @@
         </div>
     </div>
 
-    <div class="modal fade" id="tambahJobdeskModal" role="dialog">
+    <div class="modal fade" id="tambahtugasModal" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Tambah Jobdesk</h4>
+                    <h4 class="modal-title">Tambah Tugas</h4>
                 </div>
                 <div class="modal-body">
-                <form id="formTambahJobdesk" enctype="multipart/form-data" method="POST" class="form-horizontal" role="form">
+                <form id="formTambahtugas" enctype="multipart/form-data" method="POST" class="form-horizontal" role="form">
                                     
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Kepada</label>
@@ -198,7 +198,7 @@
                                         <label for="input03" class="col-sm-2 control-label">Judul</label>
                                         <div class="col-sm-10">
                                             <input id="tambah_judul" type="text" name="judul" class="form-control" id="input03">
-                                            <span class="help-block mb-0">Subject Jobdesk.</span>
+                                            <span class="help-block mb-0">Subject Tugas.</span>
                                         </div>
                                     </div>
                                     <hr class="line-dashed full-witdh-line" />
@@ -206,7 +206,7 @@
                                         <label for="input04" class="col-sm-2 control-label">Deskripsi</label>
                                         <div class="col-sm-10">
                                             <input id="tambah_deskripsi" type="text" name="deskripsi" class="form-control" id="input04">
-                                            <span class="help-block mb-0">Deskripsi Jobdesk.</span>
+                                            <span class="help-block mb-0">Deskripsi Tugas.</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -228,7 +228,7 @@
                                 </form>
                 </div>
                 <div class="modal-footer">
-                    <button id="aksiTambahJobdesk" data-idUser="" type="button" class="btn btn-raised btn-success" data-dismiss="modal">Tambahkan</button>
+                    <button id="aksiTambahtugas" data-idUser="" type="button" class="btn btn-raised btn-success" data-dismiss="modal">Tambahkan</button>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Batalkan</button>
@@ -249,12 +249,12 @@
     <script>
         $(document).ready(function(){
             var base = '<?= base_url() ?>';
-            var url_edit = '<?= base_url().'ajax/update_jobdesk/' ?>';
-            var url_tambah = '<?= base_url().'ajax/insert_jobdesk/' ?>';
-            var url_all_jobdesk = '<?= base_url().'ajax/get_all_jobdesk/'.$this->session->userdata('user')->id_bagian.'/' ?>';
-            var url_jobdesk_belum = '<?= base_url().'ajax/get_jobdesk_belum/'.$this->session->userdata('user')->id_bagian.'/' ?>';
-            var url_jobdesk_selesai = '<?= base_url().'ajax/get_jobdesk_selesai/'.$this->session->userdata('user')->id_bagian.'/' ?>';
-            var url_delete_jobdesk = '<?= base_url().'ajax/delete_jobdesk/' ?>';
+            var url_edit = '<?= base_url().'ajax/update_tugas/' ?>';
+            var url_tambah = '<?= base_url().'ajax/insert_tugas/' ?>';
+            var url_all_tugas = '<?= base_url().'ajax/get_all_tugas/'.$this->session->userdata('user')->id_bagian.'/' ?>';
+            var url_tugas_belum = '<?= base_url().'ajax/get_tugas_belum/'.$this->session->userdata('user')->id_bagian.'/' ?>';
+            var url_tugas_selesai = '<?= base_url().'ajax/get_tugas_selesai/'.$this->session->userdata('user')->id_bagian.'/' ?>';
+            var url_delete_tugas = '<?= base_url().'ajax/delete_tugas/' ?>';
             var url_all_beban = '<?= base_url().'ajax/get_all_beban/'.$this->session->userdata('user')->id_bagian.'/' ?>';
             var dataDetail;
             var DateDiff = {
@@ -288,8 +288,8 @@
 
             //function start
         
-            function get_jobdesk() {
-                $.post(url_all_jobdesk,
+            function get_tugas() {
+                $.post(url_all_tugas,
                 function(data,status){
                     let isi;
                     let jumlah = $.parseJSON(data).length;
@@ -313,19 +313,19 @@
 													
 												</td>
             
-												<td class="jobdesk-`+item.id_jobdesk+`">`+jumlah+`</td>
-												<td class="kepada-`+item.id_jobdesk+`">`+item.kepada+`</td>
-                                                <td class="judul-`+item.id_jobdesk+`">`+item.judul+`</td>
-                                                <td class="status-`+item.id_jobdesk+`">`+item.status_jobdesk+`</td>
-                                                <td class="deadline-`+item.id_jobdesk+`">`+deadline+`</td>
+												<td class="tugas-`+item.id_tugas+`">`+jumlah+`</td>
+												<td class="kepada-`+item.id_tugas+`">`+item.kepada+`</td>
+                                                <td class="judul-`+item.id_tugas+`">`+item.judul+`</td>
+                                                <td class="status-`+item.id_tugas+`">`+item.status_tugas+`</td>
+                                                <td class="deadline-`+item.id_tugas+`">`+deadline+`</td>
                                                 <td>
-                                                    <a href="<?= base_url() ?>jobdesk/detail/`+item.id_jobdesk+`"><button data-idJobdesk="`+item.id_jobdesk+`" class="btn btn-primary detailJobdesk">Lihat Detail</button></a>
+                                                    <a href="<?= base_url() ?>tugas/detail/`+item.id_tugas+`"><button data-idtugas="`+item.id_tugas+`" class="btn btn-primary detailtugas">Lihat Detail</button></a>
                                                 </td>
 												
                                             </tr>
                         `;
                         //console.log(isi);
-                        $('#isiTabelJobdesk').html(isi);
+                        $('#isiTabeltugas').html(isi);
                         jumlah--;
                     });
                     if(isi == null){
@@ -338,7 +338,7 @@
 												</td>									
                                             </tr>
                         `;
-                        $('#isiTabelJobdesk').html(isi);
+                        $('#isiTabeltugas').html(isi);
                     }
                 });
             }
@@ -368,12 +368,12 @@
 
 
             //calling function start
-            get_jobdesk();
+            get_tugas();
             get_all_beban();
             $("#deadline").datepicker();
             
             $(window).load(function () {
-			    $('#jobdeskList').footable();
+			    $('#tugasList').footable();
 		    });
             //calling function end
 
@@ -546,9 +546,9 @@
 
         });
 
-        $(document).on('click', "#aksiTambahJobdesk",function(e){
+        $(document).on('click', "#aksiTambahtugas",function(e){
             e.preventDefault();
-            var form = $('#formTambahJobdesk')[0];
+            var form = $('#formTambahtugas')[0];
             var formTambahUser = new FormData(form);
             
             $.ajax({
@@ -562,11 +562,11 @@
                         //$("#img").attr("src",response);
                         //detail(dataDetail);
                         //console.log(response); 
-                        get_jobdesk();
+                        get_tugas();
                         form.reset();
                         Swal.fire(
                             'Berhasil!',
-                            'Menambahkan jobdesk.',
+                            'Menambahkan tugas.',
                             'success'
                         );
                     }else{
