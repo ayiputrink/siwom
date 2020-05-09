@@ -18,6 +18,6 @@ class Notifikasi_m extends Base_m {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-    public $table = 'notifikasi';
-    
+	public $table = 'notifikasi';
+	
 }

@@ -20,9 +20,27 @@ class Notifikasi extends CI_Controller {
 	 */
 	public function index()
 	{
+		$this->load->model('notifikasi_m');
 		$data = array(
-            'konten' => 'user/notifikasi'
-        );
+			'konten' => 'user/notifikasi'
+		);
+		if(isset($this->session->userdata('user')->id_user)){
+			$id_user = $this->session->userdata('user')->id_user;
+			$notifikasi = $this->notifikasi_m->read_where_reverse(array('id_user' => $id_user));
+			$data['parsing'] = $notifikasi;
+		}
         $this->load->view('_partials/template',$data);
+	}
+
+	public function detail($jenis_notifikasi,$id_notifiksi,$id_link){
+		$this->load->model('notifikasi_m');
+		$data = array(
+			'status_notifikasi' => 'dibaca'
+		);
+		$where = array(
+			'id_notifikasi' => $id_notifiksi
+		);
+		$this->notifikasi_m->update($data,$where);
+		redirect(base_url("tugas/detail/$id_link"));
 	}
 }

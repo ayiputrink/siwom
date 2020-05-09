@@ -32,6 +32,12 @@ class Base_m extends CI_Model {
 		return $this->db->get_where($this->table,$data);
 	}
 
+	public function read_where_reverse($data){
+		$this->db->where($data);
+		$this->db->order_by('created_at','DESC');
+		return $this->db->get($this->table);
+	}
+
     public function update($data,$where){
         return $this->db->update($this->table,$data,$where);
     }

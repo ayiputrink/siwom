@@ -39,6 +39,18 @@
                         </div>
                     </div>
                     
+                    
+                </div>
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                        <div class="boxs top_report_chart l-parpl">
+                            <div class="boxs-body">
+                                <h3 class="mt-0">Jobdesk Bagian <?= $this->session->userdata('user')->nama_bagian ?> : </h3>
+                                <h4><?= ($data_bagian[0]['jobdesk'] == '' || $data_bagian[0]['jobdesk'] == null ? 'Data Jobdesk Tidak Ada' : $data_bagian[0]['jobdesk']) ?></h4>
+                            </div>
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
 </section>

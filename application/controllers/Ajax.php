@@ -107,6 +107,18 @@ class Ajax extends CI_Controller {
 			$data['lampiran'] = $this->upload_file('tugas','lampiran','lampiran/');
 		}
 		$tugas = $this->tugas_m->create($data);
+
+		//notifikasi
+		$this->load->model('notifikasi_m');
+		$nama_user = $this->session->userdata('user')->nama;
+		$judul = $data['judul'];
+		$data_notifikasi = array(
+			'id_user' => $data['kepada'],
+			'jenis_notifikasi' => 'tugas',
+			'isi_notifikasi' => "$nama_user memberi anda tugas $judul",
+			'id_link' => $this->db->insert_id()
+		);
+		$this->notifikasi_m->create($data_notifikasi);
 		echo json_encode($tugas);
 	}
 
@@ -247,6 +259,20 @@ class Ajax extends CI_Controller {
 			$data['lampiran'] = $this->upload_file('assign','lampiran','lampiran_assignment/');
 		}
 		$assignment = $this->assign_tugas_m->create($data);
+
+		$this->load->model('tugas_m');
+		$data_tugas = $this->tugas_m->read_where(array('id_tugas' => $data['id_tugas']))->result_array();
+		//notifikasi
+		$this->load->model('notifikasi_m');
+		$nama_user = $this->session->userdata('user')->nama;
+		$judul = $data_tugas[0]['judul'];
+		$data_notifikasi = array(
+			'id_user' => $data_tugas[0]['dari'],
+			'jenis_notifikasi' => 'tugas',
+			'isi_notifikasi' => "$nama_user menyerahkan tugas $judul",
+			'id_link' => $this->db->insert_id()
+		);
+		$this->notifikasi_m->create($data_notifikasi);
 		echo json_encode($assignment);
 	}
 
@@ -258,8 +284,25 @@ class Ajax extends CI_Controller {
 
 	public function insert_komentar(){
 		$this->load->model('komentar_tugas_m');
+		$this->load->model('notifikasi_m');
+		$this->load->model('tugas_m');
 		$data = $this->input->post();
+		$tugas = $this->tugas_m->read_where(array('id_tugas' => $data['id_tugas']))->result_array();
+		if($this->session->userdata('user')->id_jabatan == 1) {
+			$user_tujuan = $tugas[0]['dari'];
+		} else if ($this->session->userdata('user')->id_jabatan == 2) {
+			$user_tujuan = $tugas[0]['kepada'];
+		}
 		$komentar = $this->komentar_tugas_m->create($data);
+		$nama = $this->session->userdata('user')->nama;
+		$judul = $tugas[0]['judul'];
+		$data_notifikasi = array(
+			'id_user' => $user_tujuan,
+			'jenis_notifikasi' => 'komentar',
+			'isi_notifikasi' => "$nama memberikan komentar pada tugas $judul",
+			'id_link' => $data['id_tugas']
+		);
+		$this->notifikasi_m->create($data_notifikasi);
 		echo json_encode($komentar);
 	}
 
@@ -282,6 +325,13 @@ class Ajax extends CI_Controller {
 		$id_tugas = $this->input->post('id_tugas');
 		$item = $this->item_tugas_m->read_where(array('id_tugas' => $id_tugas))->result_array();
 		echo json_encode($item);
+	}
+
+	public function get_notifikasi(){
+		$this->load->model('notifikasi_m');
+		$id_user = $this->session->userdata('user')->id_user;
+		$notifikasi = $this->notifikasi_m->read_where_reverse(array('id_user' => $id_user,'status_notifikasi' => 'diterima'))->result_array();
+		echo json_encode($notifikasi);
 	}
 
 	private function upload_file($nama,$form,$direktori){

@@ -31,30 +31,37 @@ class Home extends CI_Controller {
 		} else {
 			$this->load->model('user_m');
 			$this->load->model('tugas_m');
+			$this->load->model('bagian_m');
             $user = $this->session->userdata('user');
             if($user->status == 'active') {
 				if($user->id_jabatan == 1){
 					$tugas = $this->tugas_m->read_where(array('kepada' => $user->id_user))->num_rows();
 					$tugas_belum = $this->tugas_m->read_where(array('status_tugas' => 'belum selesai','kepada' => $user->id_user))->num_rows();
 					$tugas_selesai = $this->tugas_m->read_where(array('status_tugas' => 'selesai','kepada' => $user->id_user))->num_rows();
+					$data_bagian = $this->bagian_m->read_where(array('id_bagian' => $this->session->userdata('user')->id_bagian))->result_array();
 					$data = array(
 						'konten' => 'karyawan/home_karyawan',
 						'tugas' => $tugas,
 						'tugas_belum' => $tugas_belum,
-						'tugas_selesai' => $tugas_selesai
+						'tugas_selesai' => $tugas_selesai,
+						'data_bagian' => $data_bagian
 					);
 					$this->load->view('_partials/template',$data);
 				} else if ($user->id_jabatan == 2) {
-					$total_karyawan = $this->user_m->read_where(array('id_bagian' => $user->id_bagian))->num_rows();
+					$total_karyawan = $this->user_m->read_where(array('id_bagian' => $user->id_bagian,'id_jabatan' => 1))->num_rows();
 					$tugas = $this->tugas_m->read_where(array('dari' => $user->id_user))->num_rows();
 					$tugas_belum = $this->tugas_m->read_where(array('dari' => $user->id_user,'status_tugas' => 'belum selesai'))->num_rows();
 					$tugas_selesai = $this->tugas_m->read_where(array('dari' => $user->id_user,'status_tugas' => 'selesai'))->num_rows();
+					$data_karyawan = $this->user_m->read_full_where(array('user.id_bagian' => $user->id_bagian,'user.id_jabatan' => 1))->result_array();
+					$data_bagian = $this->bagian_m->read_where(array('id_bagian' => $this->session->userdata('user')->id_bagian))->result_array(); 
 					$data = array(
 						'konten' => 'manajer/home_manajer',
 						'total_karyawan' => $total_karyawan,
 						'tugas' => $tugas,
 						'tugas_belum' => $tugas_belum,
-						'tugas_selesai' => $tugas_selesai
+						'tugas_selesai' => $tugas_selesai,
+						'data_karyawan' => $data_karyawan,
+						'data_bagian' => $data_bagian
 					);
 					$this->load->view('_partials/template',$data);
 				} 

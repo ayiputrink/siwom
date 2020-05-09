@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Bulan Mei 2020 pada 00.17
+-- Waktu pembuatan: 06 Bulan Mei 2020 pada 13.40
 -- Versi server: 10.4.8-MariaDB
 -- Versi PHP: 7.3.11
 
@@ -58,6 +58,13 @@ CREATE TABLE `assign_tugas` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `assign_tugas`
+--
+
+INSERT INTO `assign_tugas` (`id_assign`, `id_tugas`, `deskripsi`, `lampiran`, `created_at`) VALUES
+(7, 15, 'ini tes notif', 'f9b86fb04303af55979692979b8b6f50.zip', '2020-05-06 10:37:16');
+
 -- --------------------------------------------------------
 
 --
@@ -108,7 +115,7 @@ INSERT INTO `bagian` (`id_bagian`, `id_divisi`, `nama_bagian`, `jobdesk`) VALUES
 (31, 6, 'Produk Perkeretaapian', ''),
 (32, 6, 'Produk Energi dan Traksi', ''),
 (33, 7, 'Perencanaan & Pengendalian Logistik', ''),
-(34, 7, 'Operasi Logistik', ''),
+(34, 7, 'Operasi Logistik', 'Menyiapkan Alat-alat kantor'),
 (35, 7, 'Persediaan & Operasi Gudang', ''),
 (36, 8, 'Perencanaan & Evaluasi Korporasi', ''),
 (37, 8, 'Sistem Informasi', ''),
@@ -225,7 +232,11 @@ INSERT INTO `komentar_tugas` (`id_komentar`, `id_tugas`, `id_user`, `isi_komenta
 (8, 14, 1, 'wah hebat', '2020-04-10 19:02:50'),
 (9, 14, 1, 'semoga tambah keren', '2020-04-10 19:16:09'),
 (10, 8, 1, 'bioleh tuh', '2020-04-11 15:09:19'),
-(14, 11, 1, 'hebat ya kwkwkw', '2020-04-12 09:50:35');
+(14, 11, 1, 'hebat ya kwkwkw', '2020-04-12 09:50:35'),
+(15, 12, 3, 'Keren', '2020-05-06 06:06:11'),
+(22, 12, 1, 'cool', '2020-05-06 08:45:04'),
+(23, 12, 3, 'terima kasih', '2020-05-06 08:55:31'),
+(24, 11, 1, 'selesai', '2020-05-06 09:01:09');
 
 -- --------------------------------------------------------
 
@@ -236,12 +247,24 @@ INSERT INTO `komentar_tugas` (`id_komentar`, `id_tugas`, `id_user`, `isi_komenta
 CREATE TABLE `notifikasi` (
   `id_notifikasi` int(11) NOT NULL,
   `id_user` int(11) DEFAULT NULL,
-  `jenis_notifikasi` enum('tugas') NOT NULL,
-  `isi_notifikasi` varchar(50) NOT NULL,
+  `jenis_notifikasi` enum('tugas','item_tugas','komentar') NOT NULL,
+  `isi_notifikasi` text NOT NULL,
   `id_link` int(150) DEFAULT NULL,
   `status_notifikasi` enum('diterima','dibaca') NOT NULL DEFAULT 'diterima',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `notifikasi`
+--
+
+INSERT INTO `notifikasi` (`id_notifikasi`, `id_user`, `jenis_notifikasi`, `isi_notifikasi`, `id_link`, `status_notifikasi`, `created_at`) VALUES
+(1, 3, 'komentar', 'Ayi Putri Nurkaidah memberikan komentar pada tugas', 12, 'dibaca', '2020-05-06 09:15:16'),
+(2, 3, 'komentar', 'Ayi Putri Nurkaidah memberikan komentar pada tugas', 12, 'dibaca', '2020-05-06 09:19:01'),
+(3, 1, 'komentar', 'Lyodra memberikan komentar pada tugas coba lagi.', 12, 'diterima', '2020-05-06 10:13:23'),
+(4, 3, 'komentar', 'Ayi Putri Nurkaidah memberikan komentar pada tugas', 11, 'dibaca', '2020-05-06 09:18:52'),
+(5, 3, 'tugas', ' memberi anda tugas cek notif', 15, 'dibaca', '2020-05-06 10:36:07'),
+(6, 1, 'tugas', ' menyerahkan tugas cek notif', 0, 'diterima', '2020-05-06 10:37:16');
 
 -- --------------------------------------------------------
 
@@ -278,7 +301,8 @@ INSERT INTO `tugas` (`id_tugas`, `dari`, `kepada`, `judul`, `deskripsi`, `lampir
 (11, 1, 3, 'coba lagi dulu', 'iya', 'b0046e4594558a898125a6cff5ef415e.zip', 'selesai', '2020-05-05', '2020-04-12 09:56:33'),
 (12, 1, 3, 'coba lagi', 'iya', NULL, 'selesai', '2020-05-13', '2020-04-12 10:08:41'),
 (13, 1, 3, 'coba lagi', 'iya', NULL, 'belum selesai', '2020-04-30', '2020-04-11 15:05:55'),
-(14, 1, 3, 'coba lagi', 'iya', '4bde08c2ec056a4a6e23f15edcc07f1c.zip', 'belum selesai', '2020-04-30', '2020-04-11 15:05:55');
+(14, 1, 3, 'coba lagi', 'iya', '4bde08c2ec056a4a6e23f15edcc07f1c.zip', 'belum selesai', '2020-04-30', '2020-04-11 15:05:55'),
+(15, 1, 3, 'cek notif', '', NULL, 'belum selesai', '2020-05-23', '2020-05-06 10:29:47');
 
 -- --------------------------------------------------------
 
@@ -371,6 +395,12 @@ ALTER TABLE `komentar_tugas`
   ADD PRIMARY KEY (`id_komentar`);
 
 --
+-- Indeks untuk tabel `notifikasi`
+--
+ALTER TABLE `notifikasi`
+  ADD PRIMARY KEY (`id_notifikasi`);
+
+--
 -- Indeks untuk tabel `tugas`
 --
 ALTER TABLE `tugas`
@@ -396,7 +426,7 @@ ALTER TABLE `administrator`
 -- AUTO_INCREMENT untuk tabel `assign_tugas`
 --
 ALTER TABLE `assign_tugas`
-  MODIFY `id_assign` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_assign` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `bagian`
@@ -426,13 +456,19 @@ ALTER TABLE `jabatan`
 -- AUTO_INCREMENT untuk tabel `komentar_tugas`
 --
 ALTER TABLE `komentar_tugas`
-  MODIFY `id_komentar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_komentar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT untuk tabel `notifikasi`
+--
+ALTER TABLE `notifikasi`
+  MODIFY `id_notifikasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `tugas`
 --
 ALTER TABLE `tugas`
-  MODIFY `id_tugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_tugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`

@@ -30,7 +30,7 @@
                 <ul class="nav-right pull-right list-inline">
                    
                     
-                    <li class="dropdown notifications">
+                    <li class="<?php if(isset($this->session->userdata('user')->id_jabatan)){echo 'cekNotifikasi';} else {echo 'cekNotifikasiAdmin';} ?> dropdown notifications">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-bell"></i>
                             <div class="notify">
@@ -39,7 +39,7 @@
                             </div>
                         </a>
                         <div class="dropdown-menu pull-right panel panel-default">
-                            <ul class="list-group">
+                            <ul class="list-notifikasi list-group">
                                 
                                 <li class="list-group-item">
                                     <a role="button" tabindex="0" class="media">
@@ -47,11 +47,12 @@
                                             <i class="fa fa-info-circle"></i>
                                         </span>
                                         <div class="media-body">
-                                            <span class="block">Tidak ada Pemberitahuan</span>
+                                            <span class="block">Tidak ada Pemberitahuan Baru</span>
                                             <!-- <small class="text-muted">8 texts</small> -->
                                         </div>
                                     </a>
                                 </li>
+
                             </ul>
                             <div class="panel-footer">
                                 <a href="<?= base_url('notifikasi') ?>" role="button" tabindex="0">Lihat Semua Pemberitahuan

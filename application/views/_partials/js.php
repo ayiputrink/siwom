@@ -38,5 +38,36 @@
         });
     </script> 
 
+    <script>
+        $(document).ready(function(){
+            $('.cekNotifikasi').click(function(){
+                var id_user = '<?= $this->session->userdata('user')->id_user ?>';
+                let notifikasi = '';
+                $.post('<?= base_url() ?>ajax/get_notifikasi',{id_user:id_user},function(value){
+                    $.each($.parseJSON(value),function(i, item){
+                        notifikasi += `
+                                <li class="list-group-item">
+                                    <a role="button" tabindex="0" class="media">
+                                        <span class="pull-left media-object media-icon">
+                                            <i class="fa fa-info-circle"></i>
+                                        </span>
+                                        <div class="media-body">
+                                            <span class="block">${item.isi_notifikasi}</span>
+                                            <!-- <small class="text-muted">8 texts</small> -->
+                                        </div>
+                                    </a>
+                                </li>
+                        `;
+                    });
+                    console.log(notifikasi);
+                    if (notifikasi != '') {
+                        $('.list-notifikasi').html(notifikasi);
+                    }
+                });
+                
+            });
+        });
+    </script>
+
       
 <!--/ Page Specific Scripts --> 

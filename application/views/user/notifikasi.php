@@ -19,15 +19,40 @@
 				<div class="boxs-body">
 					<ul class="media-list feeds_widget m-0">
 						
+						<?php if(isset($parsing)) { ?>
+						<?php if($parsing->num_rows() < 1) { ?>
 						<li class="media">
 							<div class="media-img"><i class="fa fa-info-circle"></i></div>
 							<div class="media-body">
 								<div class="media-heading text-warning"> <small
-										class="pull-right text-muted">10:50</small></div>
-								<small>Lorem Ipsum is simply dummy text.</small>
+										class="pull-right text-muted">-:-</small></div>
+								<small>Tidak ada Notifikasi.</small>
 							</div>
 						</li>
-						
+						<?php } else { ?>
+						<?php foreach($parsing->result_array() as $data) { ?>
+						<a href="<?= base_url() ?>notifikasi/detail/<?= $data['jenis_notifikasi'] ?>/<?= $data['id_notifikasi'] ?>/<?= $data['id_link'] ?>">
+						<li class="media">
+							<div class="media-img"><i class="fa fa-info-circle"></i></div>
+							<div class="media-body">
+								<div class="media-heading text-warning"> <small
+										class="pull-right text-muted"><?= $data['created_at'] ?></small></div>
+								<small><?= $data['isi_notifikasi'] ?> <?php if($data['status_notifikasi'] == 'diterima') {echo '(Notifikasi Baru)';} ?></small>
+							</div>
+						</li>
+						</a>
+						<?php } ?>
+						<?php } ?>
+						<?php } else { ?>
+							<li class="media">
+							<div class="media-img"><i class="fa fa-info-circle"></i></div>
+							<div class="media-body">
+								<div class="media-heading text-warning"> <small
+										class="pull-right text-muted">-:-</small></div>
+								<small>Tidak ada Notifikasi.</small>
+							</div>
+						</li>
+						<?php } ?>
 					</ul>
 				</div>
 			</section>
