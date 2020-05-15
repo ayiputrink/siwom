@@ -17,6 +17,7 @@
     <script src="<?= base_url() ?>assets/js/vendor/chosen/chosen.jquery.min.js"></script> 
     <script src="<?= base_url() ?>assets/js/vendor/filestyle/bootstrap-filestyle.min.js"></script> 
     <script src="<?= base_url() ?>assets/js/datatables.min.js"></script> 
+    <script src="<?= base_url() ?>assets/js/jquery-ui.js"></script>
 
     <!--  Custom JavaScripts -->
     <script src="<?= base_url() ?>assets/bundles/mainscripts.bundle.js"></script>
@@ -66,6 +67,8 @@
                 });
                 
             });
+            
+             $("#tanggal").datepicker();
         });
     </script>
 

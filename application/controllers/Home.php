@@ -76,8 +76,5 @@ class Home extends CI_Controller {
 		
 	}
 	
-	public function coba(){
-		var_dump($this->session->userdata('user'));
-	}
     
 }

@@ -34,7 +34,7 @@
                                     <div class="form-group">
                                         <label for="input03" class="col-sm-2 control-label">NIK</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="nik" class="form-control" id="input03">
+                                            <input type="text" name="nik" class="form-control" id="input03" required>
                                             <span class="help-block mb-0">NIK karyawan.</span>
                                         </div>
                                     </div>
@@ -42,7 +42,7 @@
                                     <div class="form-group">
                                         <label for="input04" class="col-sm-2 control-label">Alamat</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="alamat" class="form-control" id="input04">
+                                            <input type="text" name="alamat" class="form-control" id="input04" required>
                                             <span class="help-block mb-0">Alamat karyawan.</span>
                                         </div>
                                     </div>
@@ -50,7 +50,7 @@
                                     <div class="form-group">
                                         <label for="input03" class="col-sm-2 control-label">Tanggal Lahir</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="tanggal_lahir" class="form-control" id="input03">
+                                            <input type="text" id="tanggal" name="tanggal_lahir" class="form-control" id="input03" required>
                                             <span class="help-block mb-0">Tanggal Lahir karyawan.</span>
                                         </div>
                                     </div>
@@ -58,7 +58,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Jenis Kelamin</label>
                                         <div class="col-sm-10">
-                                            <select tabindex="3" id="verifikasi_select_divisi" name="jenis_kelamin" class="verifikasi_select_divisi chosen-select" style="width: 400px;">
+                                            <select tabindex="3" id="verifikasi_select_divisi" name="jenis_kelamin" class="verifikasi_select_divisi chosen-select" style="width: 400px;" required>
                                             <option value="" disabled selected>Pilih Jenis Kelamin</option>
                                                 <option value="L">Laki-laki</option> 
                                                 <option value="P">Perempuan</option>    
@@ -69,7 +69,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Status Perkawinan</label>
                                         <div class="col-sm-10">
-                                            <select tabindex="3" id="verifikasi_select_divisi" name="status_perkawinan" class="verifikasi_select_divisi chosen-select" style="width: 400px;">
+                                            <select tabindex="3" id="verifikasi_select_divisi" name="status_perkawinan" class="verifikasi_select_divisi chosen-select" style="width: 400px;" required>
                                             <option value="" disabled selected>Pilih Status Perkawinan</option>
                                                 <option value="belum kawin">Belum Kawin</option> 
                                                 <option value="kawin">Kawin</option>    
@@ -80,7 +80,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Jabatan</label>
                                         <div class="col-sm-10">
-                                            <select tabindex="3" name="id_jabatan" class="chosen-select" style="width: 400px;">
+                                            <select tabindex="3" name="id_jabatan" class="chosen-select" style="width: 400px;" required>
                                                 <option value="" disabled selected>Pilih Jabatan</option>
                                                 <?php foreach ($jabatan as $value) { ?>
                                                     <option value="<?= $value['id_jabatan'] ?>"><?= $value['nama_jabatan'] ?></option>
@@ -92,7 +92,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Divisi</label>
                                         <div class="col-sm-10">
-                                            <select tabindex="3" id="verifikasi_select_divisi" name="id_divisi" class="verifikasi_select_divisi chosen-select" style="width: 400px;">
+                                            <select tabindex="3" id="verifikasi_select_divisi" name="id_divisi" class="verifikasi_select_divisi chosen-select" style="width: 400px;" required>
                                             <option value="" disabled selected>Pilih Divisi</option>
                                                 <?php 
                                                 foreach ($divisi as $value) {
@@ -108,7 +108,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Bagian</label>
                                         <div class="col-sm-10">
-                                            <select tabindex="3" id="verifikasi_select_bagian" name="id_bagian" class="verifikasi_select_bagian chosen-select" style="width: 400px;">
+                                            <select tabindex="3" id="verifikasi_select_bagian" name="id_bagian" class="verifikasi_select_bagian chosen-select" style="width: 400px;" required>
                                                 <option value="" disabled selected>Pilih Bagian Divisi</option>
 
                                             </select>
@@ -118,7 +118,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Nametag Karyawan</label>
                                         <div class="col-sm-10">
-                                            <input type="file" name="nametag" class="filestyle" data-buttonText="Upload Nametag" data-iconName="fa fa-inbox">
+                                            <input type="file" name="nametag" class="filestyle" data-buttonText="Upload Nametag" data-iconName="fa fa-inbox" required>
                                         </div>
                                     </div>
                                     <hr class="line-dashed full-witdh-line" />
@@ -131,9 +131,9 @@
                             </div>
                             <?php } ?>
                         </section>
+
                     </div>
                 </div>
             </div>
         </section>
         <!--/ CONTENT -->
-       
