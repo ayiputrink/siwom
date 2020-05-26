@@ -21,14 +21,104 @@ class Algoritma extends CI_Controller {
 	 */
 	public function index()
 	{
-		$samples = [[5, 1, 1], [1, 5, 1], [1, 1, 5]];
-        $labels = ['a', 'b', 'c'];
+		$this->load->model('user_m');
+		$this->load->model('tugas_m');
+		$user = $this->user_m->read_where(array('id_jabatan' => 1, 'status' => 'active'));
+		//$tugas_diterima = $this->tugas_m->read_where(array('status_tugas' => 'belum selesai', 'MONTH(created_at)' => 'MONTH(current_date())'));
+		$pengguna = array();
+		foreach ($user->result_array() as $k => $v) {
+				$nama = $v['nama'];
+				$jenis_kelamin = $v['jenis_kelamin'];
+				$usia = $v['tanggal_lahir'];
+				$status_perkawinan = $v['status_perkawinan'];
+				$tugas_diterima = $this->tugas_m->read_where(array('kepada' => $v['id_user'],'status_tugas' => 'belum selesai', 'MONTH(created_at)' => 'MONTH(current_date())'))->num_rows();
+				$tugas_selesai = $this->tugas_m->read_where(array('kepada' => $v['id_user'],'status_tugas' => 'selesai', 'MONTH(created_at)' => 'MONTH(current_date())'))->num_rows();
+	
+				$data = array(
+				'nama' => $nama,
+				'jenis_kelamin' => $jenis_kelamin,
+				'status_perkawinan' => $status_perkawinan,
+				'tugas_diterima' => $tugas_diterima,
+				'tugas_selesai' => $tugas_selesai,
+				'beban_kerja' => $this->cek_beban_kerja($jenis_kelamin,$usia,$status_perkawinan,$tugas_diterima,$tugas_selesai)
+			);
+			//$pengguna[$v['id_user']] = $data;
+			array_push($pengguna, $data);
+		}
+		echo json_encode($pengguna);
+		//echo $this->cek_beban_kerja('P','1996-02-20','belum kawin',8,12);
+	}
+
+	private function cek_beban_kerja($jenis_kelamin, $tanggal_lahir, $status_perkawinan, $tugas_diterima_cek, $tugas_selesai_cek)
+	{
+		$samples = [
+			['L', '20-29', 'kawin', '11-20', '0-10'], //1 
+			['P', '20-29', 'belum kawin', '0-10', '0-10'], //2 
+			['P', '30-40', 'kawin', '11-20', '11-20'], //3
+			['L', '20-29', 'belum kawin', '11-20', '0-10'], //4
+			['L', '30-40', 'kawin', '0-10', '11-20'], //5
+			['L', '20-29', 'belum kawin', '11-20', '11-20'], //6
+			['L', '>40', 'kawin', '11-20', '0-10'], //7
+			['L', '30-40', 'kawin', '11-20', '11-20'], //8
+			['P', '20-29', 'kawin', '11-20', '11-20'], //9
+			['L', '>40', 'Kkawin', '0-10', '11-20'], //10
+			['P', '30-40', 'kawin', '0-10', '11-20'], //11
+			['L', '20-29', 'belum', '11-20', '11-20'], //12
+			['P', '30-40', 'belum kawin', '0-10', '0-10'], //13
+			['P', '30-40', 'kawin', '11-20', '0-20'], //14
+			['L', '20-29', 'belum kawin', '0-10', '11-20'] //15
+		];
+		
+		$labels = [
+			'berat', //1
+			'sedang', //2
+			'berat', //3
+			'sedang', //4
+			'berat', //5
+			'berat', //6
+			'tidak berat', //7
+			'berat', //8
+			'berat', //9
+			'tidak berat', //10
+			'berat', //11
+			'tidak berat', //12
+			'tidak berat', //13
+			'berat', //14
+			'berat' //15
+		];
 
         $classifier = new NaiveBayes();
         $classifier->train($samples, $labels);
 
-        echo $classifier->predict([3, 1, 1]);
+		//echo $classifier->predict(['L', '30-40', 'kawin', '11-20','11-20']);
+		
+		# object oriented
+		$from = new DateTime($tanggal_lahir);
+		$to   = new DateTime('today');
+		$usia_cek = $from->diff($to)->y;
+		if($usia_cek >= 20 && $usia_cek < 30){
+			$usia = '20-29';
+		} else if ($usia_cek >= 30 && $usia_cek < 40){
+			$usia = '30-40';
+		} else if($usia_cek >= 40){
+			$usia = '>40';
+		}
 
+		$tugas_diterima_cek = (int) $tugas_diterima_cek;
+ 		if($tugas_diterima_cek >= 0 && $tugas_diterima_cek < 11){
+			$tugas_diterima = '0-10';
+		} else if($tugas_diterima_cek >= 11 && $tugas_diterima_cek < 21) {
+			$tugas_diterima = '11-20';
+		}
+
+		$tugas_selesai_cek = (int) $tugas_selesai_cek;
+		if($tugas_selesai_cek >= 0 && $tugas_selesai_cek < 11){
+			$tugas_selesai = '0-10';
+		} else if($tugas_selesai_cek >= 11 && $tugas_selesai_cek < 21) {
+			$tugas_selesai = '11-20';
+		}
+
+		return $classifier->predict([$jenis_kelamin, $usia, $status_perkawinan, $tugas_diterima,$tugas_selesai]);
 	}
 	
 }

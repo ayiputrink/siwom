@@ -61,5 +61,13 @@ class User_m extends Base_m {
 		$this->db->order_by('COUNT(id_tugas)','asc');
 		return $this->db->get();
 	}
+
+	public function read_algoritma(){
+		$this->db->select('*');
+		$this->db->from($this->table);
+		$this->db->join('tugas','tugas.kepada = '.$this->table.'.id_user','left');
+		$this->db->group_by('user.id_user');
+		return $this->db->get();
+	}
     
 }
