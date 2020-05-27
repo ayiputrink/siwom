@@ -255,7 +255,7 @@
             var url_tugas_belum = '<?= base_url().'ajax/get_tugas_belum/'.$this->session->userdata('user')->id_bagian.'/' ?>';
             var url_tugas_selesai = '<?= base_url().'ajax/get_tugas_selesai/'.$this->session->userdata('user')->id_bagian.'/' ?>';
             var url_delete_tugas = '<?= base_url().'ajax/delete_tugas/' ?>';
-            var url_all_beban = '<?= base_url().'ajax/get_all_beban/'.$this->session->userdata('user')->id_bagian.'/' ?>';
+            var url_all_beban = '<?= base_url().'algoritma/get_bagian/'.$this->session->userdata('user')->id_bagian.'/' ?>';
             var dataDetail;
             var DateDiff = {
                 inDays: function(d1, d2) {
@@ -347,17 +347,17 @@
                 $.post(url_all_beban, function(data,status){
                     let isi;
                     $.each($.parseJSON(data), function(i, item){
-                        if(item.beban_kerja == 'Ringan'){
+                        if(item.beban_kerja == 'tidak berat'){
                             isi += `
-                                <option class="text text-success" value="`+item.id_user+`">`+item.nama+` | Jumlah tugas : `+item.jumlah_tugas+`</option>
+                                <option class="text text-success" value="`+item.id_user+`">`+item.nama+` | Beban Kerja : `+item.beban_kerja+`</option>
                             `;
-                        } else if(item.beban_kerja == 'Sedang'){
+                        } else if(item.beban_kerja == 'sedang'){
                             isi += `
-                                <option class="text text-warning" value="`+item.id_user+`">`+item.nama+` | Jumlah tugas : `+item.jumlah_tugas+`</option>
+                                <option class="text text-warning" value="`+item.id_user+`">`+item.nama+` | Beban Kerja : `+item.beban_kerja+`</option>
                             `;
-                        } else if(item.beban_kerja == 'Berat'){
+                        } else if(item.beban_kerja == 'berat'){
                             isi += `
-                                <option class="text text-danger" value="`+item.id_user+`">`+item.nama+`  | Jumlah tugas : `+item.jumlah_tugas+`</option>
+                                <option class="text text-danger" value="`+item.id_user+`">`+item.nama+`  | Beban Kerja : `+item.beban_kerja+`</option>
                             `;
                         }
                     });

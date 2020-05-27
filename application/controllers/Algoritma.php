@@ -49,6 +49,36 @@ class Algoritma extends CI_Controller {
 		//echo $this->cek_beban_kerja('P','1996-02-20','belum kawin',8,12);
 	}
 
+	public function get_bagian($id_bagian){
+		$this->load->model('user_m');
+		$this->load->model('tugas_m');
+		$user = $this->user_m->read_where(array('id_bagian' => $id_bagian,'id_jabatan' => 1, 'status' => 'active'));
+		//$tugas_diterima = $this->tugas_m->read_where(array('status_tugas' => 'belum selesai', 'MONTH(created_at)' => 'MONTH(current_date())'));
+		$pengguna = array();
+		foreach ($user->result_array() as $k => $v) {
+				$nama = $v['nama'];
+				$jenis_kelamin = $v['jenis_kelamin'];
+				$usia = $v['tanggal_lahir'];
+				$status_perkawinan = $v['status_perkawinan'];
+				$tugas_diterima = $this->tugas_m->read_where(array('kepada' => $v['id_user'],'status_tugas' => 'belum selesai', 'MONTH(created_at)' => 'MONTH(current_date())'))->num_rows();
+				$tugas_selesai = $this->tugas_m->read_where(array('kepada' => $v['id_user'],'status_tugas' => 'selesai', 'MONTH(created_at)' => 'MONTH(current_date())'))->num_rows();
+	
+				$data = array(
+				'id_user' => $v['id_user'],
+				'nama' => $nama,
+				'jenis_kelamin' => $jenis_kelamin,
+				'status_perkawinan' => $status_perkawinan,
+				'tugas_diterima' => $tugas_diterima,
+				'tugas_selesai' => $tugas_selesai,
+				'beban_kerja' => $this->cek_beban_kerja($jenis_kelamin,$usia,$status_perkawinan,$tugas_diterima,$tugas_selesai)
+			);
+			//$pengguna[$v['id_user']] = $data;
+			array_push($pengguna, $data);
+		}
+		echo json_encode($pengguna);
+		//echo $this->cek_beban_kerja('P','1996-02-20','belum kawin',8,12);
+	}
+
 	private function cek_beban_kerja($jenis_kelamin, $tanggal_lahir, $status_perkawinan, $tugas_diterima_cek, $tugas_selesai_cek)
 	{
 		$samples = [

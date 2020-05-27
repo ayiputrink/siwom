@@ -54,7 +54,7 @@
                             <div class="boxs-body">
                                 <h3 class="mt-0">Daftar Karyawan Bagian <?= $this->session->userdata('user')->nama_bagian ?> : </h3>
                                 <?php $no=1; foreach($data_karyawan as $data) { ?>
-                                    <h4><?= $no ?>. <?= $data['nama'] ?> - <?= $data['nik'] ?></h4>
+                                    <h4><?= $no ?>. <?= $data['nama'] ?> - <?= $data['nik'] ?> | Beban Kerja : <?= $data['beban_kerja'] ?></h4>
                                 <?php $no++;} ?>
                             </div>
                             
