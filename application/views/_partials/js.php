@@ -68,7 +68,10 @@
                 
             });
             
-             $("#tanggal").datepicker();
+             $("#tanggal").datepicker({
+                dateFormat:'yy-mm-d'
+             });
+             
         });
     </script>
 

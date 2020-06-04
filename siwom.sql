@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 06 Bulan Mei 2020 pada 13.40
+-- Waktu pembuatan: 04 Jun 2020 pada 18.17
 -- Versi server: 10.4.8-MariaDB
 -- Versi PHP: 7.3.11
 
@@ -333,20 +333,25 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `nik`, `nama`, `alamat`, `jenis_kelamin`, `tanggal_lahir`, `status_perkawinan`, `email`, `password`, `id_jabatan`, `id_divisi`, `id_bagian`, `nametag`, `status`, `created_at`) VALUES
-(1, 10104006, 'Ayi Putri Nurkaidah', 'Subang', NULL, '0000-00-00', 'belum kawin', 'ayiputrink@gmail.com', '123456', 2, 7, 34, 'aa081589202d1f94a00962710ec204e9.jpg', 'active', '2020-03-17 09:25:14'),
-(2, 2020, 'Nuca', '', NULL, '0000-00-00', 'belum kawin', 'nuca@gmail.com', '123456', 2, NULL, NULL, '9c26f2d6903d551d36ff08cc22167cd9.jpg', 'suspend', '2020-03-20 14:23:45'),
-(3, 10104009, 'Lyodra', '', NULL, '0000-00-00', 'belum kawin', 'lyodra@gmail.com', '123456', 1, 7, 34, NULL, 'active', '2020-03-20 10:53:34'),
+(1, 10104006, 'Ayi Putri Nurkaidah', 'Subang', 'P', '1999-04-27', 'belum kawin', 'ayiputrink@gmail.com', '123456', 2, 7, 34, 'aa081589202d1f94a00962710ec204e9.jpg', 'active', '2020-05-26 06:22:42'),
+(2, 2020, 'Nuca', '', 'L', '1994-05-11', 'belum kawin', 'nuca@gmail.com', '123456', 2, NULL, NULL, '9c26f2d6903d551d36ff08cc22167cd9.jpg', 'suspend', '2020-05-26 06:22:49'),
+(3, 10104009, 'Lyodra', '', 'P', '1996-02-20', 'belum kawin', 'lyodra@gmail.com', '123456', 1, 7, 34, NULL, 'active', '2020-05-26 06:22:56'),
 (8, NULL, 'arvi', NULL, NULL, '0000-00-00', 'belum kawin', 'arvi@gmail.com', '123456', NULL, NULL, NULL, NULL, 'active', '2020-03-31 03:29:42'),
 (9, NULL, 'naufa', NULL, NULL, '0000-00-00', 'belum kawin', 'naufa@gmail.com', '123456', NULL, NULL, NULL, NULL, 'unverified', '2020-03-31 04:39:25'),
 (10, NULL, 'kekey', NULL, NULL, '0000-00-00', 'belum kawin', 'kekey@gmail.com', '123456', NULL, NULL, NULL, NULL, 'unverified', '2020-04-09 12:16:09'),
-(11, NULL, 'programmer', NULL, NULL, '0000-00-00', 'belum kawin', 'programmer@gmail.com', '123456', NULL, NULL, NULL, NULL, 'unverified', '2020-04-09 12:20:11'),
+(11, 0, 'programmer', '', NULL, '0000-00-00', 'belum kawin', 'programmer@gmail.com', '123456', 1, 10, 19, NULL, 'unverified', '2020-06-02 17:09:22'),
 (12, NULL, 'user1', NULL, NULL, '0000-00-00', 'belum kawin', 'user1@gmail.com', '123456', NULL, NULL, NULL, NULL, 'unverified', '2020-04-09 12:23:14'),
 (13, NULL, 'user2', NULL, NULL, '0000-00-00', 'belum kawin', 'user2@gmail.com', '123456', NULL, NULL, NULL, NULL, 'unverified', '2020-04-09 12:27:18'),
-(14, NULL, 'user3', NULL, NULL, '0000-00-00', 'belum kawin', 'user3@gmail.com', '123456', NULL, NULL, NULL, NULL, 'unverified', '2020-04-09 12:28:40'),
-(15, NULL, 'user4', NULL, NULL, '0000-00-00', 'belum kawin', 'user4@gmail.com', '123456', NULL, NULL, NULL, NULL, 'unverified', '2020-04-09 12:30:28'),
+(14, 3020, 'user3', 'Majalengka', 'L', '2020-04-01', 'belum kawin', 'user3@gmail.com', '123456', 2, 13, 41, NULL, 'unverified', '2020-06-04 15:53:29'),
+(15, 1122, 'user4', '', NULL, '0000-00-00', 'belum kawin', 'user4@gmail.com', '123456', NULL, NULL, NULL, NULL, 'unverified', '2020-06-04 12:10:53'),
 (16, NULL, 'user5', NULL, NULL, '0000-00-00', 'belum kawin', 'user5@gmail.com', '123456', NULL, NULL, NULL, NULL, 'unverified', '2020-04-09 12:38:38'),
 (17, NULL, 'user6', NULL, NULL, '0000-00-00', 'belum kawin', 'user6@gmail.com', '123456', NULL, NULL, NULL, NULL, 'unverified', '2020-04-09 12:41:16'),
-(18, 9856333, 'user7', 'Majalengka', NULL, '0000-00-00', 'belum kawin', 'user7@gmail.com', '123456', 2, 9, 16, '4d6477096f1fcd07cf0caa60d7adbba4.JPG', 'active', '2020-04-09 12:45:40');
+(18, 9856333, 'user7', 'Majalengka', NULL, '1995-10-10', 'belum kawin', 'user7@gmail.com', '123456', 2, 9, 16, '4d6477096f1fcd07cf0caa60d7adbba4.JPG', 'active', '2020-05-26 06:18:56'),
+(19, 98563334, 'zuck', 'Majalengka', 'L', '1990-05-12', 'belum kawin', 'zuck@gmail.com', '123456', 2, 4, 10, '6b1b35b7219ffb9ff510c70a6784250d.jpg', 'unverified', '2020-06-02 09:52:59'),
+(20, 202020, 'Rindi', '', 'P', '2020-06-01', 'belum kawin', 'rindi@gmail.com', '123456', 1, 13, NULL, NULL, 'unverified', '2020-06-04 16:06:32'),
+(21, 20201, 'Fauzan', 'Jakarta', 'L', '1995-02-01', 'belum kawin', 'fauzan@gmail.com', '123456', 2, 6, 30, NULL, 'unverified', '2020-06-04 16:06:36'),
+(22, 20323, 'Arjun', 'Bandung', 'L', '1996-06-09', 'belum kawin', 'arjun@gmail.com', '123456', 1, 12, 38, NULL, 'unverified', '2020-06-04 16:06:39'),
+(23, 45454554, 'Ajeng', 'Bandung', 'P', '1995-02-02', 'belum kawin', 'ajeng@gmail.com', '123456', 1, 9, 15, '92b06f7108cf2e5ec2b20eb7f0758155.jpg', 'unverified', '2020-06-04 16:14:20');
 
 --
 -- Indexes for dumped tables
@@ -356,7 +361,8 @@ INSERT INTO `user` (`id_user`, `nik`, `nama`, `alamat`, `jenis_kelamin`, `tangga
 -- Indeks untuk tabel `administrator`
 --
 ALTER TABLE `administrator`
-  ADD PRIMARY KEY (`id_admin`);
+  ADD PRIMARY KEY (`id_admin`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- Indeks untuk tabel `assign_tugas`
@@ -410,7 +416,9 @@ ALTER TABLE `tugas`
 -- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id_user`);
+  ADD PRIMARY KEY (`id_user`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `nik` (`nik`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
@@ -474,7 +482,7 @@ ALTER TABLE `tugas`
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

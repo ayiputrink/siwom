@@ -51,7 +51,7 @@
                                         <label for="input03" class="col-sm-2 control-label">Tanggal Lahir</label>
                                         <div class="col-sm-10">
                                             <input type="text" id="tanggal" name="tanggal_lahir" class="form-control" id="input03" required>
-                                            <span class="help-block mb-0">Tanggal Lahir karyawan.</span>
+                                            <span class="help-block mb-0">Tanggal Lahir karyawan (Format: tahun-bulan-tanggal).</span>
                                         </div>
                                     </div>
                                     <hr class="line-dashed full-witdh-line" />

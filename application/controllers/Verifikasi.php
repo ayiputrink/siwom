@@ -66,8 +66,6 @@ class Verifikasi extends CI_Controller {
         $nik = $this->input->post('nik');
         $alamat = $this->input->post('alamat');
         $tanggal_lahir = $this->input->post('tanggal_lahir');
-        $tanggal = explode('/',$tanggal_lahir);
-        $tanggal_lahir = "$tanggal[2]-$tanggal[0]-$tanggal[1]";
         $jenis_kelamin = $this->input->post('jenis_kelamin');
         $status_perkawinan = $this->input->post('status_perkawinan');
         $id_jabatan = $this->input->post('id_jabatan');

@@ -11,7 +11,7 @@
                 <div class="modal-body">
                     <table>
                         <tr>
-                            <td width="100px">NIK</td>
+                            <td width="150px">NIK</td>
                             <td width="10px"> : </td>
                             <td id="detail_nik"></td>
                         </tr>
@@ -19,6 +19,21 @@
                             <td>Nama</td>
                             <td> : </td>
                             <td id="detail_nama"></td>
+                        </tr>
+                        <tr>
+                            <td>Jenis Kelamin</td>
+                            <td> : </td>
+                            <td id="detail_jenis_kelamin"></td>
+                        </tr>
+                        <tr>
+                            <td>Tanggal Lahir</td>
+                            <td> : </td>
+                            <td id="detail_tanggal_lahir"></td>
+                        </tr>
+                        <tr>
+                            <td>Status Perkawinan</td>
+                            <td> : </td>
+                            <td id="detail_status_perkawinan"></td>
                         </tr>
                         <tr>
                             <td>Alamat</td>
@@ -89,6 +104,32 @@
                                         <div class="col-sm-10">
                                             <input id="edit_nama" type="text" name="nama" class="form-control" id="input03">
                                             <span class="help-block mb-0">Nama karyawan.</span>
+                                        </div>
+                                    </div>
+                                    <hr class="line-dashed full-witdh-line" />
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Jenis Kelamin</label>
+                                        <div class="col-sm-10">
+                                            <select data-id="" id="edit_jenis_kelamin" tabindex="3" name="jenis_kelamin" class="chosen-select" style="width: 400px;">
+                                               
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <hr class="line-dashed full-witdh-line" />
+                                    <div class="form-group">
+                                        <label for="input03" class="col-sm-2 control-label">Tanggal Lahir</label>
+                                        <div class="col-sm-10">
+                                            <input id="edit_tanggal_lahir" type="text" name="tanggal_lahir" class="form-control">
+                                            <span class="help-block mb-0">Tanggal Lahir (Format: tahun-bulan-tanggal).</span>
+                                        </div>
+                                    </div>
+                                    <hr class="line-dashed full-witdh-line" />
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Status Perkawinan</label>
+                                        <div class="col-sm-10">
+                                            <select data-id="" id="edit_status_perkawinan" tabindex="3" name="status_perkawinan" class="chosen-select" style="width: 400px;">
+                                              
+                                            </select>
                                         </div>
                                     </div>
                                     <hr class="line-dashed full-witdh-line" />
@@ -192,6 +233,36 @@
                                         <div class="col-sm-10">
                                             <input id="tambah_nama" type="text" name="nama" class="form-control" id="input03">
                                             <span class="help-block mb-0">Nama karyawan.</span>
+                                        </div>
+                                    </div>
+                                    <hr class="line-dashed full-witdh-line" />
+                                    <div class="form-group">
+                                        <label for="input03" class="col-sm-2 control-label">Tanggal Lahir</label>
+                                        <div class="col-sm-10">
+                                            <input id="tanggal_lahir" type="text" name="tanggal_lahir" class="form-control" id="input03">
+                                            <span class="help-block mb-0">Tanggal lahir karyawan (Format: tahun-bulan-tanggal).</span>
+                                        </div>
+                                    </div>
+                                    <hr class="line-dashed full-witdh-line" />
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Jenis Kelamin</label>
+                                        <div class="col-sm-10">
+                                            <select data-id="" id="jenis_kelamin" tabindex="3" name="jenis_kelamin" class="chosen-select" style="width: 400px;">
+                                                <option value="" disabled selected>Pilih Jenis Kelamin</option>
+                                                    <option value="L">Laki-laki</option>
+                                                    <option value="P">Perempuan</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <hr class="line-dashed full-witdh-line" />
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Status Perkawinan</label>
+                                        <div class="col-sm-10">
+                                            <select data-id="" id="status_perkawinan" tabindex="3" name="status_perkawinan" class="chosen-select" style="width: 400px;">
+                                                <option value="" disabled selected>Pilih Status Perkawinan</option>
+                                                    <option value="belum kawin">Belum Kawin</option>
+                                                    <option value="kawin">Kawin</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <hr class="line-dashed full-witdh-line" />
@@ -300,6 +371,9 @@
                     function(data,status) {
                         let nik;
                         let nama;
+                        let jenisKelamin;
+                        let tanggalLahir;
+                        let statusPerkawinan;
                         let alamat;
                         let email;
                         let jabatan;
@@ -313,6 +387,9 @@
                         $.each($.parseJSON(data), function(i, item){
                             nik = item.nik;
                             nama = item.nama;
+                            jenisKelamin = item.jenis_kelamin == 'L' ? 'Laki-laki' : (item.jenis_kelamin == 'P' ? 'Perempuan' : '' ) ;
+                            tanggalLahir = item.tanggal_lahir;
+                            statusPerkawinan = item.status_perkawinan;
                             alamat = item.alamat;
                             email = item.email;
                             jabatan = item.nama_jabatan;
@@ -330,9 +407,11 @@
                         } else {
                             var gambar = 'User belum mengunggah gambar';
                         }
-                        
                         $('#detail_nik').html(nik);
                         $('#detail_nama').html(nama);
+                        $('#detail_jenis_kelamin').html(jenisKelamin);
+                        $('#detail_tanggal_lahir').html(tanggalLahir);
+                        $('#detail_status_perkawinan').html(statusPerkawinan);
                         $('#detail_alamat').html(alamat);
                         $('#detail_email').html(email);
                         $('#detail_jabatan').html(jabatan);
@@ -471,45 +550,82 @@
                 $('#edit_divisi').attr('data-id',$('#detail_divisi').attr('data-id'));
                 $('#edit_bagian').attr('data-id',$('#detail_bagian').attr('data-id'));
                 $('#editUser').attr('data-iduser',$(this).attr('data-iduser'));
+                $('#edit_tanggal_lahir').val($('#detail_tanggal_lahir').html());
                 var id_divisi = $('#detail_divisi').attr('data-id');
+                $('#edit_jenis_kelamin').html(
+                    `
+                    <option value="" disabled `+($('#detail_jenis_kelamin').html() == '' ? 'selected' : '')+`>Pilih Jenis Kelamin</option>
+                                <option value="L" `+($('#detail_jenis_kelamin').html() == 'Laki-laki' ? 'selected' : '')+`>Laki-laki</option>
+                                <option value="P" `+($('#detail_jenis_kelamin').html() == 'Perempuan' ? 'selected' : '')+`>Perempuan</option>
+                    `
+                );
+                $('#edit_status_perkawinan').html(
+                    `
+                             <option value="" disabled `+($('#detail_status_perkawinan').html() == '' ? 'selected' : '')+`>Pilih Status Perkawinan</option>
+                                                    <option value="belum kawin" `+($('#detail_status_perkawinan').html() == 'Belum Kawin' ? 'selected' : '')+`>Belum Kawin</option>
+                                                    <option value="kawin" `+($('#detail_status_perkawinan').html() == 'Kawin' ? 'selected' : '')+`>Kawin</option>
+                    `
+                );
               
                 $.post(url_jabatan,
                     function(data,status) {
-                        let jabatan = '<option value="" disabled selected>Pilih Jabatan</option>';
+                        let jabatan = '';
+                        let kosong = true;
                         $.each($.parseJSON(data), function(i, item){
                             if(item.id_jabatan == $('#edit_jabatan').attr('data-id')){
+                                kosong = false;
                                 jabatan += '<option value="'+item.id_jabatan+'" selected>'+item.nama_jabatan+'</option>';
                             } else {
                                 jabatan += '<option value="'+item.id_jabatan+'">'+item.nama_jabatan+'</option>';
                             }
-                            
                         });
+                        if(kosong == true){
+                                jabatan += '<option value="" disabled selected>Pilih Jabatan</option>';
+                            } else {
+                                jabatan += '<option value="" disabled>Pilih Jabatan</option>';
+                            }
                         $('#edit_jabatan').html(jabatan);
                     }
                 );
                 $.post(url_divisi,
                     function(data,status) {
-                        let divisi = '<option value="" disabled selected>Pilih Divisi</option>';
+                        let divisi = '';
+                        let kosong = true;
                         $.each($.parseJSON(data), function(i, item){
                             if(item.id_divisi == $('#edit_divisi').attr('data-id')){
+                                kosong = false;
                                 divisi += '<option value="'+item.id_divisi+'" selected>'+item.nama_divisi+'</option>';
                             } else {
                                 divisi += '<option value="'+item.id_divisi+'">'+item.nama_divisi+'</option>';
                             }
+                           
                         });
+                        if(kosong == true){
+                                divisi += '<option value="" disabled selected>Pilih Divisi</option>';
+                            } else {
+                                divisi += '<option value="" disabled>Pilih Divisi</option>';
+                            }
                         $('#edit_divisi').html(divisi);
                     }
                 );
                 $.post(url_bagian,{id_divisi: id_divisi},
                     function(data,status) {
-                        let bagian = '<option value="" disabled selected>Pilih Bagian Divisi</option>';
+                        let bagian = '';
+                        let kosong = true;
                         $.each($.parseJSON(data), function(i, item){
                             if(item.id_bagian == $('#edit_bagian').attr('data-id')){
+                                kosong = false;
                                 bagian += '<option value="'+item.id_bagian+'" selected>'+item.nama_bagian+'</option>';
                             } else {
                                 bagian += '<option value="'+item.id_bagian+'">'+item.nama_bagian+'</option>';
                             }
+                           
                         });
+                        if(kosong == true){
+                                bagian += '<option value="" disabled selected>Pilih Bagian</option>';
+                            } else {
+                                bagian += '<option value="" disabled>Pilih Bagian</option>';
+                            }
                         $('#edit_bagian').html(bagian);
                     }
                 );
@@ -532,6 +648,10 @@
             // var editNametag = $('#edit_nametag')[0].files[0];
             var form = $('#formEditUser')[0];
             var formEditUser = new FormData(form);
+            if($('#edit_nik').val() == ''){
+                alert('Kolom NIK tidak boleh kosong');
+                return false;
+            }
             var files = $('#edit_nametag')[0].files[0];
             formEditUser.append('id_user',$(this).attr('data-iduser'));
             
@@ -572,6 +692,7 @@
                         //detail(dataDetail);
                         //console.log(response); 
                         get_user();
+                        location.href = '<?= base_url() ?>admin/kelola_user/';
                     }else{
                         alert('file not uploaded');
                     }
@@ -630,6 +751,12 @@
             });
         });
 
+        $('#tanggal_lahir').datepicker({
+            dateFormat:'yy-mm-d'
+        });
+        $('#edit_tanggal_lahir').datepicker({
+            dateFormat:'yy-mm-d'
+        });
 
         //penutup ready
         });

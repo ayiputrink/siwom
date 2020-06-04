@@ -198,6 +198,9 @@ class Ajax extends CI_Controller {
 		$data = array(
 			'nik' => $this->input->post('nik'),
 			'nama' => $this->input->post('nama'),
+			'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+			'tanggal_lahir' => $this->input->post('tanggal_lahir'),
+			'status_perkawinan' => $this->input->post('status_perkawinan'),
 			'alamat' => $this->input->post('alamat'),
 			'email' => $this->input->post('email'),
 			'id_jabatan' => $this->input->post('id_jabatan'),
@@ -216,8 +219,12 @@ class Ajax extends CI_Controller {
 		$data = array(
 			'nik' => $this->input->post('nik'),
 			'nama' => $this->input->post('nama'),
+			'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+			'tanggal_lahir' => $this->input->post('tanggal_lahir'),
+			'status_perkawinan' => $this->input->post('status_perkawinan'),
 			'alamat' => $this->input->post('alamat'),
 			'email' => $this->input->post('email'),
+			'password' => $this->input->post('password'),
 			'id_jabatan' => $this->input->post('id_jabatan'),
 			'id_divisi' => $this->input->post('id_divisi'),
 			'id_bagian' => $this->input->post('id_bagian')
@@ -355,7 +362,7 @@ class Ajax extends CI_Controller {
 
 	private function upload_foto($nama,$form,$direktori){
         $config['upload_path']          = './upload/'.$direktori;
-        $config['allowed_types']        = 'gif|jpg|png';
+        $config['allowed_types']        = 'gif|jpg|png|jpeg';
         $config['file_name']            = $nama;
         $config['overwrite']			= true;
         $config['max_size']             = 2048; // 1MB
