@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 04 Jun 2020 pada 18.17
+-- Waktu pembuatan: 07 Jun 2020 pada 16.10
 -- Versi server: 10.4.8-MariaDB
 -- Versi PHP: 7.3.11
 
@@ -75,56 +75,57 @@ CREATE TABLE `bagian` (
   `id_bagian` int(11) NOT NULL,
   `id_divisi` int(11) NOT NULL,
   `nama_bagian` varchar(50) NOT NULL,
-  `jobdesk` text NOT NULL
+  `jobdesk_karyawan` text NOT NULL,
+  `jobdesk_manajer` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `bagian`
 --
 
-INSERT INTO `bagian` (`id_bagian`, `id_divisi`, `nama_bagian`, `jobdesk`) VALUES
-(1, 1, 'Legal', ''),
-(2, 1, 'Komunikasi Korporasi', ''),
-(4, 1, 'Program Kemitraan & Bina Lingkungan', ''),
-(5, 2, 'Pengawasan Keuangan', ''),
-(6, 2, 'Pengawasan Operasional', ''),
-(7, 3, 'Penjamin Mutu', ''),
-(8, 3, 'Penjamin Sistem', ''),
-(9, 3, 'Penjamin K3L', ''),
-(10, 4, 'Keuangan', ''),
-(11, 4, 'Akuntansi', ''),
-(12, 4, 'Perpajakan', ''),
-(13, 5, 'Sumber Daya Manusia', ''),
-(14, 5, 'Urusan Umum', ''),
-(15, 9, 'Pemasaran & Penjualan', ''),
-(16, 9, 'Rekayasa Sistem', ''),
-(17, 9, 'Komersial', ''),
-(18, 10, 'Pemasaran & Penjualan', ''),
-(19, 10, 'Rekayasa Sistem', ''),
-(20, 10, 'Komersial', ''),
-(21, 11, 'Rekayasa Sistem', ''),
-(22, 11, 'Komersial', ''),
-(23, 11, 'Operasi Matra Darat', ''),
-(24, 11, 'Operasi Matra Laut', ''),
-(25, 11, 'Operasi Matra Udara', ''),
-(26, 12, 'Pemasaran & Penjualan', ''),
-(27, 12, 'Rekayasa Industri & Jasa Produksi', ''),
-(28, 12, 'Perencanaan Pengendalian Produksi', ''),
-(29, 6, 'Pengembangan Bisnis dan Akuntansi', ''),
-(30, 6, 'Produk Hankam & TIKN', ''),
-(31, 6, 'Produk Perkeretaapian', ''),
-(32, 6, 'Produk Energi dan Traksi', ''),
-(33, 7, 'Perencanaan & Pengendalian Logistik', ''),
-(34, 7, 'Operasi Logistik', 'Menyiapkan Alat-alat kantor'),
-(35, 7, 'Persediaan & Operasi Gudang', ''),
-(36, 8, 'Perencanaan & Evaluasi Korporasi', ''),
-(37, 8, 'Sistem Informasi', ''),
-(38, 12, 'Rekayasa Sistem', ''),
-(39, 12, 'Komersial', ''),
-(40, 12, 'Manajemen Proyek', ''),
-(41, 13, 'Pemasaran dan Penjualan', ''),
-(42, 13, 'Rekayasa Industri & Jasa Produksi', ''),
-(43, 13, 'Perencanaan Pengendalian Produksi', '');
+INSERT INTO `bagian` (`id_bagian`, `id_divisi`, `nama_bagian`, `jobdesk_karyawan`, `jobdesk_manajer`) VALUES
+(1, 1, 'Legal', '', ''),
+(2, 1, 'Komunikasi Korporasi', '', ''),
+(4, 1, 'Program Kemitraan & Bina Lingkungan', '', ''),
+(5, 2, 'Pengawasan Keuangan', '', ''),
+(6, 2, 'Pengawasan Operasional', '', ''),
+(7, 3, 'Penjamin Mutu', '', ''),
+(8, 3, 'Penjamin Sistem', '', ''),
+(9, 3, 'Penjamin K3L', '', ''),
+(10, 4, 'Keuangan', '', ''),
+(11, 4, 'Akuntansi', '', ''),
+(12, 4, 'Perpajakan', '', ''),
+(13, 5, 'Sumber Daya Manusia', '', ''),
+(14, 5, 'Urusan Umum', '', ''),
+(15, 9, 'Pemasaran & Penjualan', '', ''),
+(16, 9, 'Rekayasa Sistem', '', ''),
+(17, 9, 'Komersial', '', ''),
+(18, 10, 'Pemasaran & Penjualan', '', ''),
+(19, 10, 'Rekayasa Sistem', '', ''),
+(20, 10, 'Komersial', '', ''),
+(21, 11, 'Rekayasa Sistem', '', ''),
+(22, 11, 'Komersial', '', ''),
+(23, 11, 'Operasi Matra Darat', '', ''),
+(24, 11, 'Operasi Matra Laut', '', ''),
+(25, 11, 'Operasi Matra Udara', '', ''),
+(26, 12, 'Pemasaran & Penjualan', '', ''),
+(27, 12, 'Rekayasa Industri & Jasa Produksi', '', ''),
+(28, 12, 'Perencanaan Pengendalian Produksi', '', ''),
+(29, 6, 'Pengembangan Bisnis dan Akuntansi', '', ''),
+(30, 6, 'Produk Hankam & TIKN', '', ''),
+(31, 6, 'Produk Perkeretaapian', '', ''),
+(32, 6, 'Produk Energi dan Traksi', '', ''),
+(33, 7, 'Perencanaan & Pengendalian Logistik', '', ''),
+(34, 7, 'Operasi Logistik', 'Menyiapkan Alat-alat kantor <br> Menerima tugas dari manajer', 'Menyiapkan Alat-alat kantor <br> Memberi arahan karyawan'),
+(35, 7, 'Persediaan & Operasi Gudang', '', ''),
+(36, 8, 'Perencanaan & Evaluasi Korporasi', '', ''),
+(37, 8, 'Sistem Informasi', '', ''),
+(38, 12, 'Rekayasa Sistem', '', ''),
+(39, 12, 'Komersial', '', ''),
+(40, 12, 'Manajemen Proyek', '', ''),
+(41, 13, 'Pemasaran dan Penjualan', '', ''),
+(42, 13, 'Rekayasa Industri & Jasa Produksi', '', ''),
+(43, 13, 'Perencanaan Pengendalian Produksi', '', '');
 
 -- --------------------------------------------------------
 

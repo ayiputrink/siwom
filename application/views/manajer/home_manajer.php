@@ -66,7 +66,7 @@
                         <div class="boxs top_report_chart l-parpl">
                             <div class="boxs-body">
                                 <h3 class="mt-0">Jobdesk Bagian <?= $this->session->userdata('user')->nama_bagian ?> : </h3>
-                                <h4><?= ($data_bagian[0]['jobdesk'] == '' || $data_bagian[0]['jobdesk'] == null ? 'Data Jobdesk Tidak Ada' : $data_bagian[0]['jobdesk']) ?></h4>
+                                <h4><?= ($data_bagian[0]['jobdesk_manajer'] == '' || $data_bagian[0]['jobdesk_manajer'] == null ? 'Data Jobdesk Tidak Ada' : $data_bagian[0]['jobdesk_manajer']) ?></h4>
                             </div>
                             
                         </div>
