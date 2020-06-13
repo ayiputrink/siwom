@@ -43,7 +43,7 @@ class Verifikasi extends CI_Controller {
 
     private function upload_foto($nama,$form,$direktori){
         $config['upload_path']          = './upload/'.$direktori;
-        $config['allowed_types']        = 'gif|jpg|png';
+        $config['allowed_types']        = 'gif|jpg|png|jpeg';
         $config['file_name']            = $nama;
         $config['overwrite']			= true;
         $config['max_size']             = 2048; // 1MB
