@@ -81,41 +81,53 @@ class Algoritma extends CI_Controller {
 
 	private function cek_beban_kerja($jenis_kelamin, $tanggal_lahir, $status_perkawinan, $tugas_diterima_cek, $tugas_selesai_cek)
 	{
-		$samples = [
-			['L', '20-29', 'kawin', '11-20', '0-10'], //1 
-			['P', '20-29', 'belum kawin', '0-10', '0-10'], //2 
-			['P', '30-40', 'kawin', '11-20', '11-20'], //3
-			['L', '20-29', 'belum kawin', '11-20', '0-10'], //4
-			['L', '30-40', 'kawin', '0-10', '11-20'], //5
-			['L', '20-29', 'belum kawin', '11-20', '11-20'], //6
-			['L', '>40', 'kawin', '11-20', '0-10'], //7
-			['L', '30-40', 'kawin', '11-20', '11-20'], //8
-			['P', '20-29', 'kawin', '11-20', '11-20'], //9
-			['L', '>40', 'Kkawin', '0-10', '11-20'], //10
-			['P', '30-40', 'kawin', '0-10', '11-20'], //11
-			['L', '20-29', 'belum', '11-20', '11-20'], //12
-			['P', '30-40', 'belum kawin', '0-10', '0-10'], //13
-			['P', '30-40', 'kawin', '11-20', '0-20'], //14
-			['L', '20-29', 'belum kawin', '0-10', '11-20'] //15
-		];
+		// $samples = [
+		// 	['L', '20-29', 'kawin', '11-20', '0-10'], //1 
+		// 	['P', '20-29', 'belum kawin', '0-10', '0-10'], //2 
+		// 	['P', '30-40', 'kawin', '11-20', '11-20'], //3
+		// 	['L', '20-29', 'belum kawin', '11-20', '0-10'], //4
+		// 	['L', '30-40', 'kawin', '0-10', '11-20'], //5
+		// 	['L', '20-29', 'belum kawin', '11-20', '11-20'], //6
+		// 	['L', '>40', 'kawin', '11-20', '0-10'], //7
+		// 	['L', '30-40', 'kawin', '11-20', '11-20'], //8
+		// 	['P', '20-29', 'kawin', '11-20', '11-20'], //9
+		// 	['L', '>40', 'Kkawin', '0-10', '11-20'], //10
+		// 	['P', '30-40', 'kawin', '0-10', '11-20'], //11
+		// 	['L', '20-29', 'belum', '11-20', '11-20'], //12
+		// 	['P', '30-40', 'belum kawin', '0-10', '0-10'], //13
+		// 	['P', '30-40', 'kawin', '11-20', '0-20'], //14
+		// 	['L', '20-29', 'belum kawin', '0-10', '11-20'] //15
+		// ];
 		
-		$labels = [
-			'berat', //1
-			'sedang', //2
-			'berat', //3
-			'sedang', //4
-			'berat', //5
-			'berat', //6
-			'tidak berat', //7
-			'berat', //8
-			'berat', //9
-			'tidak berat', //10
-			'berat', //11
-			'tidak berat', //12
-			'tidak berat', //13
-			'berat', //14
-			'berat' //15
-		];
+		// $labels = [
+		// 	'berat', //1
+		// 	'sedang', //2
+		// 	'berat', //3
+		// 	'sedang', //4
+		// 	'berat', //5
+		// 	'berat', //6
+		// 	'tidak berat', //7
+		// 	'berat', //8
+		// 	'berat', //9
+		// 	'tidak berat', //10
+		// 	'berat', //11
+		// 	'tidak berat', //12
+		// 	'tidak berat', //13
+		// 	'berat', //14
+		// 	'berat' //15
+		// ];
+
+		$this->load->model('data_training_m');
+		$sample = $this->data_training_m->read_sample()->result_array();
+		$label = $this->data_training_m->read_label()->result_array();
+		$samples = [];
+		$labels = [];
+		foreach($sample as $k => $data) {
+			array_push($samples, array($data['usia'],$data['tugas_diterima'],$data['tugas_selesai']));
+		}
+		foreach ($label as $k => $data) {
+			array_push($labels, $data['label']);
+		}
 
         $classifier = new NaiveBayes();
         $classifier->train($samples, $labels);
@@ -148,7 +160,7 @@ class Algoritma extends CI_Controller {
 			$tugas_selesai = '11-20';
 		}
 
-		return $classifier->predict([$jenis_kelamin, $usia, $status_perkawinan, $tugas_diterima,$tugas_selesai]);
+		return $classifier->predict([$usia, $tugas_diterima,$tugas_selesai]);
 	}
 	
 }

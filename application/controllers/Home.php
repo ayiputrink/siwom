@@ -94,7 +94,7 @@ class Home extends CI_Controller {
 
 	private function cek_beban_kerja($jenis_kelamin, $tanggal_lahir, $status_perkawinan, $tugas_diterima_cek, $tugas_selesai_cek)
 	{
-		$samples = [
+		$samples_st = [
 			['L', '20-29', 'kawin', '11-20', '0-10'], //1 
 			['P', '20-29', 'belum kawin', '0-10', '0-10'], //2 
 			['P', '30-40', 'kawin', '11-20', '11-20'], //3
@@ -112,7 +112,7 @@ class Home extends CI_Controller {
 			['L', '20-29', 'belum kawin', '0-10', '11-20'] //15
 		];
 		
-		$labels = [
+		$labels_st = [
 			'berat', //1
 			'sedang', //2
 			'berat', //3
@@ -130,10 +130,22 @@ class Home extends CI_Controller {
 			'berat' //15
 		];
 
+		$this->load->model('data_training_m');
+		$sample = $this->data_training_m->read_sample()->result_array();
+		$label = $this->data_training_m->read_label()->result_array();
+		$samples = [];
+		$labels = [];
+		foreach($sample as $k => $data) {
+			array_push($samples, array($data['usia'],$data['tugas_diterima'],$data['tugas_selesai']));
+		}
+		foreach ($label as $k => $data) {
+			array_push($labels, $data['label']);
+		}
+
         $classifier = new NaiveBayes();
         $classifier->train($samples, $labels);
 
-		//echo $classifier->predict(['L', '30-40', 'kawin', '11-20','11-20']);
+		//echo $classifier->predict(['30-40', '11-20','11-20']);
 		
 		# object oriented
 		$from = new DateTime($tanggal_lahir);
@@ -145,6 +157,8 @@ class Home extends CI_Controller {
 			$usia = '30-40';
 		} else if($usia_cek >= 40){
 			$usia = '>40';
+		} else {
+			$usia = '0';
 		}
 
 		$tugas_diterima_cek = (int) $tugas_diterima_cek;
@@ -160,8 +174,7 @@ class Home extends CI_Controller {
 		} else if($tugas_selesai_cek >= 11 && $tugas_selesai_cek < 21) {
 			$tugas_selesai = '11-20';
 		}
-
-		return $classifier->predict([$jenis_kelamin, $usia, $status_perkawinan, $tugas_diterima,$tugas_selesai]);
+		return $classifier->predict([$usia, $tugas_diterima,$tugas_selesai]);
 	}
 	
     

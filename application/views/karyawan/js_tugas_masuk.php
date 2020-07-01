@@ -7,7 +7,7 @@
 
 <script>
     $(document).ready(function(){
-        var url_all_tugas = '<?= base_url().'ajax/get_all_tugas/'.$this->session->userdata('user')->id_bagian.'/' ?>';
+        var url_all_tugas = '<?= base_url().'ajax/get_tugas_masuk/' ?>';
 
         var DateDiff = {
                 inDays: function(d1, d2) {

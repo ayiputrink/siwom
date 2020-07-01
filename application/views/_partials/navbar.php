@@ -29,7 +29,7 @@
                 <!-- Right-side navigation -->
                 <ul class="nav-right pull-right list-inline">
                    
-                    
+                    <?php if($this->session->userdata('user')->hak_akses != 'admin') { ?>
                     <li class="<?php if(isset($this->session->userdata('user')->id_jabatan)){echo 'cekNotifikasi';} else {echo 'cekNotifikasiAdmin';} ?> dropdown notifications">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-bell"></i>
@@ -61,6 +61,8 @@
                             </div>
                         </div>
                     </li>
+                    <?php } ?>
+
                     <li class="dropdown nav-profile">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                             
@@ -73,7 +75,7 @@
                                 </div>
                             </li>
                            
-                            <li>
+                            <!-- <li>
                                 <a role="button" tabindex="0">
                                     <span class="label label-info pull-right">new</span>
                                     <i class="fa fa-check"></i>Tasks</a>
@@ -81,7 +83,7 @@
                             <li>
                                 <a role="button" tabindex="0">
                                     <i class="fa fa-cog"></i>Settings</a>
-                            </li>
+                            </li> -->
                             <li class="divider"></li>
                             <li>
                                 <a href="<?= base_url() ?>login/aksi_logout" role="button" tabindex="0">

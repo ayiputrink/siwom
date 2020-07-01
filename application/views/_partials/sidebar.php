@@ -1,76 +1,78 @@
 <aside id="leftmenu">
-                <div id="leftmenu-wrap">
-                    <div class="panel-group slim-scroll" role="tablist">
-                        <div class="panel panel-default">
-                            <div id="leftmenuNav" class="panel-collapse collapse in" role="tabpanel">
-                                <div class="panel-body">
-                                    <!--  NAVIGATION Content -->
-                                    <ul id="navigation">
-                                        <li class="<?php echo ( $this->uri->segment('1') == 'home' || $this->uri->segment('2') == 'dashboard') ? 'active' : '' ?>">
-                                            <a href="<?= base_url('home') ?>">
-                                                <i class="fa fa-dashboard"></i>
-                                                <span>Dashboard</span>
-                                            </a>
-                                        </li>
+    <div id="leftmenu-wrap">
+        <div class="panel-group slim-scroll" role="tablist">
+            <div class="panel panel-default">
+                <div id="leftmenuNav" class="panel-collapse collapse in" role="tabpanel">
+                    <div class="panel-body">
+                        <!--  NAVIGATION Content -->
+                        <ul id="navigation">
+                            <li class="<?php echo ($this->uri->segment('1') == 'home' || $this->uri->segment('2') == 'dashboard') ? 'active' : '' ?>">
+                                <a href="<?= base_url('home') ?>">
+                                    <i class="fa fa-dashboard"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
 
-                                        <li class="<?php echo  $this->uri->segment('1') == 'notifikasi' ? 'active' : '' ?>">
-                                            <a href="<?= base_url('notifikasi') ?>">
-                                                <i class="fa fa-arrow-right"></i>
-                                                <span>Pemberitahuan</span>
-                                            </a>
-                                        </li>
+                            <?php if ($this->session->userdata('user')->hak_akses != 'admin') { ?>
+                                <li class="<?php echo  $this->uri->segment('1') == 'notifikasi' ? 'active' : '' ?>">
+                                    <a href="<?= base_url('notifikasi') ?>">
+                                        <i class="fa fa-arrow-right"></i>
+                                        <span>Pemberitahuan</span>
+                                    </a>
+                                </li>
+                            <?php } ?>
 
-                                        <?php if(($this->session->userdata('user')->hak_akses == 'Manajer') || ($this->session->userdata('user')->hak_akses == 'Karyawan')) : ?>
-                                        <li class="dropdown <?= ($this->uri->segment('1') == 'tugas' && ($this->uri->segment('2') == 'karyawan' || $this->uri->segment('2') == 'detail' || $this->uri->segment('2') == 'masuk') ? 'active open':'') ?>">
-                                            <a role="button" tabindex="0">
-                                                <i class="fa fa-list"></i>
-                                                <span>Tugas</span>
-                                            </a>
-                                            <ul>
-                                                <?php if($this->session->userdata('user')->hak_akses == 'Karyawan') { ?>
-                                                <li class="<?= ($this->uri->segment('1') == 'tugas' && ($this->uri->segment('2') == 'masuk' || $this->uri->segment('2') == 'detail') ? 'active':'') ?>">
-                                                    <a href="<?= base_url('tugas/masuk') ?>">
-                                                        <i class="fa fa-angle-right"></i> Tugas Masuk
-                                                        <!-- <span class="badge br-10 badge-success">13</span> -->
-                                                    </a>
-                                                </li>
-                                                <?php } else if($this->session->userdata('user')->hak_akses == 'Manajer') { ?>
-                                                <li class="<?= ($this->uri->segment('1') == 'tugas' && ($this->uri->segment('2') == 'karyawan' || $this->uri->segment('2') == 'detail') ? 'active':'') ?>">
-                                                
-                                                    <a href="<?= base_url('tugas/karyawan') ?>">
-                                                        <i class="fa fa-angle-right"></i> Tugas Karyawan
-                                                    </a>
-                                                </li>
-                                                <?php } ?>
-                                               
-                                            </ul>
-                                        </li>
-                                        <?php endif; ?>
+                            <?php if (($this->session->userdata('user')->hak_akses == 'Manajer') || ($this->session->userdata('user')->hak_akses == 'Karyawan')) : ?>
+                                <li class="dropdown <?= ($this->uri->segment('1') == 'tugas' && ($this->uri->segment('2') == 'karyawan' || $this->uri->segment('2') == 'detail' || $this->uri->segment('2') == 'masuk') ? 'active open' : '') ?>">
+                                    <a role="button" tabindex="0">
+                                        <i class="fa fa-list"></i>
+                                        <span>Tugas</span>
+                                    </a>
+                                    <ul>
+                                        <?php if ($this->session->userdata('user')->hak_akses == 'Karyawan') { ?>
+                                            <li class="<?= ($this->uri->segment('1') == 'tugas' && ($this->uri->segment('2') == 'masuk' || $this->uri->segment('2') == 'detail') ? 'active' : '') ?>">
+                                                <a href="<?= base_url('tugas/masuk') ?>">
+                                                    <i class="fa fa-angle-right"></i> Tugas Masuk
+                                                    <!-- <span class="badge br-10 badge-success">13</span> -->
+                                                </a>
+                                            </li>
+                                        <?php } else if ($this->session->userdata('user')->hak_akses == 'Manajer') { ?>
+                                            <li class="<?= ($this->uri->segment('1') == 'tugas' && ($this->uri->segment('2') == 'karyawan' || $this->uri->segment('2') == 'detail') ? 'active' : '') ?>">
 
-                                        <?php if($this->session->userdata('user')->hak_akses == 'admin' ) : ?>
-                                        <li class="<?= ($this->uri->segment('2') == 'kelola_user') ? 'active open' : 'dropdown' ?>">
-                                            <a role="button" tabindex="0">
-                                                <i class="fa fa-list"></i>
-                                                <span>Menu Admin</span>
-                                            </a>
-                                            <ul>
-                                                <li class="<?= ($this->uri->segment('1') == 'admin' && $this->uri->segment('2') == 'kelola_user') ? 'active' : '' ?>">
-                                                    <a href="<?= base_url('admin/kelola_user') ?>">
-                                                        <i class="fa fa-angle-right"></i> Kelola User
-                                                        <!-- <span class="badge br-10 badge-success">13</span> -->
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <?php endif; ?>
-                                        
-                                        
+                                                <a href="<?= base_url('tugas/karyawan') ?>">
+                                                    <i class="fa fa-angle-right"></i> Tugas Karyawan
+                                                </a>
+                                            </li>
+                                        <?php } ?>
+
                                     </ul>
-                                    <!--/ NAVIGATION Content -->
-                                </div>
-                            </div>
-                        </div>
-                        <!-- <div class="panel settings panel-default">
+                                </li>
+                            <?php endif; ?>
+
+                            <?php if ($this->session->userdata('user')->hak_akses == 'admin') : ?>
+                                <li class="<?= ($this->uri->segment('2') == 'kelola_user') ? 'active open' : 'dropdown' ?>">
+                                    <a role="button" tabindex="0">
+                                        <i class="fa fa-list"></i>
+                                        <span>Menu Admin</span>
+                                    </a>
+                                    <ul>
+                                        <li class="<?= ($this->uri->segment('1') == 'admin' && $this->uri->segment('2') == 'kelola_user') ? 'active' : '' ?>">
+                                            <a href="<?= base_url('admin/kelola_user') ?>">
+                                                <i class="fa fa-angle-right"></i> Kelola User
+                                                <!-- <span class="badge br-10 badge-success">13</span> -->
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            <?php endif; ?>
+
+
+                        </ul>
+                        <!--/ NAVIGATION Content -->
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="panel settings panel-default">
                             <div class="panel-heading" role="tab">
                                 <h4 class="panel-title">
                                     <a data-toggle="collapse" href="#leftmenuControls">tugas sedang dikerjakan
@@ -96,6 +98,6 @@
                                 </div>
                             </div>
                         </div> -->
-                    </div>
-                </div>
-            </aside>
+        </div>
+    </div>
+</aside>

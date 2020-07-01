@@ -107,7 +107,6 @@ class Ajax extends CI_Controller {
 			$data['lampiran'] = $this->upload_file('tugas','lampiran','lampiran/');
 		}
 		$tugas = $this->tugas_m->create($data);
-
 		//notifikasi
 		$this->load->model('notifikasi_m');
 		$nama_user = $this->session->userdata('user')->nama;
@@ -277,7 +276,7 @@ class Ajax extends CI_Controller {
 			'id_user' => $data_tugas[0]['dari'],
 			'jenis_notifikasi' => 'tugas',
 			'isi_notifikasi' => "$nama_user menyerahkan tugas $judul",
-			'id_link' => $this->db->insert_id()
+			'id_link' => $data['id_tugas']
 		);
 		$this->notifikasi_m->create($data_notifikasi);
 		echo json_encode($assignment);
