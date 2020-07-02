@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 01 Jul 2020 pada 15.51
+-- Waktu pembuatan: 02 Jul 2020 pada 16.58
 -- Versi server: 10.4.8-MariaDB
 -- Versi PHP: 7.3.11
 
@@ -63,7 +63,11 @@ CREATE TABLE `assign_tugas` (
 --
 
 INSERT INTO `assign_tugas` (`id_assign`, `id_tugas`, `deskripsi`, `lampiran`, `created_at`) VALUES
-(7, 15, 'ini tes notif', 'f9b86fb04303af55979692979b8b6f50.zip', '2020-05-06 10:37:16');
+(7, 15, 'ini tes notif', 'f9b86fb04303af55979692979b8b6f50.zip', '2020-05-06 10:37:16'),
+(8, 15, 'error', NULL, '2020-07-01 14:47:49'),
+(9, 15, 'coba lagi', NULL, '2020-07-01 14:49:43'),
+(10, 15, 'cek', NULL, '2020-07-01 14:52:21'),
+(11, 15, 'bisa', NULL, '2020-07-01 14:54:08');
 
 -- --------------------------------------------------------
 
@@ -301,7 +305,11 @@ INSERT INTO `notifikasi` (`id_notifikasi`, `id_user`, `jenis_notifikasi`, `isi_n
 (3, 1, 'komentar', 'Lyodra memberikan komentar pada tugas coba lagi.', 12, 'dibaca', '2020-07-01 11:14:51'),
 (4, 3, 'komentar', 'Ayi Putri Nurkaidah memberikan komentar pada tugas', 11, 'dibaca', '2020-05-06 09:18:52'),
 (5, 3, 'tugas', ' memberi anda tugas cek notif', 15, 'dibaca', '2020-05-06 10:36:07'),
-(6, 1, 'tugas', ' menyerahkan tugas cek notif', 0, 'dibaca', '2020-07-01 11:15:01');
+(6, 1, 'tugas', ' menyerahkan tugas cek notif', 15, 'dibaca', '2020-07-01 14:42:09'),
+(7, 1, 'tugas', 'Lyodra menyerahkan tugas cek notif', 15, 'diterima', '2020-07-01 14:54:28'),
+(8, 1, 'tugas', 'Lyodra menyerahkan tugas cek notif', 15, 'diterima', '2020-07-01 14:54:25'),
+(9, 1, 'tugas', 'Lyodra menyerahkan tugas cek notif', 15, 'diterima', '2020-07-01 14:54:21'),
+(10, 1, 'tugas', 'Lyodra menyerahkan tugas cek notif', 15, 'diterima', '2020-07-01 14:54:08');
 
 -- --------------------------------------------------------
 
@@ -339,7 +347,7 @@ INSERT INTO `tugas` (`id_tugas`, `dari`, `kepada`, `judul`, `deskripsi`, `lampir
 (12, 1, 3, 'coba lagi', 'iya', NULL, 'selesai', '2020-05-13', '2020-04-12 10:08:41'),
 (13, 1, 3, 'coba lagi', 'iya', NULL, 'belum selesai', '2020-04-30', '2020-04-11 15:05:55'),
 (14, 1, 3, 'coba lagi', 'iya', '4bde08c2ec056a4a6e23f15edcc07f1c.zip', 'belum selesai', '2020-04-30', '2020-04-11 15:05:55'),
-(15, 1, 3, 'cek notif', '', NULL, 'belum selesai', '2020-05-23', '2020-05-06 10:29:47');
+(15, 1, 3, 'cek notif', '', NULL, 'belum selesai', '2020-06-23', '2020-07-01 15:21:55');
 
 -- --------------------------------------------------------
 
@@ -363,6 +371,7 @@ CREATE TABLE `user` (
   `nametag` varchar(100) DEFAULT NULL,
   `kuesioner_beban_kerja` tinyint(1) NOT NULL DEFAULT 0,
   `status` enum('unverified','active','suspend') NOT NULL,
+  `tanggal_bergabung` date NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -370,26 +379,27 @@ CREATE TABLE `user` (
 -- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`id_user`, `nik`, `nama`, `alamat`, `jenis_kelamin`, `tanggal_lahir`, `status_perkawinan`, `email`, `password`, `id_jabatan`, `id_divisi`, `id_bagian`, `nametag`, `kuesioner_beban_kerja`, `status`, `created_at`) VALUES
-(1, 10104006, 'Ayi Putri Nurkaidah', 'Subang', 'P', '1999-04-27', 'belum kawin', 'ayiputrink@gmail.com', '123456', 2, 7, 34, 'aa081589202d1f94a00962710ec204e9.jpg', 0, 'active', '2020-05-26 06:22:42'),
-(2, 2020, 'Nuca', '', 'L', '1994-05-11', 'belum kawin', 'nuca@gmail.com', '123456', 2, NULL, NULL, '9c26f2d6903d551d36ff08cc22167cd9.jpg', 0, 'suspend', '2020-05-26 06:22:49'),
-(3, 10104009, 'Lyodra', '', 'P', '1996-02-20', 'belum kawin', 'lyodra@gmail.com', '123456', 1, 7, 34, NULL, 0, 'active', '2020-05-26 06:22:56'),
-(8, NULL, 'arvi', NULL, NULL, '0000-00-00', 'belum kawin', 'arvi@gmail.com', '123456', NULL, NULL, NULL, NULL, 0, 'active', '2020-03-31 03:29:42'),
-(9, NULL, 'naufa', NULL, NULL, '0000-00-00', 'belum kawin', 'naufa@gmail.com', '123456', NULL, NULL, NULL, NULL, 0, 'unverified', '2020-03-31 04:39:25'),
-(10, NULL, 'kekey', NULL, NULL, '0000-00-00', 'belum kawin', 'kekey@gmail.com', '123456', NULL, NULL, NULL, NULL, 0, 'unverified', '2020-04-09 12:16:09'),
-(11, 0, 'programmer', '', NULL, '0000-00-00', 'belum kawin', 'programmer@gmail.com', '123456', 1, 10, 19, NULL, 0, 'unverified', '2020-06-02 17:09:22'),
-(12, NULL, 'user1', NULL, NULL, '0000-00-00', 'belum kawin', 'user1@gmail.com', '123456', NULL, NULL, NULL, NULL, 0, 'unverified', '2020-04-09 12:23:14'),
-(13, NULL, 'user2', NULL, NULL, '0000-00-00', 'belum kawin', 'user2@gmail.com', '123456', NULL, NULL, NULL, NULL, 0, 'unverified', '2020-04-09 12:27:18'),
-(14, 3020, 'user3', 'Majalengka', 'L', '2020-04-01', 'belum kawin', 'user3@gmail.com', '123456', 2, 13, 41, NULL, 0, 'unverified', '2020-06-04 15:53:29'),
-(15, 1122, 'user4', '', NULL, '0000-00-00', 'belum kawin', 'user4@gmail.com', '123456', NULL, NULL, NULL, NULL, 0, 'unverified', '2020-06-04 12:10:53'),
-(16, NULL, 'user5', NULL, NULL, '0000-00-00', 'belum kawin', 'user5@gmail.com', '123456', NULL, NULL, NULL, NULL, 0, 'unverified', '2020-04-09 12:38:38'),
-(17, NULL, 'user6', NULL, NULL, '0000-00-00', 'belum kawin', 'user6@gmail.com', '123456', NULL, NULL, NULL, NULL, 0, 'unverified', '2020-04-09 12:41:16'),
-(18, 9856333, 'user7', 'Majalengka', NULL, '1995-10-10', 'belum kawin', 'user7@gmail.com', '123456', 2, 9, 16, '4d6477096f1fcd07cf0caa60d7adbba4.JPG', 0, 'active', '2020-05-26 06:18:56'),
-(19, 98563334, 'zuck', 'Majalengka', 'L', '1990-05-12', 'belum kawin', 'zuck@gmail.com', '123456', 2, 4, 10, '6b1b35b7219ffb9ff510c70a6784250d.jpg', 0, 'unverified', '2020-06-02 09:52:59'),
-(20, 202020, 'Rindi', '', 'P', '2020-06-01', 'belum kawin', 'rindi@gmail.com', '123456', 1, 13, NULL, NULL, 0, 'unverified', '2020-06-04 16:06:32'),
-(21, 20201, 'Fauzan', 'Jakarta', 'L', '1995-02-01', 'belum kawin', 'fauzan@gmail.com', '123456', 2, 6, 30, NULL, 0, 'unverified', '2020-06-04 16:06:36'),
-(22, 20323, 'Arjun', 'Bandung', 'L', '1996-06-09', 'belum kawin', 'arjun@gmail.com', '123456', 1, 12, 38, NULL, 0, 'unverified', '2020-06-04 16:06:39'),
-(23, 45454554, 'Ajeng', 'Bandung', 'P', '1995-02-02', 'belum kawin', 'ajeng@gmail.com', '123456', 1, 9, 15, '92b06f7108cf2e5ec2b20eb7f0758155.jpg', 0, 'unverified', '2020-06-04 16:14:20');
+INSERT INTO `user` (`id_user`, `nik`, `nama`, `alamat`, `jenis_kelamin`, `tanggal_lahir`, `status_perkawinan`, `email`, `password`, `id_jabatan`, `id_divisi`, `id_bagian`, `nametag`, `kuesioner_beban_kerja`, `status`, `tanggal_bergabung`, `created_at`) VALUES
+(1, 10104006, 'Ayi Putri Nurkaidah', 'Subang', 'P', '1999-04-27', 'belum kawin', 'ayiputrink@gmail.com', '123456', 2, 7, 34, 'aa081589202d1f94a00962710ec204e9.jpg', 0, 'active', '0000-00-00', '2020-05-26 06:22:42'),
+(2, 2020, 'Nuca', '', 'L', '1994-05-11', 'belum kawin', 'nuca@gmail.com', '123456', 2, NULL, NULL, '9c26f2d6903d551d36ff08cc22167cd9.jpg', 0, 'suspend', '0000-00-00', '2020-05-26 06:22:49'),
+(3, 10104009, 'Lyodra', '', 'P', '1996-02-20', 'belum kawin', 'lyodra@gmail.com', '123456', 1, 7, 34, NULL, 0, 'active', '2020-05-13', '2020-07-02 14:54:51'),
+(8, NULL, 'arvi', NULL, NULL, '0000-00-00', 'belum kawin', 'arvi@gmail.com', '123456', NULL, NULL, NULL, NULL, 0, 'active', '0000-00-00', '2020-03-31 03:29:42'),
+(9, NULL, 'naufa', NULL, NULL, '0000-00-00', 'belum kawin', 'naufa@gmail.com', '123456', NULL, NULL, NULL, NULL, 0, 'unverified', '0000-00-00', '2020-03-31 04:39:25'),
+(10, NULL, 'kekey', NULL, NULL, '0000-00-00', 'belum kawin', 'kekey@gmail.com', '123456', NULL, NULL, NULL, NULL, 0, 'unverified', '0000-00-00', '2020-04-09 12:16:09'),
+(11, 0, 'programmer', '', NULL, '0000-00-00', 'belum kawin', 'programmer@gmail.com', '123456', 1, 10, 19, NULL, 0, 'unverified', '0000-00-00', '2020-06-02 17:09:22'),
+(12, NULL, 'user1', NULL, NULL, '0000-00-00', 'belum kawin', 'user1@gmail.com', '123456', NULL, NULL, NULL, NULL, 0, 'unverified', '0000-00-00', '2020-04-09 12:23:14'),
+(13, NULL, 'user2', NULL, NULL, '0000-00-00', 'belum kawin', 'user2@gmail.com', '123456', NULL, NULL, NULL, NULL, 0, 'unverified', '0000-00-00', '2020-04-09 12:27:18'),
+(14, 3020, 'user3', 'Majalengka', 'L', '2020-04-01', 'belum kawin', 'user3@gmail.com', '123456', 2, 13, 41, NULL, 0, 'unverified', '0000-00-00', '2020-06-04 15:53:29'),
+(15, 1122, 'user4', '', NULL, '0000-00-00', 'belum kawin', 'user4@gmail.com', '123456', NULL, NULL, NULL, NULL, 0, 'unverified', '0000-00-00', '2020-06-04 12:10:53'),
+(16, NULL, 'user5', NULL, NULL, '0000-00-00', 'belum kawin', 'user5@gmail.com', '123456', NULL, NULL, NULL, NULL, 0, 'unverified', '0000-00-00', '2020-04-09 12:38:38'),
+(17, NULL, 'user6', NULL, NULL, '0000-00-00', 'belum kawin', 'user6@gmail.com', '123456', NULL, NULL, NULL, NULL, 0, 'unverified', '0000-00-00', '2020-04-09 12:41:16'),
+(18, 9856333, 'user7', 'Majalengka', NULL, '1995-10-10', 'belum kawin', 'user7@gmail.com', '123456', 2, 9, 16, '4d6477096f1fcd07cf0caa60d7adbba4.JPG', 0, 'active', '0000-00-00', '2020-05-26 06:18:56'),
+(19, 98563334, 'zuck', 'Majalengka', 'L', '1990-05-12', 'belum kawin', 'zuck@gmail.com', '123456', 2, 4, 10, '6b1b35b7219ffb9ff510c70a6784250d.jpg', 0, 'unverified', '0000-00-00', '2020-06-02 09:52:59'),
+(20, 202020, 'Rindi', '', 'P', '2020-06-01', 'belum kawin', 'rindi@gmail.com', '123456', 1, 13, NULL, NULL, 0, 'unverified', '0000-00-00', '2020-06-04 16:06:32'),
+(21, 20201, 'Fauzan', 'Jakarta', 'L', '1995-02-01', 'belum kawin', 'fauzan@gmail.com', '123456', 2, 6, 30, NULL, 0, 'unverified', '0000-00-00', '2020-06-04 16:06:36'),
+(22, 20323, 'Arjun', 'Bandung', 'L', '1996-06-09', 'belum kawin', 'arjun@gmail.com', '123456', 1, 12, 38, NULL, 0, 'unverified', '0000-00-00', '2020-06-04 16:06:39'),
+(23, 45454554, 'Ajeng', 'Bandung', 'P', '1995-02-02', 'belum kawin', 'ajeng@gmail.com', '123456', 1, 9, 15, '92b06f7108cf2e5ec2b20eb7f0758155.jpg', 0, 'unverified', '0000-00-00', '2020-06-04 16:14:20'),
+(24, 396767676, 'kanoe', 'Subang', 'L', '2020-07-05', 'kawin', 'kanoe@gmail.com', '123456', 1, 7, 34, 'a8bd2daf3271cec91b0497feb00647a5.PNG', 0, 'active', '0000-00-00', '2020-07-01 14:57:33');
 
 --
 -- Indexes for dumped tables
@@ -478,7 +488,7 @@ ALTER TABLE `administrator`
 -- AUTO_INCREMENT untuk tabel `assign_tugas`
 --
 ALTER TABLE `assign_tugas`
-  MODIFY `id_assign` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_assign` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `bagian`
@@ -490,7 +500,7 @@ ALTER TABLE `bagian`
 -- AUTO_INCREMENT untuk tabel `data_training`
 --
 ALTER TABLE `data_training`
-  MODIFY `id_data_training` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_data_training` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `divisi`
@@ -520,7 +530,7 @@ ALTER TABLE `komentar_tugas`
 -- AUTO_INCREMENT untuk tabel `notifikasi`
 --
 ALTER TABLE `notifikasi`
-  MODIFY `id_notifikasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_notifikasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `tugas`
@@ -532,7 +542,7 @@ ALTER TABLE `tugas`
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
