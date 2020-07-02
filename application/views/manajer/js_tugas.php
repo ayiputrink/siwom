@@ -218,7 +218,7 @@
                                     </div>
                                     <hr class="line-dashed full-witdh-line" />
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">Lampiran (.zip)</label>
+                                        <label class="col-sm-2 control-label">Lampiran</label>
                                         <div class="col-sm-10">
                                             <input id="tambah_lampiran" type="file" name="lampiran" class="filestyle" data-buttonText="Upload Lampiran" data-iconName="fa fa-inbox">
                                         </div>
