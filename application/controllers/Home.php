@@ -39,7 +39,7 @@ class Home extends CI_Controller
 			if ($user->status == 'active') {
 				if ($user->id_jabatan == 1) {
 					$karyawan = $this->user_m->read_full_where(array('user.id_user' => $user->id_user))->row_array();
-					$d1 = new DateTime($karyawan['created_at']);
+					$d1 = new DateTime($karyawan['tanggal_bergabung']);
 					$d2 = new DateTime(date("Y-m-d H:i:s"));
 
 					// @link http://www.php.net/manual/en/class.dateinterval.php
