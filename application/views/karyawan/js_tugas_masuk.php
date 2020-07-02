@@ -48,11 +48,12 @@
                         d1 = new Date(item.created_at_tugas);
                         d2 = new Date(item.deadline);
                         if(item.deadline != null && item.deadline != '0000-00-00') {
-                            if(DateDiff.inDays(d1, d2) > 0) {
-                                var deadline = DateDiff.inDays(d1, d2)+` hari mendatang `;
-                            } else {
-                                var deadline = 'Telat '+DateDiff.inDays(d1, d2)*-1+` hari`;
-                            }
+                            // if(DateDiff.inDays(d1, d2) > 0) {
+                            //     var deadline = DateDiff.inDays(d1, d2)+` hari mendatang `;
+                            // } else {
+                            //     var deadline = 'Telat '+DateDiff.inDays(d1, d2)*-1+` hari`;
+                            // }
+                            var deadline = item.deadline;
                         } else {
                             var deadline = 'Tidak ada deadline';
                         }
