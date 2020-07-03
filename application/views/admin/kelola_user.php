@@ -52,9 +52,7 @@
 										data-filter="#filter" data-page-size="10">
 										<thead>
 											<tr>
-												<th style="width:20px;">
-
-												</th>
+												
 												<th>No</th>
 												<th>NIK</th>
 												<th>Nama</th>

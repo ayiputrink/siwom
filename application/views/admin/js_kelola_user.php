@@ -437,10 +437,7 @@
                         isi += 
                         `
                         <tr>
-												<td>
-															<input type="checkbox" name="optionsCheckboxes" style="width:20px;height:20px;">
-													
-												</td>
+												
                                                 <td> ${i+1} </td>
 												<td class="nik-`+item.id_user+`">`+item.nik+`</td>
 												<td class="nama-`+item.id_user+`">`+item.nama+`</td>

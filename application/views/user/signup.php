@@ -50,12 +50,12 @@
                   <div class="form-group">
                     <input type="password" name="password" placeholder="Password..." class="form-control" />
                   </div>
-                  <div class="checkbox">
+                  <!-- <div class="checkbox">
                     <label>
                       <input type="checkbox" name="optionsCheckboxes" checked> Saya setuju dengan 
                       <a href="javascript:;">Ketentuan yang Berlaku</a>
                     </label>
-                  </div>
+                  </div> -->
                 </div>
                 <div class="footer text-center mb-20">
                   <button type="submit" class="btn btn-info btn-raised">Daftar</button>
