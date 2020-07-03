@@ -16,7 +16,7 @@
 					<!-- boxs header -->
 					<div class="boxs-header">
 						<h3 class="custom-font hb-blue">
-							<strong>Tabel</strong> Item Tugas</h3>
+							<strong>Tabel</strong> Tugas</h3>
 					</div>
 					<div class="boxs-widget">
 
