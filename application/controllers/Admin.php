@@ -40,7 +40,9 @@ class Admin extends CI_Controller {
 		$this->cek_login();
 		$this->load->model('user_m');
 		$this->load->model('tugas_m');
+		$this->load->model('data_training_m');
 		$total_user = $this->user_m->read()->num_rows();
+		$data_training = $this->data_training_m->read()->num_rows();
 		$unverified = $this->user_m->read_where(array('status' => 'unverified'))->num_rows();
 		$blocked = $this->user_m->read_where(array('status' => 'suspend'))->num_rows();
 		$tugas = $this->tugas_m->read()->num_rows();
@@ -49,7 +51,8 @@ class Admin extends CI_Controller {
 			'total_user' => $total_user,
 			'unverified' => $unverified,
 			'blocked' => $blocked,
-			'tugas' => $tugas
+			'tugas' => $tugas,
+			'data_training' => $data_training
 		);
 		$this->load->view('_partials/template',$data);
 	}
