@@ -53,7 +53,7 @@
                 <div class="footer text-center">
                   <button type="submit" class="btn btn-info btn-raised">Login</button>
                 </div>
-                <a href="<?= base_url() ?>admin/lupa_password" class="btn btn-wd">Lupa Password?</a>
+                <!-- <a href="<?= base_url() ?>admin/lupa_password" class="btn btn-wd">Lupa Password?</a> -->
               </form>
             </div>
           </div>
