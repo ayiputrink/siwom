@@ -142,7 +142,7 @@ class Algoritma extends CI_Controller {
 			$usia = '20-29';
 		} else if ($usia_cek >= 30 && $usia_cek < 40){
 			$usia = '30-40';
-		} else if($usia_cek >= 40){
+		} else {
 			$usia = '>40';
 		}
 
