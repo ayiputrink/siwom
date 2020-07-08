@@ -348,7 +348,7 @@ class Ajax extends CI_Controller {
 
 	private function upload_file($nama,$form,$direktori){
         $config['upload_path']          = './upload/'.$direktori;
-        $config['allowed_types']        = 'zip|doc|xls|pdf|rar';
+        $config['allowed_types']        = 'zip|doc|xls|pdf|rar|gif|jpg|png|jpeg';
         $config['file_name']            = $nama;
         $config['overwrite']			= true;
         $config['max_size']             = 20000; // 1MB
