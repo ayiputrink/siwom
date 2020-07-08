@@ -288,6 +288,12 @@ class Ajax extends CI_Controller {
 		echo json_encode($assignment);
 	}
 
+	public function get_assign_where($id_tugas){
+		$this->load->model('assign_tugas_m');
+		$assignment = $this->assign_tugas_m->read_where(array('assign_tugas.id_tugas' => $id_tugas))->result_array();
+		echo json_encode($assignment);
+	}
+
 	public function insert_komentar(){
 		$this->load->model('komentar_tugas_m');
 		$this->load->model('notifikasi_m');

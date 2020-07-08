@@ -241,7 +241,8 @@
 
 		function get_assign(){
 			var hak_akses = '<?= $this->session->userdata('user')->hak_akses ?>';
-			$.post('<?= base_url('ajax/get_assign') ?>',
+			var id_tugas = '<?= $this->uri->segment(3) ?>';
+			$.post('<?= base_url('ajax/get_assign_where/') ?>'+id_tugas,
                 function(data,status){
 					let isi = ``;
 					$.each($.parseJSON(data),function(i, item){
