@@ -75,7 +75,7 @@ class Home extends CI_Controller
 					$tugas = $this->tugas_m->read_where(array('dari' => $user->id_user))->num_rows();
 					$tugas_belum = $this->tugas_m->read_where(array('dari' => $user->id_user, 'status_tugas' => 'belum selesai'))->num_rows();
 					$tugas_selesai = $this->tugas_m->read_where(array('dari' => $user->id_user, 'status_tugas' => 'selesai'))->num_rows();
-					$data_karyawan = $this->user_m->read_full_where(array('user.id_bagian' => $user->id_bagian, 'user.id_jabatan' => 1))->result_array();
+					$data_karyawan = $this->user_m->read_full_where(array('user.id_bagian' => $user->id_bagian, 'user.id_jabatan' => 1, 'user.status' => 'active'))->result_array();
 					$data_bagian = $this->bagian_m->read_where(array('id_bagian' => $this->session->userdata('user')->id_bagian))->result_array();
 					$data_karyawan_full = array();
 					foreach ($data_karyawan as $k => $v) {
@@ -178,7 +178,7 @@ class Home extends CI_Controller
 		} else if ($usia_cek >= 40) {
 			$usia = '>40';
 		} else {
-			$usia = '0';
+			$usia = '>40';
 		}
 
 		$tugas_diterima_cek = (int) $tugas_diterima_cek;
@@ -225,7 +225,7 @@ class Home extends CI_Controller
 			$usia = '20-29';
 		} else if ($usia_cek >= 30 && $usia_cek < 40) {
 			$usia = '30-40';
-		} else if ($usia_cek >= 40) {
+		} else {
 			$usia = '>40';
 		}
 		$tugas_diterima_cek = (int) $tugas_diterima_cek;
