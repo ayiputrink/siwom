@@ -221,7 +221,7 @@
 					let deadline = (tugas[0].deadline).split('-');
 					$('#edit_deadline').val(deadline[1]+'/'+deadline[2]+'/'+deadline[0]);
 					if(tugas[0].status_tugas == 'selesai'){
-						$('#editStatustugas').append(
+						$('#edit_status_tugas').append(
 							`
 							<option value="belum selesai">Belum Selesai</option>
 							<option value="selesai" selected>Selesai</option>
