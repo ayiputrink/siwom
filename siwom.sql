@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Jul 2020 pada 17.29
+-- Waktu pembuatan: 17 Jul 2020 pada 21.25
 -- Versi server: 10.4.8-MariaDB
 -- Versi PHP: 7.3.11
 
@@ -67,7 +67,7 @@ INSERT INTO `assign_tugas` (`id_assign`, `id_tugas`, `deskripsi`, `lampiran`, `c
 (8, 15, 'error', NULL, '2020-07-01 14:47:49'),
 (9, 15, 'coba lagi', NULL, '2020-07-01 14:49:43'),
 (10, 15, 'cek', NULL, '2020-07-01 14:52:21'),
-(11, 15, 'bisa', NULL, '2020-07-01 14:54:08');
+(11, 14, 'bisa', NULL, '2020-07-08 02:25:01');
 
 -- --------------------------------------------------------
 
@@ -142,6 +142,8 @@ CREATE TABLE `data_training` (
   `usia` varchar(20) NOT NULL,
   `tugas_diterima` varchar(20) NOT NULL,
   `tugas_selesai` varchar(20) NOT NULL,
+  `kompleksitas` enum('tidak kompleks','sedang','kompleks') NOT NULL,
+  `feedback` enum('tidak puas','cukup','puas') NOT NULL,
   `label` varchar(20) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -150,22 +152,22 @@ CREATE TABLE `data_training` (
 -- Dumping data untuk tabel `data_training`
 --
 
-INSERT INTO `data_training` (`id_data_training`, `usia`, `tugas_diterima`, `tugas_selesai`, `label`, `created_at`) VALUES
-(1, '20-29', '11-20', '0-10', 'berat', '2020-07-01 13:48:02'),
-(2, '20-29', '0-10', '0-10', 'sedang', '2020-07-01 13:48:06'),
-(3, '30-40', '11-20', '11-20', 'berat', '2020-07-01 13:48:15'),
-(4, '20-29', '11-20', '0-10', 'sedang', '2020-07-01 13:48:20'),
-(5, '30-40', '0-10', '11-20', 'berat', '2020-07-01 13:48:45'),
-(6, '20-29', '11-20', '11-20', 'berat', '2020-07-01 13:48:49'),
-(7, '>40', '11-20', '0-10', 'tidak berat', '2020-07-01 13:48:54'),
-(8, '30-40', '11-20', '11-20', 'berat', '2020-07-01 13:48:58'),
-(9, '20-29', '11-20', '11-20', 'berat', '2020-07-01 13:50:46'),
-(10, '>40', '0-10', '11-20', 'tidak berat', '2020-07-01 13:50:51'),
-(11, '30-40', '0-10', '11-20', 'berat', '2020-07-01 13:50:55'),
-(12, '20-29', '11-20', '11-20', 'tidak berat', '2020-07-01 13:51:01'),
-(13, '30-40', '0-10', '0-10', 'tidak berat', '2020-07-01 13:51:24'),
-(14, '30-40', '11-20', '0-20', 'berat', '2020-07-01 13:51:28'),
-(15, '20-29', '0-10', '11-20', 'berat', '2020-07-01 13:51:32');
+INSERT INTO `data_training` (`id_data_training`, `usia`, `tugas_diterima`, `tugas_selesai`, `kompleksitas`, `feedback`, `label`, `created_at`) VALUES
+(1, '20-29', '11-20', '0-10', 'tidak kompleks', 'tidak puas', 'berat', '2020-07-01 13:48:02'),
+(2, '20-29', '0-10', '0-10', 'tidak kompleks', 'tidak puas', 'sedang', '2020-07-01 13:48:06'),
+(3, '30-40', '11-20', '11-20', 'tidak kompleks', 'tidak puas', 'berat', '2020-07-01 13:48:15'),
+(4, '20-29', '11-20', '0-10', 'tidak kompleks', 'tidak puas', 'sedang', '2020-07-01 13:48:20'),
+(5, '30-40', '0-10', '11-20', 'tidak kompleks', 'tidak puas', 'berat', '2020-07-01 13:48:45'),
+(6, '20-29', '11-20', '11-20', 'tidak kompleks', 'tidak puas', 'berat', '2020-07-01 13:48:49'),
+(7, '>40', '11-20', '0-10', 'tidak kompleks', 'tidak puas', 'tidak berat', '2020-07-01 13:48:54'),
+(8, '30-40', '11-20', '11-20', 'tidak kompleks', 'tidak puas', 'berat', '2020-07-01 13:48:58'),
+(9, '20-29', '11-20', '11-20', 'tidak kompleks', 'tidak puas', 'berat', '2020-07-01 13:50:46'),
+(10, '>40', '0-10', '11-20', 'tidak kompleks', 'tidak puas', 'tidak berat', '2020-07-01 13:50:51'),
+(11, '30-40', '0-10', '11-20', 'tidak kompleks', 'tidak puas', 'berat', '2020-07-01 13:50:55'),
+(12, '20-29', '11-20', '11-20', 'tidak kompleks', 'tidak puas', 'tidak berat', '2020-07-01 13:51:01'),
+(13, '30-40', '0-10', '0-10', 'tidak kompleks', 'tidak puas', 'tidak berat', '2020-07-01 13:51:24'),
+(14, '30-40', '11-20', '0-20', 'tidak kompleks', 'tidak puas', 'berat', '2020-07-01 13:51:28'),
+(15, '20-29', '0-10', '11-20', 'tidak kompleks', 'tidak puas', 'berat', '2020-07-01 13:51:32');
 
 -- --------------------------------------------------------
 
@@ -222,8 +224,10 @@ INSERT INTO `item_tugas` (`id_item_tugas`, `id_tugas`, `isi_item`, `status_item`
 (4, 14, 'masih ada', 'belum selesai', '2020-04-10 19:15:49'),
 (5, 14, 'kerja keras', 'belum selesai', '2020-04-11 12:51:17'),
 (6, 8, 'good', 'belum selesai', '2020-04-11 15:09:08'),
-(10, 11, 'coba bikin yang bagus', 'selesai', '2020-04-11 16:05:37'),
-(11, 11, 'tambahin sedikit border', 'selesai', '2020-04-12 09:55:20');
+(10, 11, 'coba bikin yang bagus', 'belum selesai', '2020-07-17 18:19:29'),
+(11, 11, 'tambahin sedikit border', 'belum selesai', '2020-07-17 16:19:36'),
+(12, 15, 'buat lagi', 'selesai', '2020-07-17 02:00:21'),
+(13, 15, 'coba', 'belum selesai', '2020-07-17 02:33:03');
 
 -- --------------------------------------------------------
 
@@ -324,7 +328,9 @@ CREATE TABLE `tugas` (
   `judul` varchar(50) NOT NULL,
   `deskripsi` text NOT NULL,
   `lampiran` varchar(100) DEFAULT NULL,
+  `kompleksitas` enum('tidak kompleks','sedang','kompleks') NOT NULL,
   `status_tugas` enum('belum selesai','selesai') NOT NULL DEFAULT 'belum selesai',
+  `feedback` enum('tidak puas','cukup','puas') DEFAULT NULL,
   `deadline` date DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -333,21 +339,21 @@ CREATE TABLE `tugas` (
 -- Dumping data untuk tabel `tugas`
 --
 
-INSERT INTO `tugas` (`id_tugas`, `dari`, `kepada`, `judul`, `deskripsi`, `lampiran`, `status_tugas`, `deadline`, `created_at`) VALUES
-(1, 1, 2, 'coba lagi', 'iya', NULL, 'belum selesai', '2020-04-30', '2020-04-11 15:05:55'),
-(2, 1, 2, 'coba lagi', 'iya', NULL, 'belum selesai', '2020-04-30', '2020-04-11 15:05:55'),
-(3, 0, 3, 'coba lagi', 'iya', '5e55c8c3ac84dd2b229a8d71a778540d.zip', 'belum selesai', '2020-04-30', '2020-04-11 15:05:55'),
-(4, 0, 3, 'coba lagi', 'iya', '8e5e8d3b68add2caefbc62504d33a44c.zip', 'belum selesai', '2020-04-30', '2020-04-11 15:05:55'),
-(5, 0, 3, 'coba lagi', 'iya', NULL, 'belum selesai', '2020-04-30', '2020-04-11 15:05:55'),
-(6, 0, 3, 'coba lagi', 'iya', NULL, 'belum selesai', '2020-04-30', '2020-04-11 15:05:55'),
-(7, 0, 3, 'coba lagi', 'iya', NULL, 'belum selesai', '2020-04-30', '2020-04-11 15:05:55'),
-(9, 1, 0, 'coba lagi', 'iya', NULL, 'belum selesai', '2020-04-30', '2020-04-11 15:05:55'),
-(10, 1, 0, 'coba lagi', 'iya', NULL, 'belum selesai', '2020-04-30', '2020-04-11 15:05:55'),
-(11, 1, 3, 'coba lagi dulu', 'iya', 'b0046e4594558a898125a6cff5ef415e.zip', 'selesai', '2020-05-05', '2020-04-12 09:56:33'),
-(12, 1, 3, 'coba lagi', 'iya', NULL, 'selesai', '2020-05-13', '2020-04-12 10:08:41'),
-(13, 1, 3, 'coba lagi', 'iya', NULL, 'belum selesai', '2020-04-30', '2020-04-11 15:05:55'),
-(14, 1, 3, 'coba lagi', 'iya', '4bde08c2ec056a4a6e23f15edcc07f1c.zip', 'belum selesai', '2020-04-30', '2020-04-11 15:05:55'),
-(15, 1, 3, 'cek notif', '', NULL, 'belum selesai', '2020-06-23', '2020-07-01 15:21:55');
+INSERT INTO `tugas` (`id_tugas`, `dari`, `kepada`, `judul`, `deskripsi`, `lampiran`, `kompleksitas`, `status_tugas`, `feedback`, `deadline`, `created_at`) VALUES
+(1, 1, 2, 'coba lagi', 'iya', NULL, 'tidak kompleks', 'belum selesai', NULL, '2020-04-30', '2020-07-17 12:15:58'),
+(2, 1, 2, 'coba lagi', 'iya', NULL, 'tidak kompleks', 'belum selesai', NULL, '2020-04-30', '2020-07-17 12:15:58'),
+(3, 0, 3, 'coba lagi', 'iya', '5e55c8c3ac84dd2b229a8d71a778540d.zip', 'tidak kompleks', 'belum selesai', NULL, '2020-04-30', '2020-07-17 12:15:58'),
+(4, 0, 3, 'coba lagi', 'iya', '8e5e8d3b68add2caefbc62504d33a44c.zip', 'tidak kompleks', 'belum selesai', NULL, '2020-04-30', '2020-07-17 12:15:58'),
+(5, 0, 3, 'coba lagi', 'iya', NULL, 'tidak kompleks', 'belum selesai', NULL, '2020-04-30', '2020-07-17 12:15:58'),
+(6, 0, 3, 'coba lagi', 'iya', NULL, 'tidak kompleks', 'belum selesai', NULL, '2020-04-30', '2020-07-17 12:15:58'),
+(7, 0, 3, 'coba lagi', 'iya', NULL, 'tidak kompleks', 'belum selesai', NULL, '2020-04-30', '2020-07-17 12:15:58'),
+(9, 1, 0, 'coba lagi', 'iya', NULL, 'tidak kompleks', 'belum selesai', NULL, '2020-04-30', '2020-07-17 12:15:58'),
+(10, 1, 0, 'coba lagi', 'iya', NULL, 'tidak kompleks', 'belum selesai', NULL, '2020-04-30', '2020-07-17 12:15:58'),
+(11, 1, 3, 'coba lagi dulu', 'iya', 'b0046e4594558a898125a6cff5ef415e.zip', 'tidak kompleks', 'belum selesai', 'puas', '2020-05-05', '2020-07-17 18:19:00'),
+(12, 1, 3, 'coba lagi', 'iya', NULL, 'tidak kompleks', 'selesai', NULL, '2020-05-13', '2020-07-17 12:15:58'),
+(13, 1, 3, 'coba lagi', 'iya', NULL, 'tidak kompleks', 'selesai', NULL, '2020-04-30', '2020-07-17 17:54:09'),
+(14, 1, 3, 'coba lagi', 'iya', '4bde08c2ec056a4a6e23f15edcc07f1c.zip', 'tidak kompleks', 'belum selesai', NULL, '2020-04-30', '2020-07-17 12:15:58'),
+(15, 1, 3, 'cek notif', '', NULL, 'tidak kompleks', 'selesai', NULL, '2020-06-23', '2020-07-17 12:15:58');
 
 -- --------------------------------------------------------
 
@@ -512,7 +518,7 @@ ALTER TABLE `divisi`
 -- AUTO_INCREMENT untuk tabel `item_tugas`
 --
 ALTER TABLE `item_tugas`
-  MODIFY `id_item_tugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_item_tugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `jabatan`
