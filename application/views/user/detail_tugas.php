@@ -25,31 +25,45 @@
 								<table>
 									<tr>
 										<td>Dari</td>
-										<td> : <?= $parsing[0]['dari'] ?></td>
+										<td> : <?= $parsing['tugas'][0]['dari'] ?></td>
 									</tr>
 									<tr>
 										<td>Untuk</td>
-										<td> : <?= $parsing[0]['kepada'] ?></td>
+										<td> : <?= $parsing['tugas'][0]['kepada'] ?></td>
 									</tr>
 									<tr>
 										<td>Judul</td>
-										<td> : <?= $parsing[0]['judul'] ?></td>
+										<td> : <?= $parsing['tugas'][0]['judul'] ?></td>
 									</tr>
 									<tr>
 										<td>Lampiran</td>
 										<td> :
-											<?= ($parsing[0]['lampiran'] != null ? '<a href="'.base_url().'upload/lampiran/'.$parsing[0]['lampiran'].'" target="_blank">Unduh</a>' : 'Tidak ada lampiran') ?>
+											<?= ($parsing['tugas'][0]['lampiran'] != null ? '<a href="'.base_url().'upload/lampiran/'.$parsing['tugas'][0]['lampiran'].'" target="_blank">Unduh</a>' : 'Tidak ada lampiran') ?>
 										</td>
 									</tr>
 									<tr>
 										<td>Deadline</td>
-										<td> : <?= $parsing[0]['deadline'] ?></td>
+										<td> : <?= $parsing['tugas'][0]['deadline'] ?></td>
 									</tr>
 									<tr>
 										<td>Status Tugas</td>
-										<td> : <?= $parsing[0]['status_tugas'] ?></td>
+										<td> : <?= $parsing['tugas'][0]['status_tugas'] ?></td>
 									</tr>
+									<?php if($parsing['progress'] != null) { ?>
+									<tr>
+										<td>Progress</td>
+										<td> : <?= $parsing['progress'] ?>% </td>
+									</tr>
+									<?php } ?>
 								</table>
+								<?php if($parsing['progress'] != null) { ?>
+								<div class="progress progress-striped active">
+                                    <div class="progress-bar progress-bar-orange" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
+                                        style="width: <?= $parsing['progress'] ?>%">
+                                        <span class="sr-only"><?= $parsing['progress'] ?>% Complete</span>
+                                    </div>
+								</div>
+								<?php } ?>
 							</div>
 						</div>
 

@@ -28,15 +28,26 @@ class Tugas extends CI_Controller {
 	
 	public function detail($id_tugas){
 		$this->load->model('tugas_m');
+		$this->load->model('item_tugas_m');
 		$user = $this->session->userdata('user');
 		$detail = $this->tugas_m->read_where(array('id_tugas' => $id_tugas))->result_array();
+		$progress_total = $this->item_tugas_m->read_where(array('id_tugas' => $id_tugas))->num_rows();
+		$progress_selesai = $this->item_tugas_m->read_where(array('id_tugas' => $id_tugas, 'status_item' => 'selesai'))->num_rows();
+		if($progress_total != 0){
+			$progress = ($progress_selesai / $progress_total) * 100;
+		} else {
+			$progress = null;
+		}
 		if($detail[0]['dari'] != $user->id_user && $detail[0]['kepada'] != $user->id_user){
 			redirect(base_url('tugas'));
 		} else {
 			$tugas = $this->tugas_m->read_full_where(array('id_tugas' => $id_tugas))->result_array();
 			$data = array(
 				'konten' => 'user/detail_tugas',
-				'parsing' => $tugas,
+				'parsing' => array(
+					'tugas'=>$tugas,
+					'progress'=>$progress
+				),
 				'js' => 'user/js_detail_tugas'
 			);
 			$this->load->view('_partials/template',$data);
