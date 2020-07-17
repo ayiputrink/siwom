@@ -42,12 +42,20 @@
 										</td>
 									</tr>
 									<tr>
+										<td>Kompleksitas</td>
+										<td> : <?= $parsing['tugas'][0]['kompleksitas'] ?></td>
+									</tr>
+									<tr>
 										<td>Deadline</td>
 										<td> : <?= $parsing['tugas'][0]['deadline'] ?></td>
 									</tr>
 									<tr>
 										<td>Status Tugas</td>
 										<td> : <?= $parsing['tugas'][0]['status_tugas'] ?></td>
+									</tr>
+									<tr>
+										<td>Feedback</td>
+										<td> : <?= ($parsing['tugas'][0]['feedback'] == null ? 'Belum Ada Feedback' : $parsing['tugas'][0]['feedback']) ?></td>
 									</tr>
 									<?php if($parsing['progress'] != null) { ?>
 									<tr>

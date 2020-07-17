@@ -346,6 +346,22 @@ class Ajax extends CI_Controller {
 		echo json_encode($notifikasi);
 	}
 
+	public function get_progress($id_tugas){
+		$this->load->model('tugas_m');
+		$this->load->model('item_tugas_m');
+		$tugas = $this->tugas_m->read_where(array('id_tugas' => $id_tugas))->row_array();
+		$progress_total = $this->item_tugas_m->read_where(array('id_tugas' => $id_tugas))->num_rows();
+		$progress_selesai = $this->item_tugas_m->read_where(array('id_tugas' => $id_tugas, 'status_item' => 'selesai'))->num_rows();
+		if($progress_total != 0 && $tugas['status_tugas'] == 'belum selesai'){
+			$progress = ($progress_selesai / $progress_total) * 100;
+		} else if($tugas['status_tugas'] == 'selesai') {
+			$progress = 100;
+		} else {
+			$progress = 0;
+		}
+		echo json_encode($progress);
+	}
+
 	private function upload_file($nama,$form,$direktori){
         $config['upload_path']          = './upload/'.$direktori;
         $config['allowed_types']        = 'zip|doc|xls|pdf|rar|gif|jpg|png|jpeg';
