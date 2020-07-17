@@ -183,7 +183,7 @@
                                         <div class="col-sm-10">
                                         <span class="help-block mb-0">
                                         Arti Warna : <br>
-                                        <div class="btn btn-raised btn-success btn-sm"></div> : Beban Kerja Ringan <br>
+                                        <div class="btn btn-raised btn-success btn-sm"></div> : Beban Kerja Tidak Berat <br>
                                         <div class="btn btn-raised btn-warning btn-sm"></div> : Beban Kerja Sedang <br>
                                         <div class="btn btn-raised btn-primary btn-sm"></div> : Beban Kerja Berat
                                         </span>
