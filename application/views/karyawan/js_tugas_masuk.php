@@ -54,9 +54,26 @@
                             //     var deadline = 'Telat '+DateDiff.inDays(d1, d2)*-1+` hari`;
                             // }
                             var deadline = item.deadline;
+                            var today = new Date();
+                            var dd = String(today.getDate()).padStart(2, '0');
+                            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                            var yyyy = today.getFullYear();
+
+                            today = yyyy + '-' + mm + '-' + dd;
+                            if(item.deadline < today){
+                                var warna_deadline = 'text-danger';
+                            } else {
+                                var warna_deadline = '';
+                            }
                         } else {
                             var deadline = 'Tidak ada deadline';
+                            var warna_deadline = '';
                         }
+                        var progress = '';
+                        $.post('<?= base_url() ?>'+'ajax/get_progress/'+item.id_tugas,function(result){
+                            progress = $.parseJSON(result);
+                            $('.progress-'+item.id_tugas).html(progress+'%');
+                        });
                         isi += 
                         `
                         <tr>
@@ -68,8 +85,9 @@
 												<td class="tugas-`+item.id_tugas+`">`+jumlah+`</td>
 												<td class="kepada-`+item.id_tugas+`">`+item.kepada+`</td>
                                                 <td class="judul-`+item.id_tugas+`">`+item.judul+`</td>
+                                                <td class="progress-`+item.id_tugas+`"></td>
                                                 <td class="status-`+item.id_tugas+`">`+item.status_tugas+`</td>
-                                                <td class="deadline-`+item.id_tugas+`">`+deadline+`</td>
+                                                <td class="deadline-`+item.id_tugas+` `+warna_deadline+`">`+deadline+`</td>
                                                 <td>
                                                     <a href="<?= base_url() ?>tugas/detail/`+item.id_tugas+`"><button data-idtugas="`+item.id_tugas+`" class="btn btn-primary detailtugas">Lihat Detail</button></a>
                                                 </td>

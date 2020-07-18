@@ -85,11 +85,51 @@ class Home extends CI_Controller
 						$status_perkawinan = $v['status_perkawinan'];
 						$tugas_diterima = $this->tugas_m->read_where(array('kepada' => $v['id_user'], 'status_tugas' => 'belum selesai', 'MONTH(created_at)' => 'MONTH(current_date())'))->num_rows();
 						$tugas_selesai = $this->tugas_m->read_where(array('kepada' => $v['id_user'], 'status_tugas' => 'selesai', 'MONTH(created_at)' => 'MONTH(current_date())'))->num_rows();
+						
+						$kompleksitas['tidak_kompleks'] = $this->tugas_m->read_where(array('kompleksitas' => 'tidak kompleks', 'kepada' => $v['id_user']))->num_rows();
+						$kompleksitas['sedang'] = $this->tugas_m->read_where(array('kompleksitas' => 'sedang', 'kepada' => $v['id_user']))->num_rows();
+						$kompleksitas['kompleks'] = $this->tugas_m->read_where(array('kompleksitas' => 'kompleks', 'kepada' => $v['id_user']))->num_rows();
+
+						if ($kompleksitas['tidak_kompleks'] < $kompleksitas['sedang']) {
+							$hasil_kompleksitas = 'sedang';
+							if ($kompleksitas['sedang'] < $kompleksitas['kompleks']) {
+								$hasil_kompleksitas = 'kompleks';
+							} else {
+								$hasil_kompleksitas = 'sedang';
+							}
+						} else {
+							$hasil_kompleksitas = 'tidak kompleks';
+							if ($kompleksitas['tidak_kompleks'] < $kompleksitas['kompleks']) {
+								$hasil_kompleksitas = 'kompleks';
+							} else {
+								$hasil_kompleksitas = 'tidak kompleks';
+							}
+						}
+
+						$feedback['tidak_puas'] = $this->tugas_m->read_where(array('feedback' => 'tidak puas', 'kepada' => $v['id_user']))->num_rows();
+						$feedback['cukup'] = $this->tugas_m->read_where(array('feedback' => 'cukup', 'kepada' => $v['id_user']))->num_rows();
+						$feedback['puas'] = $this->tugas_m->read_where(array('feedback' => 'puas', 'kepada' => $v['id_user']))->num_rows();
+
+						if ($feedback['tidak_puas'] < $feedback['cukup']) {
+							$hasil_feedback = 'cukup';
+							if ($feedback['cukup'] < $feedback['puas']) {
+								$hasil_feedback = 'puas';
+							} else {
+								$hasil_feedback = 'cukup';
+							}
+						} else {
+							$hasil_feedback = 'tidak puas';
+							if ($feedback['tidak_puas'] < $feedback['puas']) {
+								$hasil_feedback = 'puas';
+							} else {
+								$hasil_feedback = 'tidak puas';
+							}
+						}
 						array_push($data_karyawan_full, array(
 							'id_user' => $v['id_user'],
 							'nama' => $nama,
 							'nik' => $v['nik'],
-							'beban_kerja' => $this->cek_beban_kerja($jenis_kelamin, $usia, $status_perkawinan, $tugas_diterima, $tugas_selesai)
+							'beban_kerja' => $this->cek_beban_kerja($jenis_kelamin, $usia, $status_perkawinan, $tugas_diterima, $tugas_selesai, $hasil_kompleksitas, $hasil_feedback)
 						));
 					}
 					$data = array(
@@ -112,7 +152,7 @@ class Home extends CI_Controller
 		}
 	}
 
-	private function cek_beban_kerja($jenis_kelamin, $tanggal_lahir, $status_perkawinan, $tugas_diterima_cek, $tugas_selesai_cek)
+	private function cek_beban_kerja($jenis_kelamin, $tanggal_lahir, $status_perkawinan, $tugas_diterima_cek, $tugas_selesai_cek, $hasil_kompleksitas, $hasil_feedback)
 	{
 		$samples_st = [
 			['L', '20-29', 'kawin', '11-20', '0-10'], //1 
@@ -156,7 +196,7 @@ class Home extends CI_Controller
 		$samples = [];
 		$labels = [];
 		foreach ($sample as $k => $data) {
-			array_push($samples, array($data['usia'], $data['tugas_diterima'], $data['tugas_selesai']));
+			array_push($samples, array($data['usia'], $data['tugas_diterima'], $data['tugas_selesai'], $data['kompleksitas'], $data['feedback']));
 		}
 		foreach ($label as $k => $data) {
 			array_push($labels, $data['label']);
@@ -194,7 +234,10 @@ class Home extends CI_Controller
 		} else if ($tugas_selesai_cek >= 11 && $tugas_selesai_cek < 21) {
 			$tugas_selesai = '11-20';
 		}
-		return $classifier->predict([$usia, $tugas_diterima, $tugas_selesai]);
+
+
+
+		return $classifier->predict([$usia, $tugas_diterima, $tugas_selesai, $hasil_kompleksitas, $hasil_feedback]);
 	}
 
 	public function isi_kuesioner()
@@ -242,10 +285,52 @@ class Home extends CI_Controller
 			$tugas_selesai = '11-20';
 		}
 
+		$kompleksitas['tidak_kompleks'] = $this->tugas_m->read_where(array('kompleksitas' => 'tidak kompleks', 'kepada' => $sesi->id_user))->num_rows();
+		$kompleksitas['sedang'] = $this->tugas_m->read_where(array('kompleksitas' => 'sedang', 'kepada' => $sesi->id_user))->num_rows();
+		$kompleksitas['kompleks'] = $this->tugas_m->read_where(array('kompleksitas' => 'kompleks', 'kepada' => $sesi->id_user))->num_rows();
+
+		if ($kompleksitas['tidak_kompleks'] < $kompleksitas['sedang']) {
+			$hasil_kompleksitas = 'sedang';
+			if ($kompleksitas['sedang'] < $kompleksitas['kompleks']) {
+				$hasil_kompleksitas = 'kompleks';
+			} else {
+				$hasil_kompleksitas = 'sedang';
+			}
+		} else {
+			$hasil_kompleksitas = 'tidak kompleks';
+			if ($kompleksitas['tidak_kompleks'] < $kompleksitas['kompleks']) {
+				$hasil_kompleksitas = 'kompleks';
+			} else {
+				$hasil_kompleksitas = 'tidak kompleks';
+			}
+		}
+
+		$feedback['tidak_puas'] = $this->tugas_m->read_where(array('feedback' => 'tidak puas', 'kepada' => $sesi->id_user))->num_rows();
+		$feedback['cukup'] = $this->tugas_m->read_where(array('feedback' => 'cukup', 'kepada' => $sesi->id_user))->num_rows();
+		$feedback['puas'] = $this->tugas_m->read_where(array('feedback' => 'puas', 'kepada' => $sesi->id_user))->num_rows();
+
+		if ($feedback['tidak_puas'] < $feedback['cukup']) {
+			$hasil_feedback = 'cukup';
+			if ($feedback['cukup'] < $feedback['puas']) {
+				$hasil_feedback = 'puas';
+			} else {
+				$hasil_feedback = 'cukup';
+			}
+		} else {
+			$hasil_feedback = 'tidak puas';
+			if ($feedback['tidak_puas'] < $feedback['puas']) {
+				$hasil_feedback = 'puas';
+			} else {
+				$hasil_feedback = 'tidak puas';
+			}
+		}
+
 		$input = array(
 			'usia' => $usia,
 			'tugas_diterima' => $tugas_diterima,
 			'tugas_selesai' => $tugas_selesai,
+			'kompleksitas' => $hasil_kompleksitas,
+			'feedback' => $hasil_feedback,
 			'label' => $beban
 		);
 		if ($this->data_training_m->create($input)) {

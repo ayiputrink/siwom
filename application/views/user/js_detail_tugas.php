@@ -36,6 +36,17 @@
 					</div>
 					<hr class="line-dashed full-witdh-line" />
 					<div class="form-group">
+						<label for="input03" class="col-sm-2 control-label">Kompleksitas</label>
+						<div class="col-sm-10">
+							<select data-id="" id="edit_kompleksitas" tabindex="3" name="kompleksitas" class="chosen-select"
+								style="width: 400px;">
+												
+							</select>
+							<span class="help-block mb-0">Kompleksitas Tugas.</span>
+						</div>
+					</div>
+					<hr class="line-dashed full-witdh-line" />
+					<div class="form-group">
 						<label for="input04" class="col-sm-2 control-label">Waktu Deadline</label>
 						<div class="col-sm-10">
 							<input id="edit_deadline" type="text" name="deadline" class="form-control">
@@ -51,6 +62,17 @@
 								<option value="" disabled selected>Pilih Status</option>
 								
 							</select>
+						</div>
+					</div>
+					<hr class="line-dashed full-witdh-line" />
+					<div class="form-group">
+						<label for="input03" class="col-sm-2 control-label">Feedback</label>
+						<div class="col-sm-10">
+							<select data-id="" id="edit_feedback" tabindex="3" name="feedback" class="chosen-select"
+								style="width: 400px;">
+												
+							</select>
+							<span class="help-block mb-0">Feedback Tugas.</span>
 						</div>
 					</div>
 					<hr class="line-dashed full-witdh-line" />
@@ -220,6 +242,31 @@
 					$('#edit_deskripsi').val(tugas[0].deskripsi);
 					let deadline = (tugas[0].deadline).split('-');
 					$('#edit_deadline').val(deadline[1]+'/'+deadline[2]+'/'+deadline[0]);
+					if(tugas[0].kompleksitas == 'tidak kompleks'){
+						$('#edit_kompleksitas').append(
+							`
+							<option value="tidak kompleks" selected>Tidak Kompleks</option>
+							<option value="sedang">Sedang</option>
+							<option value="kompleks">Kompleks</option>
+							`
+						);
+					} else if (tugas[0].kompleksitas == 'sedang'){
+						$('#edit_kompleksitas').append(
+							`
+							<option value="tidak kompleks">Tidak Kompleks</option>
+							<option value="sedang" selected>Sedang</option>
+							<option value="kompleks">Kompleks</option>
+							`
+						);
+					} else if (tugas[0].kompleksitas == 'kompleks'){
+						$('#edit_kompleksitas').append(
+							`
+							<option value="tidak kompleks">Tidak Kompleks</option>
+							<option value="sedang">Sedang</option>
+							<option value="kompleks" selected>Kompleks</option>
+							`
+						);
+					}
 					if(tugas[0].status_tugas == 'selesai'){
 						$('#edit_status_tugas').append(
 							`
@@ -232,6 +279,43 @@
 							`
 							<option value="belum selesai" selected>Belum Selesai</option>
 							<option value="selesai">Selesai</option>
+							`
+						);
+					}
+					if(tugas[0].feedback == 'tidak puas'){
+						$('#edit_feedback').append(
+							`
+							<option value="" disabled>Pilih Feedback</option>
+							<option value="tidak puas" selected>Tidak Puas</option>
+							<option value="cukup">Cukup</option>
+							<option value="puas">Puas</option>
+							`
+						);
+					} else if (tugas[0].feedback == 'cukup'){
+						$('#edit_feedback').append(
+							`
+							<option value="" disabled>Pilih Feedback</option>
+							<option value="tidak puas">Tidak Puas</option>
+							<option value="cukup" selected>Cukup</option>
+							<option value="puas">Puas</option>
+							`
+						);
+					} else if (tugas[0].feedback == 'puas'){
+						$('#edit_feedback').append(
+							`
+							<option value="" disabled>Pilih Feedback</option>
+							<option value="tidak puas">Tidak Puas</option>
+							<option value="cukup">Cukup</option>
+							<option value="puas" selected>Puas</option>
+							`
+						);
+					} else if (tugas[0].feedback == null){
+						$('#edit_feedback').append(
+							`
+							<option value="" selected disabled>Pilih Feedback</option>
+							<option value="tidak puas">Tidak Puas</option>
+							<option value="cukup">Cukup</option>
+							<option value="puas">Puas</option>
 							`
 						);
 					}

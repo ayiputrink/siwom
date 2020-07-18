@@ -21,7 +21,7 @@ class Data_training_m extends Base_m {
     public $table = 'data_training';
 
     public function read_sample(){
-        $this->db->select('usia,tugas_diterima,tugas_selesai');
+        $this->db->select('usia,tugas_diterima,tugas_selesai,kompleksitas,feedback');
         $this->db->from($this->table);
         return $this->db->get();
     }

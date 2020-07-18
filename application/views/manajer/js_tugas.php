@@ -210,6 +210,18 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label for="input04" class="col-sm-2 control-label">Kompleksitas</label>
+                                        <div class="col-sm-10">
+                                        <select data-id="" id="pilih_kompleksistas" tabindex="3" name="kompleksitas" class="chosen-select" style="width: 400px;">
+                                                <option value="" disabled selected>Pilih Kompleksitas</option>
+                                                <option value="tidak kompleks">Tidak Kompleks</option>
+                                                <option value="sedang">Sedang</option>
+                                                <option value="kompleks">Kompleks</option>
+                                            </select>
+                                            <span class="help-block mb-0">Kompleksitas Tugas.</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                     <label for="input04" class="col-sm-2 control-label">Waktu Deadline</label>
                                         <div class="col-sm-10">
                                             <input id="deadline" type="text" name="deadline" class="form-control">
@@ -318,6 +330,11 @@
                             var deadline = 'Tidak ada deadline';
                             var warna_deadline = '';
                         }
+                        var progress = '';
+                        $.post('<?= base_url() ?>'+'ajax/get_progress/'+item.id_tugas,function(result){
+                            progress = $.parseJSON(result);
+                            $('.progress-'+item.id_tugas).html(progress+'%');
+                        });
                         isi += 
                         `
                         <tr>
@@ -329,6 +346,7 @@
 												<td class="tugas-`+item.id_tugas+`">`+jumlah+`</td>
 												<td class="kepada-`+item.id_tugas+`">`+item.kepada+`</td>
                                                 <td class="judul-`+item.id_tugas+`">`+item.judul+`</td>
+                                                <td class="progress-`+item.id_tugas+`"></td>
                                                 <td class="status-`+item.id_tugas+`">`+item.status_tugas+`</td>
                                                 <td class="deadline-`+item.id_tugas+` `+warna_deadline+`">`+deadline+`</td>
                                                 <td>

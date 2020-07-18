@@ -37,6 +37,7 @@
 											<th>No</th>
 											<th>Untuk</th>
 											<th>Judul</th>
+											<th>Progress</th>
 											<th>Status</th>
 											<th>Deadline</th>
 											<th style="width:20px;"></th>
