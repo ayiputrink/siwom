@@ -378,14 +378,15 @@
                 $.post(url_all_beban, function(data,status){
                     let isi;
                     $.each($.parseJSON(data), function(i, item){
-                        if(item.beban_kerja == 'tidak berat'){
+                       if(item.beban_kerja == 'berat'){
                             isi += `
-                                <option class="text text-success" value="`+item.id_user+`">`+item.nama+` | Beban Kerja : `+item.beban_kerja+`</option>
+                                <option class="text text-danger" value="`+item.id_user+`">`+item.nama+`  | Beban Kerja : `+item.beban_kerja+`</option>
                             `;
                         }
                     });
                     $('#pilih_karyawan').append(isi);
                 });
+               
                 $.post(url_all_beban, function(data,status){
                     let isi;
                     $.each($.parseJSON(data), function(i, item){
@@ -397,12 +398,13 @@
                     });
                     $('#pilih_karyawan').append(isi);
                 });
-                 $.post(url_all_beban, function(data,status){
+                 
+                $.post(url_all_beban, function(data,status){
                     let isi;
                     $.each($.parseJSON(data), function(i, item){
-                       if(item.beban_kerja == 'berat'){
+                        if(item.beban_kerja == 'tidak berat'){
                             isi += `
-                                <option class="text text-danger" value="`+item.id_user+`">`+item.nama+`  | Beban Kerja : `+item.beban_kerja+`</option>
+                                <option class="text text-success" value="`+item.id_user+`">`+item.nama+` | Beban Kerja : `+item.beban_kerja+`</option>
                             `;
                         }
                     });
