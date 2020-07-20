@@ -75,7 +75,7 @@ class Home extends CI_Controller
 					$tugas = $this->tugas_m->read_where(array('dari' => $user->id_user))->num_rows();
 					$tugas_belum = $this->tugas_m->read_where(array('dari' => $user->id_user, 'status_tugas' => 'belum selesai'))->num_rows();
 					$tugas_selesai = $this->tugas_m->read_where(array('dari' => $user->id_user, 'status_tugas' => 'selesai'))->num_rows();
-					$data_karyawan = $this->user_m->read_full_where(array('user.id_bagian' => $user->id_bagian, 'user.id_jabatan' => 1, 'user.status' => 'active'))->result_array();
+					$data_karyawan = $this->user_m->read_where(array('id_bagian' => $user->id_bagian, 'id_jabatan' => 1, 'status' => 'active'))->result_array();
 					$data_bagian = $this->bagian_m->read_where(array('id_bagian' => $this->session->userdata('user')->id_bagian))->result_array();
 					$data_karyawan_full = array();
 					$test = array();
@@ -145,7 +145,7 @@ class Home extends CI_Controller
 						'data_karyawan' => $data_karyawan_full,
 						'data_bagian' => $data_bagian
 					);
-					// var_dump($test);
+					// var_dump($data['data_karyawan']);
 					// die();
 					$this->load->view('_partials/template', $data);
 				}
@@ -202,7 +202,7 @@ class Home extends CI_Controller
 		$samples = [];
 		$labels = [];
 		foreach ($sample as $k => $data) {
-			array_push($samples, array($data['usia'], $data['tugas_diterima'], $data['tugas_selesai'], $data['kompleksitas'], $data['feedback']));
+			array_push($samples, array($data['usia'], $data['tugas_diterima'], $data['tugas_selesai']));
 		}
 		foreach ($label as $k => $data) {
 			array_push($labels, $data['label']);
@@ -211,7 +211,7 @@ class Home extends CI_Controller
 		$classifier = new NaiveBayes();
 		$classifier->train($samples, $labels);
 
-		//echo $classifier->predict(['30-40', '11-20','11-20']);
+		//echo $classifier->predict(['L', '30-40', 'kawin', '11-20','11-20']);
 
 		# object oriented
 		$from = new DateTime($tanggal_lahir);
@@ -221,8 +221,6 @@ class Home extends CI_Controller
 			$usia = '20-29';
 		} else if ($usia_cek >= 30 && $usia_cek < 40) {
 			$usia = '30-40';
-		} else if ($usia_cek >= 40) {
-			$usia = '>40';
 		} else {
 			$usia = '>40';
 		}
@@ -240,8 +238,6 @@ class Home extends CI_Controller
 		} else if ($tugas_selesai_cek >= 11 && $tugas_selesai_cek < 21) {
 			$tugas_selesai = '11-20';
 		}
-
-
 
 		return $classifier->predict([$usia, $tugas_diterima, $tugas_selesai, $hasil_kompleksitas, $hasil_feedback]);
 	}
