@@ -60,7 +60,7 @@
                             var yyyy = today.getFullYear();
 
                             today = yyyy + '-' + mm + '-' + dd;
-                            if(item.deadline < today){
+                            if(item.deadline < today && item.status_tugas != 'selesai'){
                                 var warna_deadline = 'text-danger';
                             } else {
                                 var warna_deadline = '';
