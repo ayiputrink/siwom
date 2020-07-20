@@ -145,8 +145,8 @@ class Home extends CI_Controller
 						'data_karyawan' => $data_karyawan_full,
 						'data_bagian' => $data_bagian
 					);
-					var_dump($test);
-					die();
+					// var_dump($test);
+					// die();
 					$this->load->view('_partials/template', $data);
 				}
 			} else if ($user->status == 'unverified') {
