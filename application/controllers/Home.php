@@ -78,6 +78,7 @@ class Home extends CI_Controller
 					$data_karyawan = $this->user_m->read_full_where(array('user.id_bagian' => $user->id_bagian, 'user.id_jabatan' => 1, 'user.status' => 'active'))->result_array();
 					$data_bagian = $this->bagian_m->read_where(array('id_bagian' => $this->session->userdata('user')->id_bagian))->result_array();
 					$data_karyawan_full = array();
+					$test = array();
 					foreach ($data_karyawan as $k => $v) {
 						$nama = $v['nama'];
 						$jenis_kelamin = $v['jenis_kelamin'];
@@ -131,6 +132,9 @@ class Home extends CI_Controller
 							'nik' => $v['nik'],
 							'beban_kerja' => $this->cek_beban_kerja($jenis_kelamin, $usia, $status_perkawinan, $tugas_diterima, $tugas_selesai, $hasil_kompleksitas, $hasil_feedback)
 						));
+						array_push($test,array(
+							$jenis_kelamin, $usia, $status_perkawinan, $tugas_diterima, $tugas_selesai, $hasil_kompleksitas, $hasil_feedback
+						));
 					}
 					$data = array(
 						'konten' => 'manajer/home_manajer',
@@ -141,6 +145,8 @@ class Home extends CI_Controller
 						'data_karyawan' => $data_karyawan_full,
 						'data_bagian' => $data_bagian
 					);
+					var_dump($test);
+					die();
 					$this->load->view('_partials/template', $data);
 				}
 			} else if ($user->status == 'unverified') {
