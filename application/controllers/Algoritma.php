@@ -98,6 +98,7 @@ class Algoritma extends CI_Controller
 		$user = $this->user_m->read_where(array('id_bagian' => $id_bagian, 'id_jabatan' => 1, 'status' => 'active'));
 		//$tugas_diterima = $this->tugas_m->read_where(array('status_tugas' => 'belum selesai', 'MONTH(created_at)' => 'MONTH(current_date())'));
 		$pengguna = array();
+		$test = array();
 		foreach ($user->result_array() as $k => $v) {
 			$nama = $v['nama'];
 			$jenis_kelamin = $v['jenis_kelamin'];
@@ -156,7 +157,10 @@ class Algoritma extends CI_Controller
 			);
 			//$pengguna[$v['id_user']] = $data;
 			array_push($pengguna, $data);
+			array_push($test, array($jenis_kelamin, $usia, $status_perkawinan, $tugas_diterima, $tugas_selesai, $hasil_kompleksitas, $hasil_feedback));
 		}
+		var_dump($test);
+		die();
 		echo json_encode($pengguna);
 		//echo $this->cek_beban_kerja('P','1996-02-20','belum kawin',8,12);
 	}
