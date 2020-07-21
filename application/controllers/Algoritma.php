@@ -248,4 +248,37 @@ class Algoritma extends CI_Controller
 
 		return $classifier->predict([$usia, $tugas_diterima, $tugas_selesai, $hasil_kompleksitas, $hasil_feedback]);
 	}
+
+	public function kombinasi()
+	{
+		$this->load->model('sample_m');
+		$coba = $this->sample_m->read()->result_array();
+
+		$this->load->model('data_training_m');
+		$sample = $this->data_training_m->read_sample()->result_array();
+		$label = $this->data_training_m->read_label()->result_array();
+		$samples = [];
+		$labels = [];
+		foreach ($sample as $k => $data) {
+			array_push($samples, array($data['usia'], $data['tugas_diterima'], $data['tugas_selesai'], $data['kompleksitas'], $data['feedback']));
+		}
+		foreach ($label as $k => $data) {
+			array_push($labels, $data['label']);
+		}
+
+		$classifier = new NaiveBayes();
+		$classifier->train($samples, $labels);
+
+		foreach ($coba as $key => $value) {
+			$test = array(
+				$value['usia'],
+				$value['tugas_diterima'],
+				$value['tugas_selesai'],
+				$value['kompleksitas'],
+				$value['feedback']
+			);
+
+			echo $classifier->predict($test).'<br>';
+		}
+	}
 }
